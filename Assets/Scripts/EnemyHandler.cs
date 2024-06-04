@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +6,8 @@ public class EnemyHandler : MonoBehaviour
 {
     [SerializeField]
     private float _enemyBaseHealth, _growthRate, _bossMultiplier;
+    [SerializeField]
+    public float _baseReward, _rewardGrowthRate, bossRewardMultiplier;
     [SerializeField]
     private Text _enemyLevelText;    
     [SerializeField]
@@ -21,6 +21,7 @@ public class EnemyHandler : MonoBehaviour
     private float _enemyMaxHealth, _enemyCurrentHealth;
     private bool _isDead = false;
     private bool _isBoss = false;
+    
 
     private void OnEnable()
     {
@@ -64,6 +65,7 @@ public class EnemyHandler : MonoBehaviour
     private IEnumerator KillEnemy()
     {
         DestroyEnemyShip();
+        var reward = CalculateReward();
         yield return new WaitForSeconds(1f);
 
         RespawnEnemy();
@@ -119,5 +121,15 @@ public class EnemyHandler : MonoBehaviour
         {
             _healthBarText.text = $"{Mathf.Ceil(_enemyCurrentHealth)} / {Mathf.Ceil(_enemyMaxHealth)}";
         }
+    }
+
+    private float CalculateReward()
+    {
+        float calculatedReward = _baseReward * Mathf.Pow(1 + _rewardGrowthRate, _enemyLevel - 1);
+        if (_isBoss)
+        {
+            calculatedReward *= bossRewardMultiplier;
+        }
+        return calculatedReward;
     }
 }

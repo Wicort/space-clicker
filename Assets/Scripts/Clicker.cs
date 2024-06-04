@@ -13,7 +13,6 @@ public class Clicker : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Clicked");
         OnEnemyAttacked?.Invoke(GetClickDamage());
     }
 
