@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class EnemyHandler : MonoBehaviour
 {
     [SerializeField]
     private float _enemyBaseHealth, _growthRate, _bossMultiplier;
-    [SerializeField]
-    public float _baseReward, _rewardGrowthRate, bossRewardMultiplier;
     [SerializeField]
     private Text _enemyLevelText;    
     [SerializeField]
@@ -17,31 +17,31 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField]
     private GameObject _enemyShip;
 
-    private int _enemyLevel;
+    private Game _gameData;
     private float _enemyMaxHealth, _enemyCurrentHealth;
     private bool _isDead = false;
     private bool _isBoss = false;
+
+    public static Action<int> OnEnemyKilled;
     
 
     private void OnEnable()
     {
         Clicker.OnEnemyAttacked += TakeDamage;
+        GameBootstrapper.OnGameLoaded += Init;
     }
 
     private void OnDisable()
     {
         Clicker.OnEnemyAttacked -= TakeDamage;
+        GameBootstrapper.OnGameLoaded -= Init;
     }
 
-    private void Start()
+    private void Init(Game gameData)
     {
-        EnemyData enemyData = new EnemyData(0, false);
-        Init(enemyData);
-    }
+        _gameData = gameData;
+        EnemyData enemyData = new EnemyData(_gameData.Level, false); //todo get EnemyData from WavesHandler
 
-    private void Init(EnemyData enemyData)
-    {
-        _enemyLevel = enemyData.EnemyLevel;
         _isBoss = enemyData.IsBoss;
 
         RespawnEnemy();
@@ -65,7 +65,7 @@ public class EnemyHandler : MonoBehaviour
     private IEnumerator KillEnemy()
     {
         DestroyEnemyShip();
-        var reward = CalculateReward();
+        OnEnemyKilled?.Invoke(_gameData.Level);
         yield return new WaitForSeconds(1f);
 
         RespawnEnemy();
@@ -78,7 +78,7 @@ public class EnemyHandler : MonoBehaviour
 
     private void RespawnEnemy()
     {
-        _enemyLevel++;
+        _gameData.NextLevel();
         ShowLevelInfo();
         CalcEnemyParams();
         ShowNewEnemy();
@@ -87,13 +87,13 @@ public class EnemyHandler : MonoBehaviour
 
     private void CalcEnemyParams()
     {
-        _enemyMaxHealth = _enemyBaseHealth * Mathf.Pow(1 + _growthRate, _enemyLevel - 1);
+        _enemyMaxHealth = _enemyBaseHealth * Mathf.Pow(1 + _growthRate, _gameData.Level - 1);
         if (_isBoss) _enemyMaxHealth *= _bossMultiplier;
     }
 
     private void ShowLevelInfo()
     {
-        _enemyLevelText.text = $"Lvl {_enemyLevel}";
+        _enemyLevelText.text = $"Lvl {_gameData.Level}";
     }
 
     private void ShowNewEnemy()
@@ -121,15 +121,5 @@ public class EnemyHandler : MonoBehaviour
         {
             _healthBarText.text = $"{Mathf.Ceil(_enemyCurrentHealth)} / {Mathf.Ceil(_enemyMaxHealth)}";
         }
-    }
-
-    private float CalculateReward()
-    {
-        float calculatedReward = _baseReward * Mathf.Pow(1 + _rewardGrowthRate, _enemyLevel - 1);
-        if (_isBoss)
-        {
-            calculatedReward *= bossRewardMultiplier;
-        }
-        return calculatedReward;
     }
 }

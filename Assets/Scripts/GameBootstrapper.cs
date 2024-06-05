@@ -9,7 +9,7 @@ public class GameBootstrapper : MonoBehaviour
 
     public Game game;
 
-    private void Awake()
+    private void Start()
     {
         if (Instance == null)
         {
@@ -27,6 +27,8 @@ public class GameBootstrapper : MonoBehaviour
     private void Init()
     {
         game = new Game();
+        game.Currency = 5;
+        game.Level = 0;
         OnGameLoaded?.Invoke(game);
     }
 }
