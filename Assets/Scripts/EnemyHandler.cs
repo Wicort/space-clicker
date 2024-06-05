@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class EnemyHandler : MonoBehaviour
 {
     [SerializeField]
+    private WavesHandler _wavesHandler;
+    [SerializeField]
     private float _enemyBaseHealth, _growthRate, _bossMultiplier;
     [SerializeField]
     private Text _enemyLevelText;    
@@ -40,7 +42,8 @@ public class EnemyHandler : MonoBehaviour
     private void Init(Game gameData)
     {
         _gameData = gameData;
-        EnemyData enemyData = new EnemyData(_gameData.Level, false); //todo get EnemyData from WavesHandler
+
+        EnemyData enemyData = _wavesHandler.GetEnemyDataByLevel(_gameData.Level);
 
         _isBoss = enemyData.IsBoss;
 

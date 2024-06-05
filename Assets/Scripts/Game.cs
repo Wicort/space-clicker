@@ -2,10 +2,12 @@
 {
     public int Level;
     public float Currency;
+    public bool IsBossFailed;
     public Game()
     {
         Level = 0;
         Currency = 0;
+        IsBossFailed = false;
     }
 
     public void NextLevel()
