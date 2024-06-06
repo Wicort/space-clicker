@@ -42,12 +42,15 @@ public class EnemyHandler : MonoBehaviour
     private void Init(Game gameData)
     {
         _gameData = gameData;
-
-        EnemyData enemyData = _wavesHandler.GetEnemyDataByLevel(_gameData.Level);
-
-        _isBoss = enemyData.IsBoss;
-
+        GetNextEnemyData();
         RespawnEnemy();
+    }
+
+    private void GetNextEnemyData()
+    {
+        _gameData.NextLevel();
+        EnemyData enemyData = _wavesHandler.GetEnemyDataByLevel(_gameData.Level);
+        _isBoss = enemyData.IsBoss;
     }
 
     private void TakeDamage(float dmg)
@@ -69,6 +72,7 @@ public class EnemyHandler : MonoBehaviour
     {
         DestroyEnemyShip();
         OnEnemyKilled?.Invoke(_gameData.Level);
+        GetNextEnemyData();
         yield return new WaitForSeconds(1f);
 
         RespawnEnemy();
@@ -81,7 +85,6 @@ public class EnemyHandler : MonoBehaviour
 
     private void RespawnEnemy()
     {
-        _gameData.NextLevel();
         ShowLevelInfo();
         CalcEnemyParams();
         ShowNewEnemy();

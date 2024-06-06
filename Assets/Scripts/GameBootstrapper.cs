@@ -29,6 +29,7 @@ public class GameBootstrapper : MonoBehaviour
         game = new Game();
         game.Currency = 5;
         game.Level = 0;
+        Debug.Log($"{game}");
         OnGameLoaded?.Invoke(game);
     }
 }

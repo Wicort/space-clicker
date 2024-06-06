@@ -11,7 +11,7 @@ public class WavesHandler : MonoBehaviour
 
     public EnemyData GetEnemyDataByLevel(int _enemyLevel)
     {
-        bool isBoss = (_enemyLevel%10 == 0);
+        bool isBoss = (_enemyLevel != 0 && _enemyLevel % 10 == 0);
         EnemyData enemyData = new EnemyData(_enemyLevel, isBoss);
 
         return enemyData;
