@@ -32,7 +32,7 @@ public class Clicker : MonoBehaviour
 
     private float GetClickDamage()
     {
-        return 1f;
+        return 20f;
     }
 
     private float GetAutoClickDamage()

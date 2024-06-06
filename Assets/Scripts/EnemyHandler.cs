@@ -8,21 +8,23 @@ public class EnemyHandler : MonoBehaviour
 {
     [SerializeField]
     private WavesHandler _wavesHandler;
-    [SerializeField]
-    private float _enemyBaseHealth, _growthRate, _bossMultiplier;
+    [SerializeField] 
+    private GameObject _enemyContainer;
     [SerializeField]
     private Text _enemyLevelText;    
     [SerializeField]
     private Image _healthBarImage;
     [SerializeField]
     private Text _healthBarText;
-    [SerializeField]
-    private GameObject _enemyShip;
+    
+    
 
     private Game _gameData;
     private float _enemyMaxHealth, _enemyCurrentHealth;
     private bool _isDead = false;
     private bool _isBoss = false;
+    private GameObject _enemyShip;
+    private EnemyData _enemyData;
 
     public static Action<int> OnEnemyKilled;
     
@@ -49,8 +51,8 @@ public class EnemyHandler : MonoBehaviour
     private void GetNextEnemyData()
     {
         _gameData.NextLevel();
-        EnemyData enemyData = _wavesHandler.GetEnemyDataByLevel(_gameData.Level);
-        _isBoss = enemyData.IsBoss;
+        _enemyData = _wavesHandler.GetEnemyDataByLevel(_gameData.Level);
+        _isBoss = _enemyData.IsBoss;
     }
 
     private void TakeDamage(float dmg)
@@ -80,7 +82,7 @@ public class EnemyHandler : MonoBehaviour
 
     private void DestroyEnemyShip()
     {
-        _enemyShip.SetActive(false);
+        Destroy(_enemyShip);
     }
 
     private void RespawnEnemy()
@@ -93,8 +95,7 @@ public class EnemyHandler : MonoBehaviour
 
     private void CalcEnemyParams()
     {
-        _enemyMaxHealth = _enemyBaseHealth * Mathf.Pow(1 + _growthRate, _gameData.Level - 1);
-        if (_isBoss) _enemyMaxHealth *= _bossMultiplier;
+        _enemyMaxHealth = _enemyData.MaxHealth;
     }
 
     private void ShowLevelInfo()
@@ -104,6 +105,7 @@ public class EnemyHandler : MonoBehaviour
 
     private void ShowNewEnemy()
     {
+        _enemyShip = Instantiate(_enemyData.Prefab, _enemyContainer.transform);
         _enemyShip.SetActive(true);
     }
 
