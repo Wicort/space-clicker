@@ -7,6 +7,10 @@ public class Modules : MonoBehaviour
     private List<ActiveModule> modules;
     [SerializeField]
     private float _priceGrowthRate = 0.2f;
+    [SerializeField]
+    private GameObject _moduleButtonPrefab;
+    [SerializeField]
+    private GameObject _content;
 
     private GameData _gameData;
 
@@ -24,7 +28,7 @@ public class Modules : MonoBehaviour
     {
         _gameData = gameData;
 
-        // first initialization
+        
         if (_gameData.Modules == null || _gameData.Modules.Count == 0)
         {
             FirstInitialization();
