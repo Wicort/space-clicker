@@ -10,7 +10,7 @@ public class CurrencyHandler : MonoBehaviour
     [SerializeField]
     public float _baseReward, _rewardGrowthRate, bossRewardMultiplier;
 
-    private Game _gameData;
+    private GameData _gameData;
 
     private void OnEnable()
     {
@@ -24,7 +24,7 @@ public class CurrencyHandler : MonoBehaviour
         EnemyHandler.OnEnemyKilled -= AddReward;
     }
 
-    private void Init(Game gameData)
+    private void Init(GameData gameData)
     {
         _gameData = gameData;
         RefreshCurrencyText();

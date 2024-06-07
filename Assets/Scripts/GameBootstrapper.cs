@@ -5,9 +5,9 @@ public class GameBootstrapper : MonoBehaviour
 {
     public static GameBootstrapper Instance;
 
-    public static Action<Game> OnGameLoaded;
+    public static Action<GameData> OnGameLoaded;
 
-    public Game game;
+    public GameData game;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class GameBootstrapper : MonoBehaviour
 
     private void Init()
     {
-        game = new Game();
+        game = new GameData();
         game.Currency = 5;
         game.Level = 0;
         Debug.Log($"{game}");

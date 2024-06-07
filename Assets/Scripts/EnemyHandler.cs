@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class EnemyHandler : MonoBehaviour
@@ -17,9 +16,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField]
     private Text _healthBarText;
     
-    
-
-    private Game _gameData;
+    private GameData _gameData;
     private float _enemyMaxHealth, _enemyCurrentHealth;
     private bool _isDead = false;
     private bool _isBoss = false;
@@ -28,7 +25,6 @@ public class EnemyHandler : MonoBehaviour
 
     public static Action<int> OnEnemyKilled;
     
-
     private void OnEnable()
     {
         Clicker.OnEnemyAttacked += TakeDamage;
@@ -41,7 +37,7 @@ public class EnemyHandler : MonoBehaviour
         GameBootstrapper.OnGameLoaded -= Init;
     }
 
-    private void Init(Game gameData)
+    private void Init(GameData gameData)
     {
         _gameData = gameData;
         GetNextEnemyData();

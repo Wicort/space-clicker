@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -819,6 +819,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f25b56048afe5244814ecaaa8238756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  game:
+    Level: 0
+    Currency: 0
+    IsBossFailed: 0
+    Modules: []
 --- !u!4 &530336992
 Transform:
   m_ObjectHideFlags: 0
@@ -1050,7 +1055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.55962545}
-  m_AnchoredPosition: {x: 2.8299255, y: -3.4240112}
+  m_AnchoredPosition: {x: 2.829895, y: -3.4240112}
   m_SizeDelta: {x: -72.349976, y: -6.8480225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &843359657
@@ -1338,6 +1343,57 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 417725186}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1654688523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1654688525}
+  - component: {fileID: 1654688524}
+  m_Layer: 0
+  m_Name: Modules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1654688524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654688523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0c7b383377f1041abd8f481b85413f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modules:
+  - _module: {fileID: 11400000, guid: 4520177ac4046ab4abc48607ffeec2f0, type: 2}
+    _currentLevel: 1
+    _currentPrice: 0
+  - _module: {fileID: 11400000, guid: 6f5ae4a96f0a1d24d8b6e0a0b9f357d0, type: 2}
+    _currentLevel: 0
+    _currentPrice: 0
+--- !u!4 &1654688525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654688523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694933847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,3 +1684,4 @@ SceneRoots:
   - {fileID: 367401993}
   - {fileID: 530336992}
   - {fileID: 1694933848}
+  - {fileID: 1654688525}

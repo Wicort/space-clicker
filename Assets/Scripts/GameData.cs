@@ -1,9 +1,14 @@
-﻿public class Game
+﻿using System;
+using System.Collections.Generic;
+
+[Serializable]
+public class GameData
 {
     public int Level;
     public float Currency;
     public bool IsBossFailed;
-    public Game()
+    public List<ActiveModule> Modules;
+    public GameData()
     {
         Level = 0;
         Currency = 0;
@@ -12,7 +17,8 @@
 
     public void NextLevel()
     {
-        Level++;
+        if (!IsBossFailed)
+            Level++;
     }
 
     public void AddCurrency(float value)
@@ -20,5 +26,10 @@
         if (value <= 0) return;
 
         Currency += value;
+    }
+
+    public void SetIsBossFailed(bool value)
+    {
+        IsBossFailed = value;
     }
 }
