@@ -41,6 +41,7 @@ public class Modules : MonoBehaviour
             Debug.Log(module.GetModule().name);
             ModuleButton btn = Instantiate(_moduleButtonPrefab, _content.transform);
             btn.Init(module.GetModule().Icon, module.GetModule().Name, module.GetModule().Description, $"${module.CurrentPrice}");
+
         }
     }
 
