@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave_001
   m_EditorClassIdentifier: 
   EnemiePrefabs:
-  - {fileID: 2816378429828008076, guid: f549a42b02fdc824ebd3942bc2beea37, type: 3}
+  - {fileID: 5656403787527198488, guid: 32dab500aeb629b4298e15286eb8804b, type: 3}
   - {fileID: 2816378429828008076, guid: fc56dd922884fb04b93eaf5daa48b280, type: 3}
   BossPrefab: {fileID: 2816378429828008076, guid: b2f72ea5840678246b04a4fbbb116f8e,
     type: 3}

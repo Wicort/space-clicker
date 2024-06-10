@@ -8,7 +8,7 @@ public class Modules : MonoBehaviour
     [SerializeField]
     private float _priceGrowthRate = 0.2f;
     [SerializeField]
-    private GameObject _moduleButtonPrefab;
+    private ModuleButton _moduleButtonPrefab;
     [SerializeField]
     private GameObject _content;
 
@@ -39,6 +39,8 @@ public class Modules : MonoBehaviour
             var module = modules.Find(m => m.GetModule().Id == mData.GetModule().Id);
             module.SetCurrentPrice(CalculateModulePrice(module.CurrentLevel, module.GetModule().StartPrice));
             Debug.Log(module.GetModule().name);
+            ModuleButton btn = Instantiate(_moduleButtonPrefab, _content.transform);
+            btn.Init(module.GetModule().Icon, module.GetModule().Name, module.GetModule().Description, $"${module.CurrentPrice}");
         }
     }
 

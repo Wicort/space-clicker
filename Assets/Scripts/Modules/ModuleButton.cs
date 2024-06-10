@@ -12,11 +12,11 @@ public class ModuleButton : MonoBehaviour
     [SerializeField]
     private Text _price;
 
-    public void Init(Image icon, Text name, Text description, Text price)
+    public void Init(Sprite icon, string name, string description, string price)
     {
-        _icon = icon;
-        _name = name;
-        _description = description;
-        _price = price;
+        _icon.sprite = icon;
+        _name.text = name;
+        _description.text = description;
+        _price.text = price;
     }
 }
