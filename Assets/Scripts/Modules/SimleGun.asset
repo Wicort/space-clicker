@@ -20,4 +20,5 @@ MonoBehaviour:
   RequiredUpgrade: {fileID: 0}
   RequiredLevel: 0
   StartValue: 1
+  ValueGrowthRate: 0.2
   StartPrice: 10

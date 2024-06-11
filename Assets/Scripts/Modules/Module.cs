@@ -11,5 +11,6 @@ public class Module: ScriptableObject
     public Module RequiredUpgrade;
     public int RequiredLevel;
     public float StartValue;
+    public float ValueGrowthRate;
     public float StartPrice;
 }

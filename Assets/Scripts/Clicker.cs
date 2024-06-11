@@ -68,8 +68,9 @@ public class Clicker : MonoBehaviour
         System.Collections.Generic.List<ActiveUpgrade> autoClickModules = _gameData.Modules.FindAll(u => u.GetModule().Type == ModuleType.CLICK || u.CurrentLevel > 0);
         var res = from module in autoClickModules
                   group module by module.GetModule().Type 
-                  into g
-                  select new { Id = g.Key, Dmg = g.Sum(module => module.CurrentLevel)};
+                  into groupDmg
+                  select new { Id = groupDmg.Key, Dmg = groupDmg.Sum(module => module.CurrentLevel * module.GetModule().StartValue + Mathf.Pow(1 + module.GetModule().ValueGrowthRate, module.CurrentLevel - 1)) };
+        
 
         foreach (var result in res)
         {

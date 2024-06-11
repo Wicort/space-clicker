@@ -20,4 +20,5 @@ MonoBehaviour:
   RequiredUpgrade: {fileID: 11400000, guid: 6f5ae4a96f0a1d24d8b6e0a0b9f357d0, type: 2}
   RequiredLevel: 10
   StartValue: 10
+  ValueGrowthRate: 0.2
   StartPrice: 300
