@@ -12,16 +12,20 @@ public class CurrencyHandler : MonoBehaviour
 
     private GameData _gameData;
 
+    public static Action OnCurrencyChanged;
+
     private void OnEnable()
     {
         GameBootstrapper.OnGameLoaded += Init;
         EnemyHandler.OnEnemyKilled += AddReward;
+        Modules.OnModuleUpgraded += RefreshCurrencyText;
     }
 
     private void OnDisable()
     {
         GameBootstrapper.OnGameLoaded -= Init; 
         EnemyHandler.OnEnemyKilled -= AddReward;
+        Modules.OnModuleUpgraded -= RefreshCurrencyText;
     }
 
     private void Init(GameData gameData)
@@ -45,5 +49,6 @@ public class CurrencyHandler : MonoBehaviour
 
         _gameData.Currency += calculatedReward;
         RefreshCurrencyText();
+        OnCurrencyChanged?.Invoke();
     }
 }

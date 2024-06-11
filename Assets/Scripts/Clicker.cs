@@ -1,10 +1,33 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class Clicker : MonoBehaviour
 {
     public static Action<float> OnEnemyAttacked;
+
+    private GameData _gameData;
+    private float _clickDamage = 0;
+    private float _autoClickDamage = 0;
+
+    private void OnEnable()
+    {
+        GameBootstrapper.OnGameLoaded += Init;
+        Modules.OnModuleUpgraded += RecalcDamage;
+    }
+
+    private void OnDisable()
+    {
+        GameBootstrapper.OnGameLoaded -= Init;
+        Modules.OnModuleUpgraded -= RecalcDamage;
+    }
+
+    private void Init(GameData gameData)
+    {
+        _gameData = gameData;
+        RecalcDamage();
+    }
 
     private void Start()
     {
@@ -32,11 +55,33 @@ public class Clicker : MonoBehaviour
 
     private float GetClickDamage()
     {
-        return 20f;
+        return _clickDamage;
     }
 
     private float GetAutoClickDamage()
     {
-        return 0f;
+        return _autoClickDamage;
+    }
+
+    private void RecalcDamage()
+    {
+        System.Collections.Generic.List<ActiveUpgrade> autoClickModules = _gameData.Modules.FindAll(u => u.GetModule().Type == ModuleType.CLICK || u.CurrentLevel > 0);
+        var res = from module in autoClickModules
+                  group module by module.GetModule().Type 
+                  into g
+                  select new { Id = g.Key, Dmg = g.Sum(module => module.CurrentLevel)};
+
+        foreach (var result in res)
+        {
+            Debug.Log($"id: {result.Id}, dmg: {result.Dmg}");
+            if (result.Id == ModuleType.CLICK)
+            {
+                _clickDamage = result.Dmg;
+            } else if (result.Id == ModuleType.AUTOCLICK)
+            {
+                _autoClickDamage = result.Dmg;
+            }
+        }
+
     }
 }

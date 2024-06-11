@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +16,20 @@ public class Modules : MonoBehaviour
     private GameData _gameData;
     private List<UpgradeButton> _buttons;
 
+    public static Action OnModuleUpgraded;
+
     private void OnEnable()
     {
         GameBootstrapper.OnGameLoaded += Init;
         UpgradeButton.OnModuleUpgraded += UpgradeModule;
+        CurrencyHandler.OnCurrencyChanged += RefreshUpgradeButtons;
     }
 
     private void OnDisable()
     {
         GameBootstrapper.OnGameLoaded -= Init;
         UpgradeButton.OnModuleUpgraded -= UpgradeModule;
+        CurrencyHandler.OnCurrencyChanged -= RefreshUpgradeButtons;
     }
 
     private void Init(GameData gameData)
@@ -49,7 +54,7 @@ public class Modules : MonoBehaviour
             bool isModuleBtnEnabled = IsModuleButtonActive(upgradeBtn);
 
             UpgradeButton btn = Instantiate(_upgradeButtonPrefab, _content.transform);
-            btn.Init(module.Id, module.Icon, module.Name, module.Description, $"${upgradeBtn.CurrentPrice}", isModuleBtnEnabled);
+            btn.Init(module.Id, module.Icon, module.Name, module.Description, upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
 
             _buttons.Add(btn);
         }
@@ -59,7 +64,8 @@ public class Modules : MonoBehaviour
     {
         foreach (UpgradeButton btn in _buttons)
         {
-            btn.SetInterractable(IsModuleButtonActive(_upgrades.Find(upg => upg.GetModule().Id == btn.Id)));
+            ActiveUpgrade upgrade = _upgrades.Find(upg => upg.GetModule().Id == btn.Id);
+            btn.UpdateInfo(upgrade.CurrentPrice, upgrade.CurrentLevel, IsModuleButtonActive(upgrade));
         }
     }
 
@@ -79,7 +85,7 @@ public class Modules : MonoBehaviour
     private float CalculateModulePrice(int level, float startPrice)
     {
         if (level > 0)
-            return startPrice * Mathf.Pow(1 + _priceGrowthRate, level - 1);
+            return Mathf.Ceil(startPrice * Mathf.Pow(1 + _priceGrowthRate, level));
         else return startPrice;
     }
 
@@ -89,9 +95,12 @@ public class Modules : MonoBehaviour
 
         var upgradeBtn = _upgrades.Find(upg => upg.GetModule().Id == id);
 
-        // if has a money
+        _gameData.Currency -= upgradeBtn.CurrentPrice;
+        
         upgradeBtn.UpgradeLevel();
         upgradeBtn.SetCurrentPrice(CalculateModulePrice(upgradeBtn.CurrentLevel, upgradeBtn.GetModule().StartPrice));
+
+        OnModuleUpgraded?.Invoke();
 
         RefreshUpgradeButtons();
         
@@ -101,6 +110,8 @@ public class Modules : MonoBehaviour
     {
         bool isButtonEnabled = false;
         Module module = upgradeBtn.GetModule();
+
+        if (upgradeBtn.CurrentPrice > _gameData.Currency) return false;
 
         if (module.RequiredUpgrade == null || module.RequiredLevel == 0)
         {

@@ -15,6 +15,8 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField]
     private Text _price;
     [SerializeField]
+    private Text _level;
+    [SerializeField]
     private Button _upgradeButton;
 
     public int Id => _id;
@@ -22,13 +24,20 @@ public class UpgradeButton : MonoBehaviour
 
     public static Action<int> OnModuleUpgraded;
 
-    public void Init(int id, Sprite icon, string name, string description, string price, bool isBtnEnabled)
+    public void Init(int id, 
+        Sprite icon, 
+        string name, 
+        string description, 
+        float price, 
+        int level,
+        bool isBtnEnabled)
     {
         _id = id;
         _icon.sprite = icon;
         _name.text = name;
         _description.text = description;
-        _price.text = price;
+        _price.text = $"${price}";
+        _level.text = $"Lvl. {level}";
         SetInterractable(isBtnEnabled);
     }
 
@@ -41,6 +50,13 @@ public class UpgradeButton : MonoBehaviour
 
     public void SetInterractable(bool isBtnEnabled)
     {
+        _upgradeButton.interactable = isBtnEnabled;
+    }
+
+    public void UpdateInfo(float price, int level, bool isBtnEnabled)
+    {
+        _price.text = $"${price}";
+        _level.text = $"Lvl. {level}";
         _upgradeButton.interactable = isBtnEnabled;
     }
 }
