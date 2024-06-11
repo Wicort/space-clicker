@@ -7,7 +7,7 @@ public class GameData
     public int Level;
     public float Currency;
     public bool IsBossFailed;
-    public List<ActiveModule> Modules;
+    public List<ActiveUpgrade> Modules;
     public GameData()
     {
         Level = 0;

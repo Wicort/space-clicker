@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class ActiveModule
+public class ActiveUpgrade
 {
     [SerializeField]
     private Module _module;
@@ -18,5 +18,10 @@ public class ActiveModule
     public void SetCurrentPrice(float value)
     {
         _currentPrice = value;
+    }
+
+    public void UpgradeLevel()
+    {
+        _currentLevel++;
     }
 }

@@ -35,13 +35,13 @@ public class CurrencyHandler : MonoBehaviour
         currencyText.text = $"${_gameData.Currency}";
     }
 
-    private void AddReward(int _enemyLevel)
+    private void AddReward(EnemyData _enemy)
     {
-        float calculatedReward = Mathf.Ceil(_baseReward * Mathf.Pow(1 + _rewardGrowthRate, _enemyLevel - 1));
-        /*if (_isBoss)
+        float calculatedReward = Mathf.Ceil(_baseReward * Mathf.Pow(1 + _rewardGrowthRate, _enemy.EnemyLevel - 1));
+        if (_enemy.IsBoss)
         {
             calculatedReward *= bossRewardMultiplier;
-        }*/
+        }
 
         _gameData.Currency += calculatedReward;
         RefreshCurrencyText();

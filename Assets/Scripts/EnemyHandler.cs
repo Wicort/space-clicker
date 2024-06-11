@@ -23,7 +23,7 @@ public class EnemyHandler : MonoBehaviour
     private GameObject _enemyShip;
     private EnemyData _enemyData;
 
-    public static Action<int> OnEnemyKilled;
+    public static Action<EnemyData> OnEnemyKilled;
     
     private void OnEnable()
     {
@@ -69,7 +69,7 @@ public class EnemyHandler : MonoBehaviour
     private IEnumerator KillEnemy()
     {
         DestroyEnemyShip();
-        OnEnemyKilled?.Invoke(_gameData.Level);
+        OnEnemyKilled?.Invoke(_enemyData);
         GetNextEnemyData();
         yield return new WaitForSeconds(1f);
 

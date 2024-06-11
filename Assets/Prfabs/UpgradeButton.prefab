@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 606861680509992030}
   - component: {fileID: 536014448049560845}
   - component: {fileID: 1907061003613542460}
-  - component: {fileID: 1360937090129207839}
+  - component: {fileID: 8527267489543615007}
   m_Layer: 5
-  m_Name: ModuleButton
+  m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1360937090129207839
+--- !u!114 &8527267489543615007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,13 +181,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4409761150851167761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4015af3d1f89daf44ac890df79b1648d, type: 3}
+  m_Script: {fileID: 11500000, guid: 47fff51e7e4275248b3d79e7a55b3eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   _icon: {fileID: 4582554450047966997}
   _name: {fileID: 415382516532768525}
   _description: {fileID: 6908886653356518156}
   _price: {fileID: 1250134853518255461}
+  _upgradeButton: {fileID: 175843987110018778}
 --- !u!1 &6339229736304290641
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +278,7 @@ GameObject:
   - component: {fileID: 2844161866203985097}
   - component: {fileID: 175843987110018778}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: UpgradeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,11 +366,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.5613208, g: 1, b: 0.9628612, a: 1}
+    m_HighlightedColor: {r: 0.25943398, g: 0.83098346, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_SelectedColor: {r: 0.56078434, g: 1, b: 0.96470594, a: 1}
+    m_DisabledColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -386,7 +388,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2844161866203985097}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8527267489543615007}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: OnUpgradeButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8976878871482559674
 GameObject:
   m_ObjectHideFlags: 0

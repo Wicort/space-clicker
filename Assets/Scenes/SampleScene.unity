@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1731,7 +1731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0c7b383377f1041abd8f481b85413f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modules:
+  _upgrades:
   - _module: {fileID: 11400000, guid: 4520177ac4046ab4abc48607ffeec2f0, type: 2}
     _currentLevel: 1
     _currentPrice: 0
@@ -1742,7 +1742,7 @@ MonoBehaviour:
     _currentLevel: 0
     _currentPrice: 0
   _priceGrowthRate: 0.2
-  _moduleButtonPrefab: {fileID: 1360937090129207839, guid: 73ae0f31872bdc64990a1e9f5c9c1da4,
+  _upgradeButtonPrefab: {fileID: 8527267489543615007, guid: 73ae0f31872bdc64990a1e9f5c9c1da4,
     type: 3}
   _content: {fileID: 1589690896}
 --- !u!4 &1654688525
