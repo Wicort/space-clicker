@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 2
   Type: 1
   Name: Drone
-  Description: +1 DMG AutoATK
+  Description: Low DMG by AutoATK
   Icon: {fileID: 21300000, guid: 86d42306d5385ea4483a94e45e0cdef5, type: 3}
   RequiredUpgrade: {fileID: 11400000, guid: 4520177ac4046ab4abc48607ffeec2f0, type: 2}
   RequiredLevel: 10

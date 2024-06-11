@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 3
   Type: 1
   Name: Touret
-  Description: +10 DMG AutoATK
+  Description: Medium DMG by AutoATK
   Icon: {fileID: 21300000, guid: 802d13cd8f6755944a5fe3998d30a188, type: 3}
   RequiredUpgrade: {fileID: 11400000, guid: 6f5ae4a96f0a1d24d8b6e0a0b9f357d0, type: 2}
   RequiredLevel: 10
