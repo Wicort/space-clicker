@@ -6,6 +6,7 @@ using UnityEngine;
 public class Clicker : MonoBehaviour
 {
     public static Action<float> OnEnemyAttacked;
+    public static Action OnPlayerClick;
 
     private GameData _gameData;
     private float _clickDamage = 0;
@@ -37,6 +38,7 @@ public class Clicker : MonoBehaviour
     public void OnClick()
     {
         OnEnemyAttacked?.Invoke(GetClickDamage());
+        OnPlayerClick?.Invoke();
     }
 
     public void OnAutoClick()
