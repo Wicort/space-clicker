@@ -4,32 +4,41 @@ using System.Collections.Generic;
 [Serializable]
 public class GameData
 {
-    public int Level;
-    public float Currency;
-    public bool IsBossFailed;
+    private bool _isBossFailed;
+    private int _level;
+    private float _currency;
+
+
+    public int Level => _level;
+    public float Currency => _currency;
+    
     public List<ActiveUpgrade> Modules;
+
+    public bool IsBossFailed => _isBossFailed;
     public GameData()
     {
-        Level = 0;
-        Currency = 0;
-        IsBossFailed = false;
+        _level = 9;
+        _currency = 0;
+        _isBossFailed = false;
     }
 
     public void NextLevel()
     {
-        if (!IsBossFailed)
-            Level++;
+        if (!IsBossFailed) _level++;
+    }
+
+    public void PrevLevel()
+    {
+        _level--;
     }
 
     public void AddCurrency(float value)
     {
-        if (value <= 0) return;
-
-        Currency += value;
+        _currency += value;
     }
 
     public void SetIsBossFailed(bool value)
     {
-        IsBossFailed = value;
+        _isBossFailed = value;
     }
 }

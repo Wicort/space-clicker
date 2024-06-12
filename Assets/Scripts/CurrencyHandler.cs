@@ -30,6 +30,7 @@ public class CurrencyHandler : MonoBehaviour
 
     private void Init(GameData gameData)
     {
+        Debug.Log("Currency handler init");
         _gameData = gameData;
         RefreshCurrencyText();
     }
@@ -47,7 +48,7 @@ public class CurrencyHandler : MonoBehaviour
             calculatedReward *= bossRewardMultiplier;
         }
 
-        _gameData.Currency += calculatedReward;
+        _gameData.AddCurrency(calculatedReward);
         RefreshCurrencyText();
         OnCurrencyChanged?.Invoke();
     }

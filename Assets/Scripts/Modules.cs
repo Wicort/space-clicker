@@ -48,8 +48,7 @@ public class Modules : MonoBehaviour
         {
             ActiveUpgrade upgradeBtn = _upgrades.Find(upg => upg.GetModule().Id == mData.GetModule().Id);
             upgradeBtn.SetCurrentPrice(CalculateModulePrice(upgradeBtn.CurrentLevel, upgradeBtn.GetModule().StartPrice));
-            Debug.Log(upgradeBtn.GetModule().name);
-
+            
             Module module = upgradeBtn.GetModule();
             bool isModuleBtnEnabled = IsModuleButtonActive(upgradeBtn);
 
@@ -95,7 +94,7 @@ public class Modules : MonoBehaviour
 
         var upgradeBtn = _upgrades.Find(upg => upg.GetModule().Id == id);
 
-        _gameData.Currency -= upgradeBtn.CurrentPrice;
+        _gameData.AddCurrency(-1 * upgradeBtn.CurrentPrice);
         
         upgradeBtn.UpgradeLevel();
         upgradeBtn.SetCurrentPrice(CalculateModulePrice(upgradeBtn.CurrentLevel, upgradeBtn.GetModule().StartPrice));

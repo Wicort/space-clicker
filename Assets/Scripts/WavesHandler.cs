@@ -11,10 +11,9 @@ public class WavesHandler : MonoBehaviour
     [SerializeField]
     private float _enemyBaseHealth, _growthRate, _bossMultiplier;
 
-
-
     public EnemyData GetEnemyDataByLevel(int enemyLevel)
     {
+        Debug.Log($"GetEnemyDataByLevel: {enemyLevel}");
         int waveNumber = Mathf.Min((int)Mathf.Floor((enemyLevel - 1) / 10f), waves.Count - 1);
         Wave currentWave = waves[waveNumber] ;
 

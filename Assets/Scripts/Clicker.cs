@@ -74,7 +74,6 @@ public class Clicker : MonoBehaviour
 
         foreach (var result in res)
         {
-            Debug.Log($"id: {result.Id}, dmg: {result.Dmg}");
             if (result.Id == ModuleType.CLICK)
             {
                 _clickDamage = result.Dmg;
