@@ -174,7 +174,7 @@ MonoBehaviour:
   _enemyLevelText: {fileID: 843359658}
   _healthBarImage: {fileID: 137486795}
   _healthBarText: {fileID: 1068458329}
-  _maxBossTime: 5
+  _maxBossTime: 30
   _bossTimeText: {fileID: 1444038777}
   _bosRushButton: {fileID: 1103407159}
 --- !u!1 &137486793
@@ -1878,7 +1878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1444038775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2416,6 +2416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d03a59852f965d42bb8e7e1421764e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyHandler: {fileID: 103239250}
 --- !u!4 &2042146108
 Transform:
   m_ObjectHideFlags: 0

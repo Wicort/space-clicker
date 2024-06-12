@@ -18,7 +18,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField]
     private Text _healthBarText;
     [SerializeField]
-    private float _maxBossTime = 10;
+    private float _maxBossTime = 30;
     [SerializeField]
     private Text _bossTimeText;
     [SerializeField]
@@ -219,5 +219,10 @@ public class EnemyHandler : MonoBehaviour
         {
             StartCoroutine(BossRush());
         }
+    }
+
+    public Vector3 GetEnemyPosition()
+    {
+        return _enemyShip.transform.position;
     }
 }

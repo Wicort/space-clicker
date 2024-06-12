@@ -17,7 +17,7 @@ public class GameData
     public bool IsBossFailed => _isBossFailed;
     public GameData()
     {
-        _level = 9;
+        _level = 0;
         _currency = 0;
         _isBossFailed = false;
     }

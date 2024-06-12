@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class Clicker : MonoBehaviour
 {
-    public static Action<float> OnEnemyAttacked;
-    public static Action OnPlayerClick;
+    [SerializeField]
+    private EnemyHandler _enemyHandler;
 
     private GameData _gameData;
     private float _clickDamage = 0;
     private float _autoClickDamage = 0;
+
+    public static Action<float> OnEnemyAttacked;
+    public static Action<Vector3> OnPlayerClick;
 
     private void OnEnable()
     {
@@ -38,7 +41,7 @@ public class Clicker : MonoBehaviour
     public void OnClick()
     {
         OnEnemyAttacked?.Invoke(GetClickDamage());
-        OnPlayerClick?.Invoke();
+        OnPlayerClick?.Invoke(_enemyHandler.GetEnemyPosition());
     }
 
     public void OnAutoClick()
