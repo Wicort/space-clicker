@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ModuleData", menuName = "Game/Module")]
@@ -13,4 +14,6 @@ public class Module: ScriptableObject
     public float StartValue;
     public float ValueGrowthRate;
     public float StartPrice;
+    public Stage CurrentStage;
+    public List<Stage> Stages;
 }
