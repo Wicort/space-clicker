@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13257d8cfefb96741b249f5bd356c67d, type: 3}
+  m_Name: Wave_003
+  m_EditorClassIdentifier: 
+  EnemiePrefabs:
+  - {fileID: 4940248191170998394, guid: 353d5ed7031c94b4eb92f27910b7bc92, type: 3}
+  - {fileID: 3034078500049234360, guid: de3eccc102018c0468a58393d8975112, type: 3}
+  - {fileID: 5856722479650282891, guid: 611cec6507fb2704fab074a59f49cb0b, type: 3}
+  - {fileID: 5884161078227687636, guid: 94f309ded60f938469b932bd7b1900c8, type: 3}
+  BossPrefab: {fileID: 1352819912832323548, guid: b00826a1a1cc86d4eaecae7c15ef457d,
+    type: 3}

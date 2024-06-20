@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Wave_001
   m_EditorClassIdentifier: 
   EnemiePrefabs:
-  - {fileID: 5656403787527198488, guid: 32dab500aeb629b4298e15286eb8804b, type: 3}
-  - {fileID: 2816378429828008076, guid: fc56dd922884fb04b93eaf5daa48b280, type: 3}
-  BossPrefab: {fileID: 2816378429828008076, guid: b2f72ea5840678246b04a4fbbb116f8e,
+  - {fileID: 7055826564936787250, guid: fd5c85bbee6d8884ba1b9a7711665c59, type: 3}
+  - {fileID: 8069868161854042501, guid: fa4c687674daa0342a03825138dc8e29, type: 3}
+  - {fileID: 8214473817285665960, guid: bc2c7842bb242f949bb4d5545a478056, type: 3}
+  - {fileID: 3423309543239701135, guid: a1e6294ed6f2a8241bedcc0b410ada71, type: 3}
+  BossPrefab: {fileID: 8484998922380724727, guid: 6704d9f6683da674ab31ad0eee165c29,
     type: 3}

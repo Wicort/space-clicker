@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -12,7 +13,8 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         if (_target == null) return;
-        MoveBullet();
+        StartCoroutine(DestroyBullet());
+        //MoveBullet();
     }
 
     private void MoveBullet()
@@ -23,5 +25,11 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private IEnumerator DestroyBullet()
+    {
+        yield return new WaitForSeconds(0.4f);
+        Destroy(gameObject);
     }
 }

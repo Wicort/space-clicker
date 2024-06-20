@@ -19,8 +19,7 @@ public class MechanicGun : MonoBehaviour
 
     private void Attack(Vector3 targetPosition)
     {
-        Debug.Log("Attack!");
-        Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        Bullet bullet = Instantiate(_bulletPrefab, transform);
         bullet.Init(targetPosition);
     }
 }

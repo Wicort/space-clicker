@@ -23,6 +23,8 @@ public class EnemyHandler : MonoBehaviour
     private Text _bossTimeText;
     [SerializeField]
     private Button _bosRushButton;
+    [SerializeField]
+    private GameObject _explosionPrefab;
     
     private GameData _gameData;
     private float _enemyMaxHealth, _enemyCurrentHealth;
@@ -141,13 +143,15 @@ public class EnemyHandler : MonoBehaviour
         DestroyEnemyShip();
         OnEnemyKilled?.Invoke(_enemyData);
         GetNextEnemyData();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(4f);
 
         RespawnEnemy();
     }
 
     private void DestroyEnemyShip()
     {
+        GameObject explosion = Instantiate(_explosionPrefab, _enemyShip.transform);
+        explosion.transform.parent = null;
         Destroy(_enemyShip);
     }
 
