@@ -1,3 +1,4 @@
+using DamageNumbersPro;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +7,12 @@ public class CurrencyHandler : MonoBehaviour
 {
     [SerializeField] 
     private Text currencyText;
+    [SerializeField]
+    private DamageNumber currencyNumbersPrefab;
 
     [SerializeField]
     public float _baseReward, _rewardGrowthRate, bossRewardMultiplier;
+
 
     private GameData _gameData;
 
@@ -49,6 +53,7 @@ public class CurrencyHandler : MonoBehaviour
         }
 
         _gameData.AddCurrency(calculatedReward);
+        currencyNumbersPrefab.Spawn(Vector3.zero, calculatedReward);
         RefreshCurrencyText();
         OnCurrencyChanged?.Invoke();
     }

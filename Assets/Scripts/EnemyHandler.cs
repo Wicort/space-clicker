@@ -1,3 +1,4 @@
+using DamageNumbersPro;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -25,6 +26,8 @@ public class EnemyHandler : MonoBehaviour
     private Button _bosRushButton;
     [SerializeField]
     private GameObject _explosionPrefab;
+    [SerializeField]
+    private DamageNumber damageNumberPrefab;
     
     private GameData _gameData;
     private float _enemyMaxHealth, _enemyCurrentHealth;
@@ -121,6 +124,9 @@ public class EnemyHandler : MonoBehaviour
     private void TakeDamage(float dmg)
     {
         if (dmg <= 0 || _isDead) return;
+
+        if (_enemyShip != null) 
+            damageNumberPrefab.Spawn(_enemyShip.transform.position, dmg);
 
         _enemyCurrentHealth -= dmg;
 
