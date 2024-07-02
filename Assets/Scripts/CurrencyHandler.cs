@@ -53,7 +53,7 @@ public class CurrencyHandler : MonoBehaviour
         }
 
         _gameData.AddCurrency(calculatedReward);
-        currencyNumbersPrefab.Spawn(Vector3.zero, calculatedReward);
+        currencyNumbersPrefab.Spawn(Vector3.zero + new Vector3(UnityEngine.Random.Range(0f, 5f), 0, UnityEngine.Random.Range(0f, 5f)), calculatedReward);
         RefreshCurrencyText();
         OnCurrencyChanged?.Invoke();
     }
