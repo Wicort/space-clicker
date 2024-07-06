@@ -10,15 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c549577361d86c040aa567658787cac8, type: 3}
-  m_Name: Drone
+  m_Name: Touret
   m_EditorClassIdentifier: 
-  Id: 2
+  Id: 3
   Type: 1
-  Name: Drone
-  Description: Low DMG by AutoATK
-  Icon: {fileID: 21300000, guid: 86d42306d5385ea4483a94e45e0cdef5, type: 3}
-  RequiredUpgrade: {fileID: 11400000, guid: 4520177ac4046ab4abc48607ffeec2f0, type: 2}
+  Name: Touret
+  Description: Medium DMG by AutoATK
+  ItemType: 2
+  Icon: {fileID: 21300000, guid: 802d13cd8f6755944a5fe3998d30a188, type: 3}
+  RequiredUpgrade: {fileID: 11400000, guid: 6f5ae4a96f0a1d24d8b6e0a0b9f357d0, type: 2}
   RequiredLevel: 10
-  StartValue: 1
+  StartValue: 10
   ValueGrowthRate: 0.2
-  StartPrice: 50
+  StartPrice: 300
+  CurrentStage:
+    Id: 0
+    RequiredLevel: 0
+    Prefab: {fileID: 0}
+  Stages: []

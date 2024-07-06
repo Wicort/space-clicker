@@ -1,3 +1,4 @@
+using Items;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,7 +54,7 @@ public class Modules : MonoBehaviour
             bool isModuleBtnEnabled = IsModuleButtonActive(upgradeBtn);
 
             UpgradeButton btn = Instantiate(_upgradeButtonPrefab, _content.transform);
-            btn.Init(module.Id, module.Icon, module.Name, module.Description, upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
+            btn.Init(module.Id, module.GetIcon(), module.GetName(), module.GetDescription(), upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
 
             _buttons.Add(btn);
         }

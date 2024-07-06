@@ -1,3 +1,4 @@
+using Items;
 using System;
 using System.Collections;
 using System.Linq;
@@ -70,7 +71,7 @@ public class Clicker : MonoBehaviour
 
     private void RecalcDamage()
     {
-        System.Collections.Generic.List<ActiveUpgrade> autoClickModules = _gameData.Modules.FindAll(u => u.GetModule().Type == ModuleType.CLICK || u.CurrentLevel > 0);
+        System.Collections.Generic.List<ActiveUpgrade> autoClickModules = _gameData.Modules.FindAll(u => u.GetModule().Type == AttackType.CLICK || u.CurrentLevel > 0);
         var res = from module in autoClickModules
                   group module by module.GetModule().Type 
                   into groupDmg
@@ -79,10 +80,10 @@ public class Clicker : MonoBehaviour
 
         foreach (var result in res)
         {
-            if (result.Id == ModuleType.CLICK)
+            if (result.Id == AttackType.CLICK)
             {
                 _clickDamage = result.Dmg;
-            } else if (result.Id == ModuleType.AUTOCLICK)
+            } else if (result.Id == AttackType.AUTOCLICK)
             {
                 _autoClickDamage = result.Dmg;
             }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyHandler : MonoBehaviour
 {
+    private const float _timeForNewEnemy = 2f;
     [SerializeField]
     private WavesHandler _wavesHandler;
     [SerializeField] 
@@ -126,7 +127,7 @@ public class EnemyHandler : MonoBehaviour
         if (dmg <= 0 || _isDead) return;
 
         if (_enemyShip != null) 
-            damageNumberPrefab.Spawn(_enemyShip.transform.position, dmg);
+            damageNumberPrefab.Spawn(_enemyShip.transform.position, ShortScaleString.parseDouble(dmg, 1, 1000, true));
 
         _enemyCurrentHealth -= dmg;
 
@@ -149,7 +150,7 @@ public class EnemyHandler : MonoBehaviour
         DestroyEnemyShip();
         OnEnemyKilled?.Invoke(_enemyData);
         GetNextEnemyData();
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(_timeForNewEnemy);
 
         RespawnEnemy();
     }
@@ -219,7 +220,7 @@ public class EnemyHandler : MonoBehaviour
         }
         else
         {
-            _healthBarText.text = $"{Mathf.Ceil(_enemyCurrentHealth)} / {Mathf.Ceil(_enemyMaxHealth)}";
+            _healthBarText.text = $"{ShortScaleString.parseDouble(Mathf.Ceil(_enemyCurrentHealth), 1, 1000, true)} / {ShortScaleString.parseDouble(Mathf.Ceil(_enemyMaxHealth), 1, 1000, true)}";
         }
     }
 

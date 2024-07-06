@@ -15,6 +15,7 @@ public class CurrencyHandler : MonoBehaviour
 
 
     private GameData _gameData;
+    private float _currencyNumberOffset = 5f;
 
     public static Action OnCurrencyChanged;
 
@@ -41,7 +42,7 @@ public class CurrencyHandler : MonoBehaviour
 
     private void RefreshCurrencyText()
     {
-        currencyText.text = $"${_gameData.Currency}";
+        currencyText.text = $"${ShortScaleString.parseDouble(_gameData.Currency, 3, 1000, true)}";
     }
 
     private void AddReward(EnemyData _enemy)
@@ -53,7 +54,13 @@ public class CurrencyHandler : MonoBehaviour
         }
 
         _gameData.AddCurrency(calculatedReward);
-        currencyNumbersPrefab.Spawn(Vector3.zero + new Vector3(UnityEngine.Random.Range(0f, 5f), 0, UnityEngine.Random.Range(0f, 5f)), calculatedReward);
+
+        currencyNumbersPrefab.Spawn(
+            Vector3.zero + new Vector3(UnityEngine.Random.Range(0f, _currencyNumberOffset), 
+            0, 
+            UnityEngine.Random.Range(0f, _currencyNumberOffset)), 
+            $"+ ${ShortScaleString.parseDouble(calculatedReward, 3, 1000, true)}");
+
         RefreshCurrencyText();
         OnCurrencyChanged?.Invoke();
     }
