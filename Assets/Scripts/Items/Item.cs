@@ -12,9 +12,4 @@ namespace Items
         public void Equip();
         public void Remove();
     }
-
-    public class Slot
-    {
-        private Item _item;
-    }
 }
