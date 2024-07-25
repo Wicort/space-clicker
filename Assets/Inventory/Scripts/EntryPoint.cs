@@ -1,47 +1,68 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 
 namespace Inventory
 {
     public class EntryPoint: MonoBehaviour
     {
-        public InventoryGridView _view;
-        public InventoryService _inventoryService;
+        [SerializeField] private ScreenView _screenView;
+
+        private const string OWNER_1 = "Player";
+        private const string OWNER_2 = "Chest";
+        private readonly string[] _itemIds = { "TouretPart", "DrontPart", "MechanicGunPart" };
+
+        private InventoryService _inventoryService;
+        private ScreenController _screenController;
+        private string _cachedOwnerId;
 
         private void Start()
         {
             _inventoryService = new InventoryService();
 
-            var ownerId = "Player";
+            var inventoryDataPlayer = CreateTestInventory(OWNER_1);
+            _inventoryService.RegisterInventory(inventoryDataPlayer);
 
-            var inventoryData = CreateTestInventory(ownerId);
+            var inventoryDataChest = CreateTestInventory(OWNER_2);
+            _inventoryService.RegisterInventory(inventoryDataChest);
 
-            var playerInventory = _inventoryService.RegisterInventory(inventoryData);
-            _view.Setup(playerInventory);
+            _screenController = new ScreenController(_inventoryService, _screenView);
+            _screenController.OpenInventory(OWNER_1);
+            _cachedOwnerId = OWNER_1;
+        }
 
-            var addedResult = _inventoryService.AddItems(ownerId, "TouretPart", 20);
-            Debug.Log($"Items added. ItemId: TouretPart, amount to add: 20, amount added: {addedResult.ItemsAddedAmount}");
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _screenController.OpenInventory(OWNER_1);
+                _cachedOwnerId = OWNER_1;
+            }
 
-            addedResult = _inventoryService.AddItems(ownerId, "DronePart", 112);
-            Debug.Log($"Items added. ItemId: DronePart, amount to add: 112, amount added: {addedResult.ItemsAddedAmount}");
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                _screenController.OpenInventory(OWNER_2);
+                _cachedOwnerId = OWNER_2;
+            }
 
-            addedResult = _inventoryService.AddItems(ownerId, "MechanicGunPart", 30);
-            Debug.Log($"Items added. ItemId: MechanicGunPart, amount to add: 30, amount added: {addedResult.ItemsAddedAmount}");
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                var rIndex = Random.Range(0, _itemIds.Length);
+                var rItemId = _itemIds[rIndex];
+                var rAmount = Random.Range(0, 50);
+                var result = _inventoryService.AddItems(_cachedOwnerId, rItemId, rAmount);
 
-            _view.Print();
+                Debug.Log($"Item added: ${rItemId}. Amount added: {result.ItemsAddedAmount}");
+            }
 
-            var removeResult = _inventoryService.RemoveItems(ownerId, "TouretPart",10);
-            Debug.Log($"Items removed. ItemId: TouretPart, amount to remove: 10, success: {removeResult.Success}");
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                var rIndex = Random.Range(0, _itemIds.Length);
+                var rItemId = _itemIds[rIndex];
+                var rAmount = Random.Range(0, 50);
+                var result = _inventoryService.RemoveItems(_cachedOwnerId, rItemId, rAmount);
 
-            _view.Print();
-
-            removeResult = _inventoryService.RemoveItems(ownerId, "TouretPart", 15);
-            Debug.Log($"Items removed. ItemId: TouretPart, amount to remove: 15, success: {removeResult.Success}");
-
-            _view.Print();
-
-            
+                Debug.Log($"Item removed: ${rItemId}. Truying to remove: {result.ItemsToRemoveAmount}. Success: {result.Success}");
+            }
         }
 
         private InventoryGridData CreateTestInventory(string ownerId)
