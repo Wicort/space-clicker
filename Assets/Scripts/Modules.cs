@@ -16,6 +16,7 @@ public class Modules : MonoBehaviour
 
     private GameData _gameData;
     private List<UpgradeButton> _buttons;
+    private ItemService _itemService;
 
     public static Action OnModuleUpgraded;
 
@@ -36,6 +37,7 @@ public class Modules : MonoBehaviour
     private void Init(GameData gameData)
     {
         _gameData = gameData;
+        _itemService = new ItemService();
 
 
         if (_gameData.Modules == null || _gameData.Modules.Count == 0)
@@ -54,7 +56,7 @@ public class Modules : MonoBehaviour
             bool isModuleBtnEnabled = IsModuleButtonActive(upgradeBtn);
 
             UpgradeButton btn = Instantiate(_upgradeButtonPrefab, _content.transform);
-            btn.Init(module.Id, module.GetIcon(), module.GetName(), module.GetDescription(), upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
+            btn.Init(module.Id, null/*module.GetIcon()*/, module.GetName(), module.GetDescription(), upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
 
             _buttons.Add(btn);
         }
@@ -72,13 +74,18 @@ public class Modules : MonoBehaviour
     private void FirstInitialization()
     {
         _gameData.Modules = new List<ActiveUpgrade>();
-        foreach (var module in _upgrades)
+        foreach (var upgrade in _upgrades)
         {
-            if (module.CurrentLevel != 0)
+            Item item = _itemService.GetCommonItemByType(upgrade.GetModule().ModuleItemType);
+            if (item == null) continue;
+            upgrade.GetModule().SetItem(item);
+
+            if (upgrade.CurrentLevel != 0)
             {
-                module.SetCurrentPrice(CalculateModulePrice(module.CurrentLevel, module.GetModule().StartPrice));
+                
+                upgrade.SetCurrentPrice(CalculateModulePrice(upgrade.CurrentLevel, upgrade.GetModule().StartPrice));
             }
-            _gameData.Modules.Add(module);
+            _gameData.Modules.Add(upgrade);
         }
     }
 

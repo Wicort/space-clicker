@@ -9,7 +9,7 @@ namespace Inventory
 
         private const string OWNER_1 = "Player";
         private const string OWNER_2 = "Chest";
-        private readonly string[] _itemIds = { "TouretPart", "DrontPart", "MechanicGunPart" };
+        private readonly string[] _itemIds = { "TestGun", "TestDrone", "TestEngine", "TestTouret" };
 
         private InventoryService _inventoryService;
         private ScreenController _screenController;
@@ -49,6 +49,7 @@ namespace Inventory
                 var rIndex = Random.Range(0, _itemIds.Length);
                 var rItemId = _itemIds[rIndex];
                 var rAmount = Random.Range(0, 50);
+                Debug.Log($"Try to find item {rItemId}");
                 var result = _inventoryService.AddItems(_cachedOwnerId, rItemId, rAmount);
 
                 Debug.Log($"Item added: ${rItemId}. Amount added: {result.ItemsAddedAmount}");

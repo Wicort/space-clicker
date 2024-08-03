@@ -111,12 +111,14 @@ namespace Inventory
 
             if (remainingAmount <= 0)
             {
+                ItemsAdded?.Invoke(itemId, amount);
                 return new AddItemsToInventoryGridResult(OwnerId, amount, itemsAddedToSlotWithSameItemsAmount);
             }
 
             var itemsAddedToAvailableSlotAmount = AddItemsAddedToAvailableSlot(itemId, remainingAmount, out remainingAmount);
             var totalAddedAmount = itemsAddedToSlotWithSameItemsAmount + itemsAddedToAvailableSlotAmount;
 
+            ItemsAdded?.Invoke(itemId, amount);
             return new AddItemsToInventoryGridResult(OwnerId, amount, totalAddedAmount);
 
         }
@@ -151,6 +153,7 @@ namespace Inventory
                 slot.Amount = newValue;
             }
 
+            ItemsAdded?.Invoke(itemId, amount);
             return new AddItemsToInventoryGridResult(OwnerId, amount, itemsAddedAmount);
         }
 
@@ -185,7 +188,8 @@ namespace Inventory
                     {
                         RemoveItems(slotCoords, itemId, amountToRemove);
 
-                        return new RemoveItemsFromInventoryGridResult(OwnerId, amount, true);
+                        
+                        return new RemoveItemsFromInventoryGridResult(OwnerId, amount, true);                        
                     }
                 }
             }
@@ -209,6 +213,7 @@ namespace Inventory
                 slot.ItemId = null;
             }
 
+            ItemsRemoved?.Invoke(itemId, amount);
             return new RemoveItemsFromInventoryGridResult(OwnerId, amount, true);
         }
         

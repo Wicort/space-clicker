@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: SimleGun
   m_EditorClassIdentifier: 
   Id: 1
-  Type: 0
-  Name: Mechanic Gun
-  Description: DMG by ATK
-  Icon: {fileID: 21300000, guid: 51856bae7a7f96643b37235c4b916c0b, type: 3}
+  ModuleAttackType: 0
+  ModuleItemType: 0
   RequiredUpgrade: {fileID: 0}
   RequiredLevel: 0
   StartValue: 1
   ValueGrowthRate: 0.2
   StartPrice: 10
+  CurrentStage:
+    Id: 0
+    RequiredLevel: 0
+    Prefab: {fileID: 0}
+  Stages: []

@@ -1,4 +1,6 @@
+using Items;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour
@@ -8,6 +10,8 @@ public class GameBootstrapper : MonoBehaviour
     public static Action<GameData> OnGameLoaded;
 
     public GameData gameData;
+
+    //public List<Item> items;
 
     private void Start()
     {

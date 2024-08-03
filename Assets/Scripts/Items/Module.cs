@@ -7,15 +7,9 @@ namespace Items
     public class Module : ScriptableObject
     {
         public int Id;
-        public AttackType Type = AttackType.AUTOCLICK;
-        [SerializeField]
-        private string Name;
-        [SerializeField]
-        private string Description;
-        [SerializeField]
-        private ItemType ItemType;
-        [SerializeField]
-        private Sprite Icon;
+        public AttackType ModuleAttackType = AttackType.AUTOCLICK;
+        public ItemType ModuleItemType;
+        private Item _item;
         public Module RequiredUpgrade;
         public int RequiredLevel;
         public float StartValue;
@@ -31,28 +25,37 @@ namespace Items
 
         public string GetDescription()
         {
-            return Description;
+            return _item.Description;
         }
 
         public Sprite GetIcon()
         {
-            return Icon;
+            return _item.Icon;
         }
 
         public ItemType GetItemType()
         {
-            return ItemType;
+            return _item.ItemType;
         }
 
         public string GetName()
         {
-            return Name;
+            Debug.Log($"Getting name for item {_item.Name}");
+            return _item.Name;
         }
 
-        public void Remove()
+        public string GetId()
         {
-            throw new System.NotImplementedException();
+            return _item.Id;
+        }
+        public ItemRarity GetRarity()
+        {
+            return _item.Rarity;
         }
 
+        public void SetItem(Item item)
+        {
+            _item = item;
+        }
     }
 }
