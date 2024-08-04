@@ -1,3 +1,4 @@
+using Items;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -13,11 +14,8 @@ public class WavesHandler : MonoBehaviour
 
     public EnemyData GetEnemyDataByLevel(int enemyLevel)
     {
-        Debug.Log($"GetEnemyDataByLevel: {enemyLevel}");
-        int waveNumber = Mathf.Min((int)Mathf.Floor((enemyLevel - 1) / 10f), waves.Count - 1);
-        Wave currentWave = waves[waveNumber] ;
-
-        bool isBoss = (enemyLevel > 0 && enemyLevel % 10 == 0);        
+        Wave currentWave = getWave(enemyLevel);
+        bool isBoss = (enemyLevel > 0 && enemyLevel % 10 == 0);
         GameObject enemyPrefab = isBoss ? currentWave.BossPrefab : currentWave.EnemiePrefabs[Random.Range(0, currentWave.EnemiePrefabs.Count)];
         float _enemyMaxHealth = _enemyBaseHealth * Mathf.Pow(1 + _growthRate, enemyLevel - 1);
         if (isBoss) _enemyMaxHealth *= _bossMultiplier;
@@ -25,5 +23,11 @@ public class WavesHandler : MonoBehaviour
         EnemyData enemyData = new EnemyData(enemyLevel, isBoss, enemyPrefab, _enemyMaxHealth);
         
         return enemyData;
+    }
+
+    public Wave getWave (int enemyLevel)
+    {
+        int waveNumber = Mathf.Min((int)Mathf.Floor((enemyLevel - 1) / 10f), waves.Count - 1);
+        return waves[waveNumber];
     }
 }

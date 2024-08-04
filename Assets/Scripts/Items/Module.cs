@@ -12,7 +12,6 @@ namespace Items
         private Item _item;
         public Module RequiredUpgrade;
         public int RequiredLevel;
-        public float StartValue;
         public float ValueGrowthRate;
         public float StartPrice;
         public Stage CurrentStage;
@@ -40,7 +39,6 @@ namespace Items
 
         public string GetName()
         {
-            Debug.Log($"Getting name for item {_item.Name}");
             return _item.Name;
         }
 
@@ -57,5 +55,7 @@ namespace Items
         {
             _item = item;
         }
+
+        public float StartValue => _item.StartValue;
     }
 }

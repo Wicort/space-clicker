@@ -1,10 +1,9 @@
-﻿using Items;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Items
 {
-    public class ItemService
+    public class ItemService : IItemService
     {
         private List<Item> _items;
         public Item GetItemInfo(string itemId)
@@ -27,9 +26,10 @@ namespace Items
                 ItemType.GUN,
                 "Descritrion for test Gun",
                 null,
-                ItemRarity.COMMON
-            ); 
-            _items.Add( item );
+                ItemRarity.COMMON,
+                1
+            );
+            _items.Add(item);
 
             item = new Item(
                 "TestDrone",
@@ -37,7 +37,9 @@ namespace Items
                 ItemType.DRONE,
                 "Descritrion for test Drone",
                 null,
-                ItemRarity.COMMON);
+                ItemRarity.COMMON,
+                1
+            );
             _items.Add(item);
 
             item = new Item(
@@ -46,7 +48,9 @@ namespace Items
                 ItemType.ENGINE,
                 "Descritrion for test Engine",
                 null,
-                ItemRarity.COMMON);
+                ItemRarity.COMMON,
+                1
+            );
             _items.Add(item);
 
             item = new Item(
@@ -55,13 +59,22 @@ namespace Items
                 ItemType.TOURET,
                 "Descritrion for test Touret",
                 null,
-                ItemRarity.COMMON);
+                ItemRarity.COMMON,
+                10
+            );
             _items.Add(item);
         }
 
-        internal Item GetCommonItemByType(ItemType moduleItemType)
+        public Item GetCommonItemByType(ItemType moduleItemType)
         {
             return _items.Find(item => item.ItemType == moduleItemType);
+        }
+
+        public Item GetRandomItemByRarity(ItemRarity rarity)
+        {
+            var rarityItems = _items.FindAll(item => item.Rarity == rarity);
+            var index = Random.Range(0, rarityItems.Count);
+            return rarityItems[index];
         }
     }
 }

@@ -2,12 +2,12 @@
 {
     public class ScreenController
     {
-        private readonly InventoryService _inventoryService;
+        private readonly IInventoryService _inventoryService;
         private readonly ScreenView _view;
 
         private InventoryGridController _currentInventoryController;
 
-        public ScreenController(InventoryService inventoryService, ScreenView view)
+        public ScreenController(IInventoryService inventoryService, ScreenView view)
         {
             _inventoryService = inventoryService;
             _view = view;

@@ -1,12 +1,11 @@
 ﻿using Items;
-using System.Diagnostics;
+using Services;
 
 namespace Inventory
 {
     public class InventorySlotController
     {
         private readonly InventorySlotView _view;
-        private ItemService _itemService = new ItemService();
 
         public InventorySlotController(
             IReadOnlyInventorySlot slot, 
@@ -17,7 +16,7 @@ namespace Inventory
             slot.ItemIdChanged += OnSlotItemIdChanged;
             slot.ItemAmountChanged += OnSlotItemIdChanged;
 
-            Item item = _itemService.GetItemInfo(slot.ItemId);
+            Item item = AllServices.Container.Single<IItemService>().GetItemInfo(slot.ItemId);
             if (item != null)
             { 
                 _view.Title = item.Description;

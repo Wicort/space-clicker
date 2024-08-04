@@ -56,7 +56,7 @@ public class Modules : MonoBehaviour
             bool isModuleBtnEnabled = IsModuleButtonActive(upgradeBtn);
 
             UpgradeButton btn = Instantiate(_upgradeButtonPrefab, _content.transform);
-            btn.Init(module.Id, null/*module.GetIcon()*/, module.GetName(), module.GetDescription(), upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
+            btn.Init(module.Id, module.GetIcon(), module.GetName(), module.GetDescription(), upgradeBtn.CurrentPrice, upgradeBtn.CurrentLevel, isModuleBtnEnabled);
 
             _buttons.Add(btn);
         }
@@ -98,8 +98,6 @@ public class Modules : MonoBehaviour
 
     public void UpgradeModule(int id)
     {
-        Debug.Log($"{id}");
-
         var upgradeBtn = _upgrades.Find(upg => upg.GetModule().Id == id);
 
         _gameData.AddCurrency(-1 * upgradeBtn.CurrentPrice);

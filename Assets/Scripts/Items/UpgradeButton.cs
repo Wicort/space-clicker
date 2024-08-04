@@ -34,7 +34,6 @@ namespace Items
             int level,
             bool isBtnEnabled)
         {
-            Debug.Log($"Draw button id={id}, name={name}, description={description}");
             _id = id;
             _icon.sprite = icon;
             _name.text = name;

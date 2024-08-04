@@ -1,4 +1,6 @@
+using Inventory;
 using Items;
+using Services;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +13,7 @@ public class GameBootstrapper : MonoBehaviour
 
     public GameData gameData;
 
-    //public List<Item> items;
+    private AllServices _services => AllServices.Container;
 
     private void Start()
     {
@@ -31,6 +33,13 @@ public class GameBootstrapper : MonoBehaviour
     private void Init()
     {
         gameData = new GameData();
+        RegisterServices();
         OnGameLoaded?.Invoke(gameData);
+    }
+
+    private void RegisterServices()
+    {
+        _services.RegisterSingle<IItemService>(new ItemService());
+        _services.RegisterSingle<IInventoryService>(new InventoryService());
     }
 }

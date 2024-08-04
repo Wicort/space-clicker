@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Services;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Inventory
@@ -11,13 +12,13 @@ namespace Inventory
         private const string OWNER_2 = "Chest";
         private readonly string[] _itemIds = { "TestGun", "TestDrone", "TestEngine", "TestTouret" };
 
-        private InventoryService _inventoryService;
+        private IInventoryService _inventoryService;
         private ScreenController _screenController;
         private string _cachedOwnerId;
 
         private void Start()
         {
-            _inventoryService = new InventoryService();
+            _inventoryService = AllServices.Container.Single<IInventoryService>();
 
             var inventoryDataPlayer = CreateTestInventory(OWNER_1);
             _inventoryService.RegisterInventory(inventoryDataPlayer);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Inventory
 {
-    public class InventoryService
+    public class InventoryService : IInventoryService
     {
         public readonly Dictionary<string, InventoryGrid> _inventoriesMap = new();
 
@@ -22,9 +22,9 @@ namespace Inventory
         }
 
         public AddItemsToInventoryGridResult AddItemsToInventory(
-            string ownerId, 
+            string ownerId,
             Vector2Int slotCoords,
-            string itemId, 
+            string itemId,
             int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
@@ -38,9 +38,9 @@ namespace Inventory
         }
 
         public RemoveItemsFromInventoryGridResult RemoveItems(
-            string ownerId, 
+            string ownerId,
             Vector2Int slotCoords,
-            string itemId, 
+            string itemId,
             int amount = 1)
         {
             var inventory = _inventoriesMap[ownerId];
