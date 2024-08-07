@@ -1,5 +1,8 @@
-﻿namespace Items
+﻿using System;
+
+namespace Items
 {
+    [Serializable]
     public enum ItemRarity
     {
         COMMON, 

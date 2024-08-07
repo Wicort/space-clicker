@@ -1,4 +1,5 @@
 using Items;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,5 +11,5 @@ public class Wave : ScriptableObject
     [Range(0,1)] public float DropChance;
     [Range(0, 10)] public int BossDropCount;
     public float BossDropMultiplier;
-    public Dictionary<ItemRarity, float> RarityDropChance;
+    public RarityDictionary RarityDropChance = new RarityDictionary();
 }

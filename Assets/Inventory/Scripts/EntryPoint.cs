@@ -23,8 +23,8 @@ namespace Inventory
             var inventoryDataPlayer = CreateTestInventory(OWNER_1);
             _inventoryService.RegisterInventory(inventoryDataPlayer);
 
-            var inventoryDataChest = CreateTestInventory(OWNER_2);
-            _inventoryService.RegisterInventory(inventoryDataChest);
+            //var inventoryDataChest = CreateTestInventory(OWNER_2);
+            //_inventoryService.RegisterInventory(inventoryDataChest);
 
             _screenController = new ScreenController(_inventoryService, _screenView);
             _screenController.OpenInventory(OWNER_1);
@@ -64,6 +64,12 @@ namespace Inventory
                 var result = _inventoryService.RemoveItems(_cachedOwnerId, rItemId, rAmount);
 
                 Debug.Log($"Item removed: ${rItemId}. Truying to remove: {result.ItemsToRemoveAmount}. Success: {result.Success}");
+            }
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                Debug.Log($"{_screenView.gameObject.activeInHierarchy}");
+                _screenView.gameObject.SetActive(!_screenView.gameObject.activeInHierarchy);
             }
         }
 
