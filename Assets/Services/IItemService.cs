@@ -1,6 +1,7 @@
-﻿using Services;
+﻿using Items;
+using Services;
 
-namespace Items
+namespace Assets.Services
 {
     public interface IItemService : IService
     {

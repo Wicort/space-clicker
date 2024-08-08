@@ -1,4 +1,5 @@
-﻿using Items;
+﻿using Assets.Services;
+using Items;
 using Services;
 
 namespace Inventory

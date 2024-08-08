@@ -1,3 +1,4 @@
+using Assets.Services;
 using Inventory;
 using Items;
 using Services;
@@ -46,8 +47,9 @@ public class DropHandler : MonoBehaviour
         {
             var currentChance = UnityEngine.Random.Range(0f, 1f);
             if (isBoss) currentChance *= wave.BossDropMultiplier;
+            if (currentChance > 1) currentChance = 1;
             Debug.Log($"current chance: {currentChance}");
-            if (currentChance > dropChance)
+            if (currentChance <= dropChance)
             {
                 Item item = _itemService.GetRandomItemByRarity(CalcRarity(wave.RarityDropChance));
                 _inventoryService.AddItems("Player", item.Id, 1);
@@ -58,12 +60,31 @@ public class DropHandler : MonoBehaviour
         return drop;
     }
 
-    public ItemRarity CalcRarity(RarityDictionary dictionary)
+    private ItemRarity CalcRarity(RarityDictionary dictionary)
     {
         var chance = UnityEngine.Random.Range(0f, 100f);
-        //dictionary<
-
+        Debug.Log($"current chance = {chance}");
+        
+        if (checkRarity(dictionary, ItemRarity.MYPHICAL, chance)) return ItemRarity.MYPHICAL;
+        if (checkRarity(dictionary, ItemRarity.LEGENDARY, chance)) return ItemRarity.LEGENDARY;
+        if (checkRarity(dictionary, ItemRarity.EPIC, chance)) return ItemRarity.EPIC;
+        if (checkRarity(dictionary, ItemRarity.RARE, chance)) return ItemRarity.RARE;
+        if (checkRarity(dictionary, ItemRarity.UNCOMMON, chance)) return ItemRarity.UNCOMMON;
 
         return ItemRarity.COMMON;
+    }
+
+    private bool checkRarity(RarityDictionary dictionary, ItemRarity rarity, float currentChance)
+    {
+        float rarityChance = 0f;
+        if (dictionary.TryGetValue(rarity, out rarityChance))
+        {
+            if (currentChance <= rarityChance)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
