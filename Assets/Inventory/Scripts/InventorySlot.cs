@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Inventory
 {
@@ -8,6 +9,7 @@ namespace Inventory
 
         public event Action<string> ItemIdChanged;
         public event Action<int> ItemAmountChanged;
+        public event Action<Sprite> ItemSpriteChanged;
 
         public string ItemId 
         { 
@@ -34,6 +36,19 @@ namespace Inventory
             }
         }
         public bool IsEmpty => Amount == 0 && string.IsNullOrEmpty(ItemId);
+
+        public Sprite ItemSprite
+        {
+            get => _data.ItemSprite;
+            set
+            {
+                if (_data.ItemSprite != value)
+                {
+                    _data.ItemSprite = value;
+                    ItemSpriteChanged?.Invoke(value);
+                }
+            }
+        }
 
         public InventorySlot(InventorySlotData data)
         {

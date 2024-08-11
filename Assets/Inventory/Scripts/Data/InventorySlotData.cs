@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Inventory
 {
@@ -7,5 +8,6 @@ namespace Inventory
     {
         public string ItemId;
         public int Amount;
+        public Sprite ItemSprite;
     }
 }

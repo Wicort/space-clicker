@@ -1661,6 +1661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wavesHandler: {fileID: 1694933849}
+  dropDNPrefab: {fileID: 4972717692306838793, guid: f18a45d95fda650448643f4d33dc0c8a,
+    type: 3}
 --- !u!4 &484377768
 Transform:
   m_ObjectHideFlags: 0

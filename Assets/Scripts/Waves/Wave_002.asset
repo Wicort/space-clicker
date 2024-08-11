@@ -20,3 +20,23 @@ MonoBehaviour:
   - {fileID: 8642896949781843317, guid: b378480d72238d644b7f0e17168db308, type: 3}
   BossPrefab: {fileID: 1656465006786743792, guid: 1a5e99532a5024c4a88e9da35b7f0285,
     type: 3}
+  DropChance: 1
+  BossDropCount: 3
+  BossDropMultiplier: 10
+  RarityDropChance:
+    _Buckets: ffffffff0400000003000000020000000100000000000000ffffffff
+    _HashCodes: 05000000040000000300000002000000010000000000000000000000
+    _Next: ffffffffffffffffffffffffffffffffffffffff0000000000000000
+    _Count: 5
+    _Version: 20
+    _FreeList: -1
+    _FreeCount: 0
+    _Keys: 05000000040000000300000002000000010000000000000000000000
+    _Values:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 0
+    - 0

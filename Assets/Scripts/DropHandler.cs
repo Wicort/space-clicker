@@ -1,4 +1,5 @@
 using Assets.Services;
+using DamageNumbersPro;
 using Inventory;
 using Items;
 using Services;
@@ -11,6 +12,8 @@ public class DropHandler : MonoBehaviour
 {
     [SerializeField]
     private WavesHandler _wavesHandler;
+    [SerializeField]
+    private DamageNumber dropDNPrefab;
 
     private IItemService _itemService;
     private IInventoryService _inventoryService;
@@ -18,11 +21,6 @@ public class DropHandler : MonoBehaviour
     private void OnEnable()
     {
         EnemyHandler.OnEnemyKilled += getDrop;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void getDrop(EnemyData enemy)
@@ -48,12 +46,27 @@ public class DropHandler : MonoBehaviour
             var currentChance = UnityEngine.Random.Range(0f, 1f);
             if (isBoss) currentChance *= wave.BossDropMultiplier;
             if (currentChance > 1) currentChance = 1;
-            Debug.Log($"current chance: {currentChance}");
             if (currentChance <= dropChance)
             {
                 Item item = _itemService.GetRandomItemByRarity(CalcRarity(wave.RarityDropChance));
                 _inventoryService.AddItems("Player", item.Id, 1);
-                Debug.Log($"DROP! {item.Name} added");
+
+                Color dropColor = Color.black;
+                switch (item.Rarity)
+                {
+                    case ItemRarity.COMMON: dropColor = Color.white; break;
+                    case ItemRarity.UNCOMMON: dropColor = Color.green; break;
+                    case ItemRarity.RARE: dropColor = Color.blue; break;
+                    case ItemRarity.EPIC: dropColor = Color.magenta; break;
+                    case ItemRarity.LEGENDARY: dropColor = Color.yellow; break;
+                    case ItemRarity.MYPHICAL: dropColor = Color.red; break;
+                }
+                
+                var dropText = dropDNPrefab.Spawn(Vector3.zero +
+                    new Vector3(2,-4,0), 
+                    $"{item.Name} added");
+                dropText.SetColor(dropColor);
+                dropText.UpdateText();
             }
         }
 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Assets.Services;
+using Items;
+using Services;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -75,12 +78,15 @@ namespace Inventory
 
             var tempSlotItemId = slotA.ItemId;
             var tempSlotAmount = slotA.Amount;
+            var tempSlotSprite = slotA.ItemSprite;
 
             slotA.ItemId = slotB.ItemId;
             slotA.Amount = slotB.Amount;
+            slotA.ItemSprite = slotB.ItemSprite;
 
             slotB.ItemId = tempSlotItemId;
             slotB.Amount = tempSlotAmount;
+            slotB.ItemSprite = tempSlotSprite;
         }
 
         public void SetSize(Vector2Int newSize)
@@ -276,6 +282,7 @@ namespace Inventory
         {
             var itemsAddedAmount = 0;
             remainingAmount = amount;
+            Item item = AllServices.Container.Single<IItemService>().GetItemInfo(itemId);
 
             for (var i = 0; i < Size.x; i++)
             {
@@ -290,6 +297,7 @@ namespace Inventory
                     }
 
                     slot.ItemId = itemId;
+                    slot.ItemSprite = item.Icon;
                     var newValue = remainingAmount;
                     var slotItemCapaclty = GetItemSlotCapacity(slot.ItemId);
 

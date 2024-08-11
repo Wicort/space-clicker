@@ -1,4 +1,5 @@
-﻿using Items;
+﻿using Assets.Scripts.AssetProvider;
+using Items;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Assets.Services
         {
             SetTestItemsList();
         }
+
         public Item GetCommonItemByType(ItemType moduleItemType)
         {
             return _items.Find(item => item.ItemType == moduleItemType);
@@ -37,7 +39,7 @@ namespace Assets.Services
                 "Common Gun",
                 ItemType.GUN,
                 "Description for Common Gun",
-                null,
+                Resources.Load<Sprite>(AssetPath.CommonGunPath),
                 ItemRarity.COMMON,
                 1
             );
@@ -48,7 +50,7 @@ namespace Assets.Services
                 "Common Drone",
                 ItemType.DRONE,
                 "Description for Common Drone",
-                null,
+                Resources.Load<Sprite>(AssetPath.CommonDronePath),
                 ItemRarity.COMMON,
                 1
             );
@@ -59,7 +61,7 @@ namespace Assets.Services
                 "Common Touret",
                 ItemType.TOURET,
                 "Description for Common Touret",
-                null,
+                Resources.Load<Sprite>(AssetPath.CommonTouretPath),
                 ItemRarity.COMMON,
                 10
             );
@@ -71,7 +73,7 @@ namespace Assets.Services
                 "UNCOMMON Gun",
                 ItemType.GUN,
                 "Description for UNCOMMON Gun",
-                null,
+                Resources.Load<Sprite>(AssetPath.UncommonGunPath),
                 ItemRarity.UNCOMMON,
                 1
             );
@@ -82,7 +84,7 @@ namespace Assets.Services
                 "UNCOMMON Drone",
                 ItemType.DRONE,
                 "Description for UNCOMMON Drone",
-                null,
+                Resources.Load<Sprite>(AssetPath.UncommonDronePath),
                 ItemRarity.UNCOMMON,
                 1
             );
@@ -93,7 +95,7 @@ namespace Assets.Services
                 "UNCOMMON Touret",
                 ItemType.TOURET,
                 "Description for UNCOMMON Touret",
-                null,
+                Resources.Load<Sprite>(AssetPath.UncommonTouretPath),
                 ItemRarity.UNCOMMON,
                 10
             );
@@ -105,7 +107,7 @@ namespace Assets.Services
                 "RARE Gun",
                 ItemType.GUN,
                 "Description for RARE Gun",
-                null,
+                Resources.Load<Sprite>(AssetPath.RareGunPath),
                 ItemRarity.RARE,
                 1
             );
@@ -116,7 +118,7 @@ namespace Assets.Services
                 "RARE Drone",
                 ItemType.DRONE,
                 "Description for RARE Drone",
-                null,
+                Resources.Load<Sprite>(AssetPath.RareDronePath),
                 ItemRarity.RARE,
                 1
             );
@@ -127,7 +129,7 @@ namespace Assets.Services
                 "RARE Touret",
                 ItemType.TOURET,
                 "Description for RARE Touret",
-                null,
+                Resources.Load<Sprite>(AssetPath.RareTouretPath),
                 ItemRarity.RARE,
                 10
             );
@@ -139,7 +141,7 @@ namespace Assets.Services
                 "EPIC Gun",
                 ItemType.GUN,
                 "Description for EPIC Gun",
-                null,
+                Resources.Load<Sprite>(AssetPath.EpicGunPath),
                 ItemRarity.EPIC,
                 1
             );
@@ -150,7 +152,7 @@ namespace Assets.Services
                 "EPIC Drone",
                 ItemType.DRONE,
                 "Description for EPIC Drone",
-                null,
+                Resources.Load<Sprite>(AssetPath.EpicDronePath),
                 ItemRarity.EPIC,
                 1
             );
@@ -161,7 +163,7 @@ namespace Assets.Services
                 "EPIC Touret",
                 ItemType.TOURET,
                 "Description for EPIC Touret",
-                null,
+                Resources.Load<Sprite>(AssetPath.EpicTouretPath),
                 ItemRarity.EPIC,
                 10
             );
@@ -173,7 +175,7 @@ namespace Assets.Services
                 "LEGENDARY Gun",
                 ItemType.GUN,
                 "Description for LEGENDARY Gun",
-                null,
+                Resources.Load<Sprite>(AssetPath.LegGunPath),
                 ItemRarity.LEGENDARY,
                 1
             );
@@ -184,7 +186,7 @@ namespace Assets.Services
                 "LEGENDARY Drone",
                 ItemType.DRONE,
                 "Description for LEGENDARY Drone",
-                null,
+                Resources.Load<Sprite>(AssetPath.LegDronePath),
                 ItemRarity.LEGENDARY,
                 1
             );
@@ -195,7 +197,7 @@ namespace Assets.Services
                 "LEGENDARY Touret",
                 ItemType.TOURET,
                 "Description for LEGENDARY Touret",
-                null,
+                Resources.Load<Sprite>(AssetPath.LegTouretPath),
                 ItemRarity.LEGENDARY,
                 10
             );
@@ -207,7 +209,7 @@ namespace Assets.Services
                 "MYPHICAL Gun",
                 ItemType.GUN,
                 "Description for MYPHICAL Gun",
-                null,
+                Resources.Load<Sprite>(AssetPath.MyphGunPath),
                 ItemRarity.MYPHICAL,
                 1
             );
@@ -218,7 +220,7 @@ namespace Assets.Services
                 "MYPHICAL Drone",
                 ItemType.DRONE,
                 "Description for MYPHICAL Drone",
-                null,
+                Resources.Load<Sprite>(AssetPath.MyphDronePath),
                 ItemRarity.MYPHICAL,
                 1
             );
@@ -229,7 +231,7 @@ namespace Assets.Services
                 "MYPHICAL Touret",
                 ItemType.TOURET,
                 "Description for MYPHICAL Touret",
-                null,
+                Resources.Load<Sprite>(AssetPath.MyphTouretPath),
                 ItemRarity.MYPHICAL,
                 10
             );
