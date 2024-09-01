@@ -75,7 +75,7 @@ namespace Assets.Services
                 "Description for UNCOMMON Gun",
                 Resources.Load<Sprite>(AssetPath.UncommonGunPath),
                 ItemRarity.UNCOMMON,
-                1
+                2
             );
             _items.Add(item);
 
@@ -86,7 +86,7 @@ namespace Assets.Services
                 "Description for UNCOMMON Drone",
                 Resources.Load<Sprite>(AssetPath.UncommonDronePath),
                 ItemRarity.UNCOMMON,
-                1
+                2
             );
             _items.Add(item);
 
@@ -97,7 +97,7 @@ namespace Assets.Services
                 "Description for UNCOMMON Touret",
                 Resources.Load<Sprite>(AssetPath.UncommonTouretPath),
                 ItemRarity.UNCOMMON,
-                10
+                20
             );
             _items.Add(item);
 
@@ -109,7 +109,7 @@ namespace Assets.Services
                 "Description for RARE Gun",
                 Resources.Load<Sprite>(AssetPath.RareGunPath),
                 ItemRarity.RARE,
-                1
+                5
             );
             _items.Add(item);
 
@@ -120,7 +120,7 @@ namespace Assets.Services
                 "Description for RARE Drone",
                 Resources.Load<Sprite>(AssetPath.RareDronePath),
                 ItemRarity.RARE,
-                1
+                5
             );
             _items.Add(item);
 
@@ -131,7 +131,7 @@ namespace Assets.Services
                 "Description for RARE Touret",
                 Resources.Load<Sprite>(AssetPath.RareTouretPath),
                 ItemRarity.RARE,
-                10
+                50
             );
             _items.Add(item);
 
@@ -143,7 +143,7 @@ namespace Assets.Services
                 "Description for EPIC Gun",
                 Resources.Load<Sprite>(AssetPath.EpicGunPath),
                 ItemRarity.EPIC,
-                1
+                10
             );
             _items.Add(item);
 
@@ -154,7 +154,7 @@ namespace Assets.Services
                 "Description for EPIC Drone",
                 Resources.Load<Sprite>(AssetPath.EpicDronePath),
                 ItemRarity.EPIC,
-                1
+                10
             );
             _items.Add(item);
 
@@ -165,7 +165,7 @@ namespace Assets.Services
                 "Description for EPIC Touret",
                 Resources.Load<Sprite>(AssetPath.EpicTouretPath),
                 ItemRarity.EPIC,
-                10
+                100
             );
             _items.Add(item);
 
@@ -177,7 +177,7 @@ namespace Assets.Services
                 "Description for LEGENDARY Gun",
                 Resources.Load<Sprite>(AssetPath.LegGunPath),
                 ItemRarity.LEGENDARY,
-                1
+                15
             );
             _items.Add(item);
 
@@ -188,7 +188,7 @@ namespace Assets.Services
                 "Description for LEGENDARY Drone",
                 Resources.Load<Sprite>(AssetPath.LegDronePath),
                 ItemRarity.LEGENDARY,
-                1
+                15
             );
             _items.Add(item);
 
@@ -199,7 +199,7 @@ namespace Assets.Services
                 "Description for LEGENDARY Touret",
                 Resources.Load<Sprite>(AssetPath.LegTouretPath),
                 ItemRarity.LEGENDARY,
-                10
+                150
             );
             _items.Add(item);
 
@@ -211,7 +211,7 @@ namespace Assets.Services
                 "Description for MYPHICAL Gun",
                 Resources.Load<Sprite>(AssetPath.MyphGunPath),
                 ItemRarity.MYPHICAL,
-                1
+                20
             );
             _items.Add(item);
 
@@ -222,7 +222,7 @@ namespace Assets.Services
                 "Description for MYPHICAL Drone",
                 Resources.Load<Sprite>(AssetPath.MyphDronePath),
                 ItemRarity.MYPHICAL,
-                1
+                20
             );
             _items.Add(item);
 
@@ -233,7 +233,7 @@ namespace Assets.Services
                 "Description for MYPHICAL Touret",
                 Resources.Load<Sprite>(AssetPath.MyphTouretPath),
                 ItemRarity.MYPHICAL,
-                10
+                200
             );
             _items.Add(item);
         }

@@ -42,4 +42,9 @@ public class ActionPanel : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void OnGetUpgradeButtonClick()
+    {
+
+    }
 }

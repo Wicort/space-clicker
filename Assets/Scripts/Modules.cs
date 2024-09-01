@@ -53,6 +53,7 @@ public class Modules : MonoBehaviour
         Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
 
         RefreshUpgradeButtons();
+        OnModuleUpgraded?.Invoke();
 
         Debug.Log($"Equiped item {itemId}!");
     }
