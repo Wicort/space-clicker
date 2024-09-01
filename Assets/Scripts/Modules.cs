@@ -1,5 +1,7 @@
 using Assets.Services;
+using Inventory;
 using Items;
+using Services;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +28,7 @@ public class Modules : MonoBehaviour
         GameBootstrapper.OnGameLoaded += Init;
         UpgradeButton.OnModuleUpgraded += UpgradeModule;
         CurrencyHandler.OnCurrencyChanged += RefreshUpgradeButtons;
+        ActionPanel.OnEquipButtonClicked += EquipItem;
     }
 
     private void OnDisable()
@@ -33,6 +36,25 @@ public class Modules : MonoBehaviour
         GameBootstrapper.OnGameLoaded -= Init;
         UpgradeButton.OnModuleUpgraded -= UpgradeModule;
         CurrencyHandler.OnCurrencyChanged -= RefreshUpgradeButtons;
+        ActionPanel.OnEquipButtonClicked -= EquipItem;
+    }
+
+    private void EquipItem(string itemId)
+    {
+        Item item = AllServices.Container.Single<IItemService>().GetItemInfo(itemId);
+
+        ActiveUpgrade upgrade = _gameData.Modules.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
+        Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
+
+        upgrade.GetModule().SetItem(item);
+
+        Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
+        upgrade = _gameData.Modules.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
+        Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
+
+        RefreshUpgradeButtons();
+
+        Debug.Log($"Equiped item {itemId}!");
     }
 
     private void Init(GameData gameData)
@@ -68,7 +90,13 @@ public class Modules : MonoBehaviour
         foreach (UpgradeButton btn in _buttons)
         {
             ActiveUpgrade upgrade = _upgrades.Find(upg => upg.GetModule().Id == btn.Id);
-            btn.UpdateInfo(upgrade.CurrentPrice, upgrade.CurrentLevel, IsModuleButtonActive(upgrade));
+            btn.UpdateInfo(
+                upgrade.GetModule().GetIcon(), 
+                upgrade.GetModule().GetName(),
+                upgrade.GetModule().GetDescription(),
+                upgrade.CurrentPrice, 
+                upgrade.CurrentLevel, 
+                IsModuleButtonActive(upgrade));
         }
     }
 

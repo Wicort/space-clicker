@@ -38,7 +38,7 @@ namespace Items
             _icon.sprite = icon;
             _name.text = name;
             _description.text = description;
-            UpdateInfo(price, level, isBtnEnabled);
+            UpdateInfo(icon, name, description, price, level, isBtnEnabled);
         }
 
         public void OnUpgradeButtonClick()
@@ -53,8 +53,11 @@ namespace Items
             _upgradeButton.interactable = isBtnEnabled;
         }
 
-        public void UpdateInfo(float price, int level, bool isBtnEnabled)
+        public void UpdateInfo(Sprite icon, string name, string description, float price, int level, bool isBtnEnabled)
         {
+            _icon.sprite = icon;
+            _name.text = name;
+            _description.text = description;
             _price.text = $"${ShortScaleString.parseDouble(price,1, 1000, true)}";
             _level.text = $"Lvl. {level}";
             SetInterractable(isBtnEnabled);

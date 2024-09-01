@@ -25,6 +25,7 @@ namespace Inventory
                 _view.Title = item.Description;
                 _view.Amount = slot.Amount;
                 _view.ItemSprite = item.Icon;
+                _view.ItemId = item.Id;
             }
         }
 
@@ -35,7 +36,9 @@ namespace Inventory
 
         private void OnSlotItemIdChanged(string newItemId)
         {
-            _view.Title = newItemId;
+            Item item = AllServices.Container.Single<IItemService>().GetItemInfo(newItemId);
+            _view.Title = item.Name;
+            _view.ItemId = newItemId;
         }
 
         private void OnSlotItemSpriteChanged(Sprite newSprite)

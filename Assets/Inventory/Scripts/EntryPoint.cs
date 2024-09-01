@@ -9,12 +9,11 @@ namespace Inventory
         [SerializeField] private ScreenView _screenView;
 
         private const string OWNER_1 = "Player";
-        private const string OWNER_2 = "Chest";
-        private readonly string[] _itemIds = { "TestGun", "TestDrone", "TestEngine", "TestTouret" };
+        //private readonly string[] _itemIds = { "TestGun", "TestDrone", "TestEngine", "TestTouret" };
 
         private IInventoryService _inventoryService;
         private ScreenController _screenController;
-        private string _cachedOwnerId;
+
 
         private void Start()
         {
@@ -25,7 +24,7 @@ namespace Inventory
 
             _screenController = new ScreenController(_inventoryService, _screenView);
             _screenController.OpenInventory(OWNER_1);
-            _cachedOwnerId = OWNER_1;
+            _screenView.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -33,11 +32,14 @@ namespace Inventory
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 _screenController.OpenInventory(OWNER_1);
-                _cachedOwnerId = OWNER_1;
             }
 
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                _screenView.gameObject.SetActive(!_screenView.gameObject.activeInHierarchy);
+            }
 
-            if (Input.GetKeyDown(KeyCode.A))
+            /*if (Input.GetKeyDown(KeyCode.A))
             {
                 var rIndex = Random.Range(0, _itemIds.Length);
                 var rItemId = _itemIds[rIndex];
@@ -46,9 +48,9 @@ namespace Inventory
                 var result = _inventoryService.AddItems(_cachedOwnerId, rItemId, rAmount);
 
                 Debug.Log($"Item added: ${rItemId}. Amount added: {result.ItemsAddedAmount}");
-            }
+            }*/
 
-            if (Input.GetKeyDown(KeyCode.R))
+            /*if (Input.GetKeyDown(KeyCode.R))
             {
                 var rIndex = Random.Range(0, _itemIds.Length);
                 var rItemId = _itemIds[rIndex];
@@ -56,12 +58,7 @@ namespace Inventory
                 var result = _inventoryService.RemoveItems(_cachedOwnerId, rItemId, rAmount);
 
                 Debug.Log($"Item removed: ${rItemId}. Truying to remove: {result.ItemsToRemoveAmount}. Success: {result.Success}");
-            }
-
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                _screenView.gameObject.SetActive(!_screenView.gameObject.activeInHierarchy);
-            }
+            }*/
         }
 
         private InventoryGridData CreateTestInventory(string ownerId)

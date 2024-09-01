@@ -1,4 +1,6 @@
-﻿namespace Inventory
+﻿using UnityEngine;
+
+namespace Inventory
 {
     public class ScreenController
     {
