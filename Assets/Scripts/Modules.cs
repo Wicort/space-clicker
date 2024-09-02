@@ -137,13 +137,17 @@ public class Modules : MonoBehaviour
         OnModuleUpgraded?.Invoke();
 
         RefreshUpgradeButtons();
-
     }
 
     private void UseUpgradeModule(string itemId, int count = 1)
     {
         Item item = _itemService.GetItemInfo(itemId);
         var upgradeBtn = _upgrades.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
+
+        var requiredUpgrade = upgradeBtn.GetModule().RequiredUpgrade;
+        var requiredLevel = upgradeBtn.GetModule().RequiredLevel;
+        var requiredItemType = requiredUpgrade.GetItemType();
+        var rquiredModuleLevel = _upgrades.Find(upg => upg.GetModule().GetItemType() == requiredItemType).CurrentLevel;
 
         int rarity = Convert.ToInt32(item.Rarity) + 1;
         Debug.Log($"upgrading item {itemId}, rarity {rarity}");
