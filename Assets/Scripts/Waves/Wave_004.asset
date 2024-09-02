@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13257d8cfefb96741b249f5bd356c67d, type: 3}
+  m_Name: Wave_004
+  m_EditorClassIdentifier: 
+  EnemiePrefabs:
+  - {fileID: 7055826564936787250, guid: 3f11376c2d715074aaf1fc1fb292bbe3, type: 3}
+  - {fileID: 7055826564936787250, guid: 568a3ef4008684640b4c9c1fdadf1ab9, type: 3}
+  - {fileID: 7055826564936787250, guid: 2f5478303f9776948bb4ca021b35b3c7, type: 3}
+  - {fileID: 7055826564936787250, guid: 246829e49702f7d4b84852286d7ad766, type: 3}
+  BossPrefab: {fileID: 7055826564936787250, guid: 56024584efc85a644a25d5add55acc86,
+    type: 3}
+  DropChance: 1
+  BossDropCount: 3
+  BossDropMultiplier: 10
+  RarityDropChance:
+    _Buckets: ffffffff0400000003000000020000000100000000000000ffffffff
+    _HashCodes: 05000000040000000300000002000000010000000000000000000000
+    _Next: ffffffffffffffffffffffffffffffffffffffff0000000000000000
+    _Count: 5
+    _Version: 20
+    _FreeList: -1
+    _FreeCount: 0
+    _Keys: 05000000040000000300000002000000010000000000000000000000
+    _Values:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 0
+    - 0

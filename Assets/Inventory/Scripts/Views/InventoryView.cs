@@ -1,12 +1,12 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Inventory
 {
     public class InventoryView : MonoBehaviour
     {
         [SerializeField] private InventorySlotView[] _slots;
-        [SerializeField] private TMP_Text _textOwner;
+        [SerializeField] private Text _textOwner;
 
         public string OwnerId
         {

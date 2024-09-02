@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23207090329119870}
   - component: {fileID: 64144645025645748}
   m_Layer: 0
-  m_Name: SM_Veh_Part_Misc_06
+  m_Name: touret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
