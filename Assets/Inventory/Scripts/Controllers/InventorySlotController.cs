@@ -37,8 +37,17 @@ namespace Inventory
         private void OnSlotItemIdChanged(string newItemId)
         {
             Item item = AllServices.Container.Single<IItemService>().GetItemInfo(newItemId);
-            _view.Title = item.Name;
-            _view.ItemId = newItemId;
+            if (item != null)
+            {
+                _view.Title = item.Name;
+                _view.ItemId = newItemId;
+            }
+            else
+            {
+                _view.Title = null;
+                _view.ItemId = null;
+                _view.ItemSprite = null;
+            }
         }
 
         private void OnSlotItemSpriteChanged(Sprite newSprite)

@@ -1,19 +1,16 @@
-﻿
-using System;
-using TMPro;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace Inventory
 {
     public class InventorySlotView: MonoBehaviour
     {
-        [SerializeField] private TMP_Text _textTitle;
-        [SerializeField] private TMP_Text _textAmount;
+        [SerializeField] private Text _textTitle;
+        [SerializeField] private Text _textAmount;
         [SerializeField] private Image _itemImage;
 
-        public static Action<string> OnInventoryButtonClicked;
+        public static Action<string, int> OnInventoryButtonClicked;
 
         private string _itemId;
 
@@ -42,7 +39,6 @@ namespace Inventory
             set
             {
                 _itemImage.sprite = value;
-                Debug.Log($"sprite name {_itemImage.sprite.name}");
             }
         }
 
@@ -57,7 +53,7 @@ namespace Inventory
 
         public void OnInventoryButtonClick()
         {
-            OnInventoryButtonClicked?.Invoke(_itemId);
+            if (_itemId != null) OnInventoryButtonClicked?.Invoke(_itemId, Convert.ToInt32(_textAmount.text));
         }
     }
 }

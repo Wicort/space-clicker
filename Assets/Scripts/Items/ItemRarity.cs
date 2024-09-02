@@ -10,6 +10,6 @@ namespace Items
         RARE,
         EPIC,
         LEGENDARY,
-        MYPHICAL
+        MYTHICAL
     }
 }

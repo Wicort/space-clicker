@@ -22,9 +22,9 @@ namespace Items
             _currentPrice = value;
         }
 
-        public void UpgradeLevel()
+        public void UpgradeLevel(int count = 1)
         {
-            _currentLevel++;
+            _currentLevel += count;
         }
     }
 }

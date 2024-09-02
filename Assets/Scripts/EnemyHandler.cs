@@ -16,7 +16,7 @@ public class EnemyHandler : MonoBehaviour
     [SerializeField]
     private Text _enemyLevelText;    
     [SerializeField]
-    private Image _healthBarImage;
+    private Slider _healthBarSlider;
     [SerializeField]
     private Text _healthBarText;
     [SerializeField]
@@ -84,7 +84,7 @@ public class EnemyHandler : MonoBehaviour
             _bossTimeText.text = Mathf.Ceil(_currentBossTime).ToString();
         }
 
-        if (_currentBossTime == 0 && _bossTimeText.IsActive())
+        if (_enemyData.IsBoss && _currentBossTime == 0 && _bossTimeText.IsActive())
         {
             StartCoroutine(FailBoss());
         }
@@ -213,7 +213,8 @@ public class EnemyHandler : MonoBehaviour
 
     private void RefreshHealthBar()
     {
-        _healthBarImage.fillAmount = _enemyCurrentHealth/_enemyMaxHealth;
+        //_healthBarSlider. = _enemyCurrentHealth/_enemyMaxHealth;
+        _healthBarSlider.value = _enemyCurrentHealth / _enemyMaxHealth;
         if (_isDead)
         {
             _healthBarText.text = "Dead";

@@ -7,5 +7,11 @@ namespace Inventory
         [SerializeField] private InventoryView _inventoryView;
 
         public InventoryView InventoryView => _inventoryView;
+
+        public void OnInventoryCloseButtonClick()
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 }

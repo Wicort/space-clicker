@@ -59,7 +59,7 @@ public class DropHandler : MonoBehaviour
                     case ItemRarity.RARE: dropColor = Color.blue; break;
                     case ItemRarity.EPIC: dropColor = Color.magenta; break;
                     case ItemRarity.LEGENDARY: dropColor = Color.yellow; break;
-                    case ItemRarity.MYPHICAL: dropColor = Color.red; break;
+                    case ItemRarity.MYTHICAL: dropColor = Color.red; break;
                 }
                 
                 var dropText = dropDNPrefab.Spawn(Vector3.zero +
@@ -78,7 +78,7 @@ public class DropHandler : MonoBehaviour
         var chance = UnityEngine.Random.Range(0f, 100f);
         Debug.Log($"current chance = {chance}");
         
-        if (checkRarity(dictionary, ItemRarity.MYPHICAL, chance)) return ItemRarity.MYPHICAL;
+        if (checkRarity(dictionary, ItemRarity.MYTHICAL, chance)) return ItemRarity.MYTHICAL;
         if (checkRarity(dictionary, ItemRarity.LEGENDARY, chance)) return ItemRarity.LEGENDARY;
         if (checkRarity(dictionary, ItemRarity.EPIC, chance)) return ItemRarity.EPIC;
         if (checkRarity(dictionary, ItemRarity.RARE, chance)) return ItemRarity.RARE;

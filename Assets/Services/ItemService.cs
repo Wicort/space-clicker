@@ -205,34 +205,34 @@ namespace Assets.Services
 
             //MYPHICAL
             item = new Item(
-                "MYPHICALGun",
-                "MYPHICAL Gun",
+                "MYTHICALGun",
+                "MYTHICAL Gun",
                 ItemType.GUN,
-                "Description for MYPHICAL Gun",
-                Resources.Load<Sprite>(AssetPath.MyphGunPath),
-                ItemRarity.MYPHICAL,
+                "Description for MYTHICAL Gun",
+                Resources.Load<Sprite>(AssetPath.MythGunPath),
+                ItemRarity.MYTHICAL,
                 20
             );
             _items.Add(item);
 
             item = new Item(
-                "MYPHICALDrone",
-                "MYPHICAL Drone",
+                "MYTHICALDrone",
+                "MYTHICAL Drone",
                 ItemType.DRONE,
-                "Description for MYPHICAL Drone",
-                Resources.Load<Sprite>(AssetPath.MyphDronePath),
-                ItemRarity.MYPHICAL,
+                "Description for MYTHICAL Drone",
+                Resources.Load<Sprite>(AssetPath.MythDronePath),
+                ItemRarity.MYTHICAL,
                 20
             );
             _items.Add(item);
 
             item = new Item(
-                "MYPHICALTouret",
-                "MYPHICAL Touret",
+                "MYTHICALTouret",
+                "MYTHICAL Touret",
                 ItemType.TOURET,
-                "Description for MYPHICAL Touret",
-                Resources.Load<Sprite>(AssetPath.MyphTouretPath),
-                ItemRarity.MYPHICAL,
+                "Description for MYTHICAL Touret",
+                Resources.Load<Sprite>(AssetPath.MythTouretPath),
+                ItemRarity.MYTHICAL,
                 200
             );
             _items.Add(item);

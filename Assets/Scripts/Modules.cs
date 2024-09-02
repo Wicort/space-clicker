@@ -29,6 +29,7 @@ public class Modules : MonoBehaviour
         UpgradeButton.OnModuleUpgraded += UpgradeModule;
         CurrencyHandler.OnCurrencyChanged += RefreshUpgradeButtons;
         ActionPanel.OnEquipButtonClicked += EquipItem;
+        ActionPanel.OnUseUpgradeButtonClicked += UseUpgradeModule;
     }
 
     private void OnDisable()
@@ -37,6 +38,7 @@ public class Modules : MonoBehaviour
         UpgradeButton.OnModuleUpgraded -= UpgradeModule;
         CurrencyHandler.OnCurrencyChanged -= RefreshUpgradeButtons;
         ActionPanel.OnEquipButtonClicked -= EquipItem;
+        ActionPanel.OnUseUpgradeButtonClicked -= UseUpgradeModule;
     }
 
     private void EquipItem(string itemId)
@@ -44,18 +46,15 @@ public class Modules : MonoBehaviour
         Item item = AllServices.Container.Single<IItemService>().GetItemInfo(itemId);
 
         ActiveUpgrade upgrade = _gameData.Modules.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
-        Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
-
         upgrade.GetModule().SetItem(item);
-
-        Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
         upgrade = _gameData.Modules.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
-        Debug.Log($"upgrade {upgrade.GetModule().GetName()}!");
 
-        RefreshUpgradeButtons();
         OnModuleUpgraded?.Invoke();
+        RefreshUpgradeButtons();
 
         Debug.Log($"Equiped item {itemId}!");
+        IInventoryService inventoryService = AllServices.Container.Single<IInventoryService>();
+        inventoryService.RemoveItems("Player", itemId, 1);
     }
 
     private void Init(GameData gameData)
@@ -138,7 +137,31 @@ public class Modules : MonoBehaviour
         OnModuleUpgraded?.Invoke();
 
         RefreshUpgradeButtons();
-        
+
+    }
+
+    private void UseUpgradeModule(string itemId, int count = 1)
+    {
+        Item item = _itemService.GetItemInfo(itemId);
+        var upgradeBtn = _upgrades.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
+
+        int rarity = Convert.ToInt32(item.Rarity) + 1;
+        Debug.Log($"upgrading item {itemId}, rarity {rarity}");
+
+        int upgradeValue = count * rarity;
+
+        for (int i = 0; i < upgradeValue; i++)
+        {
+            upgradeBtn.UpgradeLevel();
+        }        
+        upgradeBtn.SetCurrentPrice(CalculateModulePrice(upgradeBtn.CurrentLevel, upgradeBtn.GetModule().StartPrice));
+
+        IInventoryService inventoryService = AllServices.Container.Single<IInventoryService>();
+        inventoryService.RemoveItems("Player", itemId, count);
+
+        OnModuleUpgraded?.Invoke();
+
+        RefreshUpgradeButtons();
     }
 
     private bool IsModuleButtonActive(ActiveUpgrade upgradeBtn)

@@ -1,9 +1,7 @@
 using Assets.Services;
 using Inventory;
-using Items;
 using Services;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameBootstrapper : MonoBehaviour
