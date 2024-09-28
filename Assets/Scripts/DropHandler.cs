@@ -44,11 +44,15 @@ public class DropHandler : MonoBehaviour
         for (int i = 0; i < dropCount; i++)
         {
             var currentChance = UnityEngine.Random.Range(0f, 1f);
-            if (isBoss) currentChance *= wave.BossDropMultiplier;
+            if (isBoss)
+            {
+                currentChance *= wave.BossDropMultiplier;
+            }
             if (currentChance > 1) currentChance = 1;
             if (currentChance <= dropChance)
             {
-                Item item = _itemService.GetRandomItemByRarity(CalcRarity(wave.RarityDropChance));
+                
+                Item item = _itemService.GetRandomItemByRarity(CalcRarity(wave.RarityDropChance, isBoss ? wave.BossDropMultiplier : 1));
                 _inventoryService.AddItems("Player", item.Id, 1);
 
                 Color dropColor = Color.black;
@@ -73,9 +77,9 @@ public class DropHandler : MonoBehaviour
         return drop;
     }
 
-    private ItemRarity CalcRarity(RarityDictionary dictionary)
+    private ItemRarity CalcRarity(RarityDictionary dictionary, float multiplyer = 1)
     {
-        var chance = UnityEngine.Random.Range(0f, 100f);
+        var chance = UnityEngine.Random.Range(0f, 100f) * multiplyer;
         Debug.Log($"current chance = {chance}");
         
         if (checkRarity(dictionary, ItemRarity.MYTHICAL, chance)) return ItemRarity.MYTHICAL;
