@@ -157,6 +157,8 @@ public class EnemyHandler : MonoBehaviour
 
     private void DestroyEnemyShip()
     {
+        if (!_enemyShip) return; 
+
         GameObject explosion = Instantiate(_explosionPrefab, _enemyShip.transform);
         explosion.transform.parent = null;
         Destroy(_enemyShip);

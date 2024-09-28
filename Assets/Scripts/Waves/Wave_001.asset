@@ -21,13 +21,13 @@ MonoBehaviour:
     type: 3}
   DropChance: 0.1
   BossDropCount: 3
-  BossDropMultiplier: 10
+  BossDropMultiplier: 2
   RarityDropChance:
     _Buckets: ffffffff0400000003000000020000000100000000000000ffffffff
     _HashCodes: 0500000004000000030000000200000001000000ffffffff00000000
     _Next: ffffffffffffffffffffffffffffffffffffffffffffffff00000000
     _Count: 6
-    _Version: 50
+    _Version: 59
     _FreeList: 5
     _FreeCount: 1
     _Keys: 05000000040000000300000002000000010000000000000000000000
@@ -35,7 +35,7 @@ MonoBehaviour:
     - 0.01
     - 0.1
     - 0.5
-    - 3
-    - 10
+    - 0.75
+    - 1
     - 0
     - 0
