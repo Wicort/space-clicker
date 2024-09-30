@@ -26,5 +26,10 @@ namespace Items
         {
             _currentLevel += count;
         }
+
+        public void SetLevel(int value)
+        {
+            _currentLevel = value;
+        }
     }
 }

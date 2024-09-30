@@ -19,6 +19,11 @@ namespace Assets.SaveSystem.Scripts
             gameData.SetLevel(LoadInt(LEVEL));
             gameData.AddCurrency(LoadFloat(CURRENCY));
 
+            gameData.Module0Lvl = LoadInt("Module0Lvl");
+            if (gameData.Module0Lvl == 0) gameData.Module0Lvl = 1;
+            gameData.Module1Lvl = LoadInt("Module1Lvl");
+            gameData.Module2Lvl = LoadInt("Module2Lvl");
+
             return gameData;
 
         }
@@ -31,10 +36,11 @@ namespace Assets.SaveSystem.Scripts
 
             if (data.Modules == null) return;
 
+            int i = 0;
             foreach(ActiveUpgrade upg in data.Modules)
             {
-                string json = JsonUtility.ToJson(upg);
-                Debug.Log(json);
+                PlayerPrefs.SetInt("Module" + i + "Lvl", upg.CurrentLevel);
+                i++;
             }
         }
 

@@ -105,18 +105,22 @@ public class Modules : MonoBehaviour
     private void FirstInitialization()
     {
         _gameData.Modules = new List<ActiveUpgrade>();
+        int i = 0;
         foreach (var upgrade in _upgrades)
         {
             Item item = _itemService.GetCommonItemByType(upgrade.GetModule().ModuleItemType);
             if (item == null) continue;
             upgrade.GetModule().SetItem(item);
 
+            upgrade.SetLevel(i == 0 ? _gameData.Module0Lvl : (i == 1 ? _gameData.Module1Lvl : _gameData.Module2Lvl));
+
             if (upgrade.CurrentLevel != 0)
             {
-                
                 upgrade.SetCurrentPrice(CalculateModulePrice(upgrade.CurrentLevel, upgrade.GetModule().StartPrice));
             }
+
             _gameData.Modules.Add(upgrade);
+            i++;
         }
     }
 

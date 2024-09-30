@@ -9,6 +9,10 @@ public class GameData
     private int _level;
     private float _currency;
 
+    public int Module0Lvl;
+    public int Module1Lvl;
+    public int Module2Lvl;
+
 
     public int Level => _level;
     public float Currency => _currency;
