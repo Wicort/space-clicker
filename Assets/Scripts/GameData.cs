@@ -28,6 +28,11 @@ public class GameData
         if (!IsBossFailed) _level++;
     }
 
+    public void SetLevel(int value)
+    {
+        _level = value;
+    }
+
     public void PrevLevel()
     {
         _level--;

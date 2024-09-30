@@ -46,6 +46,7 @@ public class Modules : MonoBehaviour
         Item item = AllServices.Container.Single<IItemService>().GetItemInfo(itemId);
 
         ActiveUpgrade upgrade = _gameData.Modules.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
+        string oldItemId = upgrade.GetModule().GetId();
         upgrade.GetModule().SetItem(item);
         upgrade = _gameData.Modules.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
 
@@ -55,6 +56,7 @@ public class Modules : MonoBehaviour
         Debug.Log($"Equiped item {itemId}!");
         IInventoryService inventoryService = AllServices.Container.Single<IInventoryService>();
         inventoryService.RemoveItems("Player", itemId, 1);
+        inventoryService.AddItems("Player", oldItemId, 1);
     }
 
     private void Init(GameData gameData)

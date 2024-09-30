@@ -1,4 +1,5 @@
 using DamageNumbersPro;
+using Services;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -36,6 +37,7 @@ public class EnemyHandler : MonoBehaviour
     private GameObject _enemyShip;
     private EnemyData _enemyData;
     private float _currentBossTime;
+    private ISaveSystem _saveSystem;
 
     public static Action<EnemyData> OnEnemyKilled;
     
@@ -60,10 +62,10 @@ public class EnemyHandler : MonoBehaviour
 
     private void Init(GameData gameData)
     {
-        Debug.Log("Enemy handler init");
+        _saveSystem = AllServices.Container.Single<ISaveSystem>();
         _gameData = gameData;
-        _bosRushButton.gameObject.SetActive(false);
         GetNextEnemyData();
+        _bosRushButton.gameObject.SetActive(_gameData.IsBossFailed && !_enemyData.IsBoss);
         RespawnEnemy();
     }
 
@@ -151,7 +153,7 @@ public class EnemyHandler : MonoBehaviour
         OnEnemyKilled?.Invoke(_enemyData);
         GetNextEnemyData();
         yield return new WaitForSeconds(_timeForNewEnemy);
-
+        _saveSystem.Save(_gameData);
         RespawnEnemy();
     }
 
@@ -166,7 +168,6 @@ public class EnemyHandler : MonoBehaviour
 
     private void RespawnEnemy()
     {
-        Debug.Log("Respawn enemy");
         _enemyHUD.gameObject.SetActive(false);
         ShowLevelInfo();
         CalcEnemyParams();
@@ -174,11 +175,11 @@ public class EnemyHandler : MonoBehaviour
         StartCoroutine(ShowNewEnemyInfo());
         if (_enemyData.IsBoss)
         {
-            Debug.Log("Boss is spawned");
             _gameData.SetIsBossFailed(true);
             _currentBossTime = _maxBossTime;
             _bossTimeText.gameObject.SetActive(true);
         }
+        _saveSystem.Save(_gameData);
     }
 
     private void CalcEnemyParams()

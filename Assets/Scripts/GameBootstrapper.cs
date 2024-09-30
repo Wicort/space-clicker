@@ -1,3 +1,4 @@
+using Assets.SaveSystem.Scripts;
 using Assets.Services;
 using Inventory;
 using Services;
@@ -31,8 +32,9 @@ public class GameBootstrapper : MonoBehaviour
 
     private void Init()
     {
-        gameData = new GameData();
         RegisterServices();
+        ISaveSystem saveSystem = _services.Single<ISaveSystem>();
+        gameData = saveSystem.Load();
         OnGameLoaded?.Invoke(gameData);
     }
 
@@ -40,5 +42,6 @@ public class GameBootstrapper : MonoBehaviour
     {
         _services.RegisterSingle<IItemService>(new ItemService());
         _services.RegisterSingle<IInventoryService>(new InventoryService());
+        _services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem());
     }
 }
