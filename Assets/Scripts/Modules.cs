@@ -108,7 +108,9 @@ public class Modules : MonoBehaviour
         int i = 0;
         foreach (var upgrade in _upgrades)
         {
-            Item item = _itemService.GetCommonItemByType(upgrade.GetModule().ModuleItemType);
+            //Item item = _itemService.GetCommonItemByType(upgrade.GetModule().ModuleItemType);
+            Item item = _itemService.GetItemByTypeAndRariry(upgrade.GetModule().ModuleItemType,
+                i == 0 ? _gameData.Module0Rarity : (i == 1 ? _gameData.Module1Rarity : _gameData.Module2Rarity));
             if (item == null) continue;
             upgrade.GetModule().SetItem(item);
 
@@ -118,6 +120,7 @@ public class Modules : MonoBehaviour
             {
                 upgrade.SetCurrentPrice(CalculateModulePrice(upgrade.CurrentLevel, upgrade.GetModule().StartPrice));
             }
+            
 
             _gameData.Modules.Add(upgrade);
             i++;

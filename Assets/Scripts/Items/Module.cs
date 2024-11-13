@@ -9,7 +9,7 @@ namespace Items
         public int Id;
         public AttackType ModuleAttackType = AttackType.AUTOCLICK;
         public ItemType ModuleItemType;
-        private Item _item;
+        public Item _item;
         public Module RequiredUpgrade;
         public int RequiredLevel;
         public float ValueGrowthRate;

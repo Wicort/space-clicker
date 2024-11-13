@@ -1,5 +1,9 @@
 ﻿
+using Assets.Services;
+using Inventory;
 using Items;
+using System;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -10,6 +14,14 @@ namespace Assets.SaveSystem.Scripts
         private const string IS_BOSS_FAILED = "IsBossFailed";
         private const string LEVEL = "Level";
         private const string CURRENCY = "Currency";
+        private IInventoryService _inventory;
+        private IItemService _itemService;
+
+        public PlayerPrefsSaveSystem (IInventoryService inventory, IItemService itemService)
+        {
+            _inventory = inventory;
+            _itemService = itemService;
+        }
 
         public GameData Load()
         {
@@ -23,6 +35,29 @@ namespace Assets.SaveSystem.Scripts
             if (gameData.Module0Lvl == 0) gameData.Module0Lvl = 1;
             gameData.Module1Lvl = LoadInt("Module1Lvl");
             gameData.Module2Lvl = LoadInt("Module2Lvl");
+
+            /*gameData.Module0Rarity = ItemRarity.RARE;
+            gameData.Module1Rarity = ItemRarity.MYTHICAL;
+            gameData.Module2Rarity = ItemRarity.UNCOMMON;*/
+            gameData.Module0Rarity = PlayerPrefs.HasKey("Module0Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module0Rarity")) : ItemRarity.COMMON;
+            gameData.Module1Rarity = PlayerPrefs.HasKey("Module1Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module1Rarity")) : ItemRarity.COMMON;
+            gameData.Module2Rarity = PlayerPrefs.HasKey("Module2Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module2Rarity")) : ItemRarity.COMMON;
+
+            var size = _inventory.GetInventory("Player").Size;
+            for (var x = 0; x < size.x; x++)
+            {
+                for (var y = 0; y < size.y; y++)
+                {
+                    if (PlayerPrefs.HasKey($"Inv_{x}_{y}_id") && PlayerPrefs.HasKey($"Inv_{x}_{y}_amount"))
+                    {
+                        Debug.Log($"loading Inv_{x}_{y}");
+                        string itemId = LoadString($"Inv_{x}_{y}_id");
+                        Debug.Log($"loading {itemId}");
+                        if (itemId != null)
+                            _inventory.AddItems("Player", itemId, LoadInt($"Inv_{x}_{y}_amount"));
+                    }
+                }
+            }
 
             return gameData;
 
@@ -40,7 +75,34 @@ namespace Assets.SaveSystem.Scripts
             foreach(ActiveUpgrade upg in data.Modules)
             {
                 PlayerPrefs.SetInt("Module" + i + "Lvl", upg.CurrentLevel);
+                PlayerPrefs.SetString("Module" + i + "Rarity", upg.GetModule().GetRarity().ToString());
                 i++;
+            }
+
+            if (_inventory != null)
+            {
+                var size = _inventory.GetInventory("Player").Size;
+                var slots = _inventory.GetInventory("Player").GetSlots();
+                for (var x = 0; x < size.x; x++)
+                {
+                    for (var y = 0; y < size.y; y++)
+                    {
+                        var slot = slots[x, y];
+                        if (slot.ItemId != null)
+                        {
+                            var item = _itemService.GetItemInfo(slot.ItemId);
+                            Debug.Log($"({x}, {y}), {item.Name}");
+                            Debug.Log($"{item.ItemType}, {item.Rarity}, {slot.Amount}");
+                            PlayerPrefs.SetString($"Inv_{x}_{y}_id", slot.ItemId);
+                            PlayerPrefs.SetInt($"Inv_{x}_{y}_amount", slot.Amount);
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetString($"Inv_{x}_{y}_id", null);
+                            PlayerPrefs.SetInt($"Inv_{x}_{y}_amount", 0);
+                        }
+                    }
+                }
             }
         }
 

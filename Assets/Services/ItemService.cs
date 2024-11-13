@@ -30,6 +30,13 @@ namespace Assets.Services
             return rarityItems[index];
         }
 
+        public Item GetItemByTypeAndRariry(ItemType moduleItemType, ItemRarity rarity)
+        {
+            var rarityItems = _items.FindAll(item => item.Rarity == rarity && item.ItemType == moduleItemType);
+            var index = Random.Range(0, rarityItems.Count);
+            return rarityItems[index];
+        }
+
         public void SetTestItemsList()
         {
             _items = new List<Item>();

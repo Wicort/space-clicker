@@ -19,9 +19,6 @@ namespace Inventory
         {
             _inventoryService = AllServices.Container.Single<IInventoryService>();
 
-            var inventoryDataPlayer = CreateTestInventory(OWNER_1);
-            _inventoryService.RegisterInventory(inventoryDataPlayer);
-
             _screenController = new ScreenController(_inventoryService, _screenView);
             _screenController.OpenInventory(OWNER_1);
             _screenView.gameObject.SetActive(false);
@@ -61,7 +58,7 @@ namespace Inventory
             }*/
         }
 
-        private InventoryGridData CreateTestInventory(string ownerId)
+/*        private InventoryGridData CreatePlayerInventory(string ownerId)
         {
             var size = new Vector2Int(3, 4);
             var createdInventorySlots = new List<InventorySlotData>();
@@ -79,6 +76,6 @@ namespace Inventory
             };
 
             return createdInventoryData;
-        }
+        }*/
     }
 }

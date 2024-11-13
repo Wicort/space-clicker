@@ -42,6 +42,6 @@ public class GameBootstrapper : MonoBehaviour
     {
         _services.RegisterSingle<IItemService>(new ItemService());
         _services.RegisterSingle<IInventoryService>(new InventoryService());
-        _services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem());
+        _services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
     }
 }

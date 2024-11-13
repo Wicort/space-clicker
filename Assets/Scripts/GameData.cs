@@ -10,8 +10,12 @@ public class GameData
     private float _currency;
 
     public int Module0Lvl;
+    public ItemRarity Module0Rarity;
     public int Module1Lvl;
+    public ItemRarity Module1Rarity;
     public int Module2Lvl;
+    public ItemRarity Module2Rarity;
+
 
 
     public int Level => _level;

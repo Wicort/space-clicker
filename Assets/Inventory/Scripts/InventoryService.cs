@@ -7,6 +7,12 @@ namespace Inventory
     {
         public readonly Dictionary<string, InventoryGrid> _inventoriesMap = new();
 
+        public InventoryService() 
+        {
+            var inventoryDataPlayer = CreatePlayerInventory("Player");
+            RegisterInventory(inventoryDataPlayer);
+        }
+
         public InventoryGrid RegisterInventory(InventoryGridData inventoryData)
         {
             var inventory = new InventoryGrid(inventoryData);
@@ -56,6 +62,26 @@ namespace Inventory
         public IReadOnlyInventoryGrid GetInventory(string ownerId)
         {
             return _inventoriesMap[ownerId];
+        }
+
+        private InventoryGridData CreatePlayerInventory(string ownerId)
+        {
+            var size = new Vector2Int(3, 4);
+            var createdInventorySlots = new List<InventorySlotData>();
+            var length = size.x * size.y;
+            for (var i = 0; i < length; i++)
+            {
+                createdInventorySlots.Add(new InventorySlotData());
+            }
+
+            var createdInventoryData = new InventoryGridData
+            {
+                OwnerId = ownerId,
+                Size = size,
+                Slots = createdInventorySlots
+            };
+
+            return createdInventoryData;
         }
     }
 }

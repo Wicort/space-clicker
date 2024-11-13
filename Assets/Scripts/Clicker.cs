@@ -61,7 +61,8 @@ public class Clicker : MonoBehaviour
 
     private float GetClickDamage()
     {
-        return _clickDamage;
+        //return _clickDamage;
+        return 500000f;
     }
 
     private float GetAutoClickDamage()

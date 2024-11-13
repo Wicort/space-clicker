@@ -8,6 +8,7 @@ namespace Assets.Services
         Item GetCommonItemByType(ItemType moduleItemType);
         Item GetItemInfo(string itemId);
         Item GetRandomItemByRarity(ItemRarity rarity);
+        Item GetItemByTypeAndRariry(ItemType moduleItemType, ItemRarity rarity);
         void SetTestItemsList();
     }
 }
