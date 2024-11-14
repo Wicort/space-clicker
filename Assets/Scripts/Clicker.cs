@@ -8,6 +8,8 @@ public class Clicker : MonoBehaviour
 {
     [SerializeField]
     private EnemyHandler _enemyHandler;
+    [SerializeField]
+    private OfflineReward _offlineReward;
 
     private GameData _gameData;
     private float _clickDamage = 0;
@@ -28,10 +30,11 @@ public class Clicker : MonoBehaviour
         Modules.OnModuleUpgraded -= RecalcDamage;
     }
 
-    private void Init(GameData gameData)
+    public void Init(GameData gameData)
     {
         _gameData = gameData;
         RecalcDamage();
+        _enemyHandler.OfflineKilling(_offlineReward.Init(_gameData, GetAllDamageInSecond(), _enemyHandler.GetCurrentEnemyHealth()));
     }
 
     private void Start()
@@ -61,8 +64,7 @@ public class Clicker : MonoBehaviour
 
     private float GetClickDamage()
     {
-        //return _clickDamage;
-        return 500000f;
+        return _clickDamage;
     }
 
     private float GetAutoClickDamage()
@@ -89,6 +91,10 @@ public class Clicker : MonoBehaviour
                 _autoClickDamage = result.Dmg;
             }
         }
-
+        _clickDamage = 500000f;
+    }
+    public float GetAllDamageInSecond()
+    {
+        return _autoClickDamage + _clickDamage;
     }
 }

@@ -35,47 +35,6 @@ namespace Inventory
             {
                 _screenView.gameObject.SetActive(!_screenView.gameObject.activeInHierarchy);
             }
-
-            /*if (Input.GetKeyDown(KeyCode.A))
-            {
-                var rIndex = Random.Range(0, _itemIds.Length);
-                var rItemId = _itemIds[rIndex];
-                var rAmount = Random.Range(0, 50);
-                Debug.Log($"Try to find item {rItemId}");
-                var result = _inventoryService.AddItems(_cachedOwnerId, rItemId, rAmount);
-
-                Debug.Log($"Item added: ${rItemId}. Amount added: {result.ItemsAddedAmount}");
-            }*/
-
-            /*if (Input.GetKeyDown(KeyCode.R))
-            {
-                var rIndex = Random.Range(0, _itemIds.Length);
-                var rItemId = _itemIds[rIndex];
-                var rAmount = Random.Range(0, 50);
-                var result = _inventoryService.RemoveItems(_cachedOwnerId, rItemId, rAmount);
-
-                Debug.Log($"Item removed: ${rItemId}. Truying to remove: {result.ItemsToRemoveAmount}. Success: {result.Success}");
-            }*/
         }
-
-/*        private InventoryGridData CreatePlayerInventory(string ownerId)
-        {
-            var size = new Vector2Int(3, 4);
-            var createdInventorySlots = new List<InventorySlotData>();
-            var length = size.x * size.y;
-            for (var i = 0;i < length;i++)
-            {
-                createdInventorySlots.Add(new InventorySlotData());
-            }
-
-            var createdInventoryData = new InventoryGridData 
-            { 
-                OwnerId = ownerId,
-                Size = size,
-                Slots = createdInventorySlots
-            };
-
-            return createdInventoryData;
-        }*/
     }
 }

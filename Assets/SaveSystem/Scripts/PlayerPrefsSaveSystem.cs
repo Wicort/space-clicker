@@ -3,9 +3,7 @@ using Assets.Services;
 using Inventory;
 using Items;
 using System;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Assets.SaveSystem.Scripts
 {
@@ -36,9 +34,6 @@ namespace Assets.SaveSystem.Scripts
             gameData.Module1Lvl = LoadInt("Module1Lvl");
             gameData.Module2Lvl = LoadInt("Module2Lvl");
 
-            /*gameData.Module0Rarity = ItemRarity.RARE;
-            gameData.Module1Rarity = ItemRarity.MYTHICAL;
-            gameData.Module2Rarity = ItemRarity.UNCOMMON;*/
             gameData.Module0Rarity = PlayerPrefs.HasKey("Module0Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module0Rarity")) : ItemRarity.COMMON;
             gameData.Module1Rarity = PlayerPrefs.HasKey("Module1Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module1Rarity")) : ItemRarity.COMMON;
             gameData.Module2Rarity = PlayerPrefs.HasKey("Module2Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module2Rarity")) : ItemRarity.COMMON;
@@ -50,14 +45,15 @@ namespace Assets.SaveSystem.Scripts
                 {
                     if (PlayerPrefs.HasKey($"Inv_{x}_{y}_id") && PlayerPrefs.HasKey($"Inv_{x}_{y}_amount"))
                     {
-                        Debug.Log($"loading Inv_{x}_{y}");
                         string itemId = LoadString($"Inv_{x}_{y}_id");
-                        Debug.Log($"loading {itemId}");
                         if (itemId != null)
                             _inventory.AddItems("Player", itemId, LoadInt($"Inv_{x}_{y}_amount"));
                     }
                 }
             }
+            string lastPlayedTimeString = LoadString("LastPlayedTime");
+            if (lastPlayedTimeString != null)
+                gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
 
             return gameData;
 
@@ -65,6 +61,8 @@ namespace Assets.SaveSystem.Scripts
 
         public void Save(GameData data)
         {
+            PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
+
             PlayerPrefs.SetInt(LEVEL, data.Level);
             PlayerPrefs.SetInt(IS_BOSS_FAILED, data.IsBossFailed ? 1 : 0);
             PlayerPrefs.SetFloat(CURRENCY, data.Currency);
@@ -91,8 +89,6 @@ namespace Assets.SaveSystem.Scripts
                         if (slot.ItemId != null)
                         {
                             var item = _itemService.GetItemInfo(slot.ItemId);
-                            Debug.Log($"({x}, {y}), {item.Name}");
-                            Debug.Log($"{item.ItemType}, {item.Rarity}, {slot.Amount}");
                             PlayerPrefs.SetString($"Inv_{x}_{y}_id", slot.ItemId);
                             PlayerPrefs.SetInt($"Inv_{x}_{y}_amount", slot.Amount);
                         }
@@ -110,7 +106,7 @@ namespace Assets.SaveSystem.Scripts
         {
             if (key == null) return null;
 
-            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetString(key);
+            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetString(key, null);
 
             return null;
         }
@@ -119,7 +115,7 @@ namespace Assets.SaveSystem.Scripts
         {
             if (key == null) return 0;
 
-            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetInt(key);
+            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetInt(key, 0);
 
             return 0;
         }
@@ -128,7 +124,7 @@ namespace Assets.SaveSystem.Scripts
         {
             if (key == null) return 0f;
 
-            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetFloat(key);
+            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetFloat(key, 0f);
 
             return 0f;
         }

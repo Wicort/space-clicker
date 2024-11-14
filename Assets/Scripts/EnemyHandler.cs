@@ -39,7 +39,7 @@ public class EnemyHandler : MonoBehaviour
     private float _currentBossTime;
     private ISaveSystem _saveSystem;
 
-    public static Action<EnemyData> OnEnemyKilled;
+    public static Action<EnemyData, float> OnEnemyKilled;
     
     private void OnEnable()
     {
@@ -150,7 +150,7 @@ public class EnemyHandler : MonoBehaviour
             _bossTimeText.gameObject.SetActive(false);
         }
         DestroyEnemyShip();
-        OnEnemyKilled?.Invoke(_enemyData);
+        OnEnemyKilled?.Invoke(_enemyData, 1);
         GetNextEnemyData();
         yield return new WaitForSeconds(_timeForNewEnemy);
         _saveSystem.Save(_gameData);
@@ -239,5 +239,15 @@ public class EnemyHandler : MonoBehaviour
     public Vector3 GetEnemyPosition()
     {
         return _enemyShip.transform.position;
+    }
+
+    public float GetCurrentEnemyHealth()
+    {
+        return _enemyData.MaxHealth;
+    }
+
+    public void OfflineKilling(float coeff)
+    {
+        OnEnemyKilled?.Invoke(_enemyData, coeff);
     }
 }

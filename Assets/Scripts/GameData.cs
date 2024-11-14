@@ -16,7 +16,7 @@ public class GameData
     public int Module2Lvl;
     public ItemRarity Module2Rarity;
 
-
+    public DateTime LastPlayedTime;
 
     public int Level => _level;
     public float Currency => _currency;

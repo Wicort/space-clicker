@@ -23,10 +23,13 @@ public class DropHandler : MonoBehaviour
         EnemyHandler.OnEnemyKilled += getDrop;
     }
 
-    private void getDrop(EnemyData enemy)
+    private void getDrop(EnemyData enemy, float coeff = 1)
     {
         Wave currentWave = _wavesHandler.getWave(enemy.EnemyLevel);
-        GetDrop(enemy.EnemyLevel, currentWave);
+        for (int i = 0; i < coeff; i++)
+        {
+            GetDrop(enemy.EnemyLevel, currentWave);
+        }
     }
 
     public List<Item> GetDrop(int enemyLevel, Wave wave)
