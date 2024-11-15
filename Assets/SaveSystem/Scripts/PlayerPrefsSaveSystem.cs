@@ -63,8 +63,16 @@ namespace Assets.SaveSystem.Scripts
         {
             PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
 
-            PlayerPrefs.SetInt(LEVEL, data.Level);
-            PlayerPrefs.SetInt(IS_BOSS_FAILED, data.IsBossFailed ? 1 : 0);
+            if (data.Level % 10 == 0)
+            {
+                PlayerPrefs.SetInt(LEVEL, data.Level-1);
+                PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(LEVEL, data.Level);
+                PlayerPrefs.SetInt(IS_BOSS_FAILED, data.IsBossFailed ? 1 : 0);
+            }
             PlayerPrefs.SetFloat(CURRENCY, data.Currency);
 
             if (data.Modules == null) return;
