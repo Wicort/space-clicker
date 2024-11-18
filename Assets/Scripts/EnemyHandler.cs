@@ -246,6 +246,11 @@ public class EnemyHandler : MonoBehaviour
         return _enemyData.MaxHealth;
     }
 
+    public float GetCurrentEnemyLevel()
+    {
+        return _enemyData.EnemyLevel;
+    }
+
     public void OfflineKilling(float coeff)
     {
         OnEnemyKilled?.Invoke(_enemyData, coeff);

@@ -51,7 +51,7 @@ namespace Assets.SaveSystem.Scripts
                     }
                 }
             }
-            string lastPlayedTimeString = LoadString("LastPlayedTime");
+            string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.UtcNow.ToString());
             if (lastPlayedTimeString != null)
                 gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
 
@@ -65,12 +65,12 @@ namespace Assets.SaveSystem.Scripts
 
             if (data.Level % 10 == 0)
             {
-                PlayerPrefs.SetInt(LEVEL, data.Level-1);
+                PlayerPrefs.SetInt(LEVEL, data.Level-2);
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
             }
             else
             {
-                PlayerPrefs.SetInt(LEVEL, data.Level);
+                PlayerPrefs.SetInt(LEVEL, data.Level-1);
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, data.IsBossFailed ? 1 : 0);
             }
             PlayerPrefs.SetFloat(CURRENCY, data.Currency);
@@ -110,11 +110,11 @@ namespace Assets.SaveSystem.Scripts
             }
         }
 
-        private string LoadString(string key)
+        private string LoadString(string key, string defVal = null)
         {
             if (key == null) return null;
 
-            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetString(key, null);
+            if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetString(key, defVal);
 
             return null;
         }

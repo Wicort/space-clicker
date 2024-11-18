@@ -2828,7 +2828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c58ed8e34a51540926388626b86fff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeSpanRestriction: 7200
+  TimeSpanRestriction: 43200
 --- !u!1001 &731360081
 PrefabInstance:
   m_ObjectHideFlags: 0

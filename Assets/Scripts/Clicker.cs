@@ -34,7 +34,8 @@ public class Clicker : MonoBehaviour
     {
         _gameData = gameData;
         RecalcDamage();
-        _enemyHandler.OfflineKilling(_offlineReward.Init(_gameData, GetAllDamageInSecond(), _enemyHandler.GetCurrentEnemyHealth()));
+        if (_enemyHandler.GetCurrentEnemyLevel() > 1 )
+            _enemyHandler.OfflineKilling(_offlineReward.Init(_gameData, GetAllDamageInSecond(), _enemyHandler.GetCurrentEnemyHealth()));
     }
 
     private void Start()
@@ -91,7 +92,7 @@ public class Clicker : MonoBehaviour
                 _autoClickDamage = result.Dmg;
             }
         }
-        _clickDamage = 500000f;
+        //_clickDamage = 500000f;
     }
     public float GetAllDamageInSecond()
     {
