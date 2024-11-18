@@ -18,6 +18,8 @@ public class DropHandler : MonoBehaviour
     private IItemService _itemService;
     private IInventoryService _inventoryService;
 
+    public static Action<Item> OnItemDropped;
+
     private void OnEnable()
     {
         EnemyHandler.OnEnemyKilled += getDrop;
@@ -57,6 +59,7 @@ public class DropHandler : MonoBehaviour
                 
                 Item item = _itemService.GetRandomItemByRarity(CalcRarity(wave.RarityDropChance, isBoss ? wave.BossDropMultiplier : 1));
                 _inventoryService.AddItems("Player", item.Id, 1);
+                OnItemDropped?.Invoke(item);
 
                 Color dropColor = Color.black;
                 switch (item.Rarity)
@@ -83,7 +86,7 @@ public class DropHandler : MonoBehaviour
     private ItemRarity CalcRarity(RarityDictionary dictionary, float multiplyer = 1)
     {
         var chance = UnityEngine.Random.Range(0f, 100f) * multiplyer;
-        Debug.Log($"current chance = {chance}");
+        //Debug.Log($"current chance = {chance}");
         
         if (checkRarity(dictionary, ItemRarity.MYTHICAL, chance)) return ItemRarity.MYTHICAL;
         if (checkRarity(dictionary, ItemRarity.LEGENDARY, chance)) return ItemRarity.LEGENDARY;

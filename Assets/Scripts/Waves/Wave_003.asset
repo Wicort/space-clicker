@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 5884161078227687636, guid: 94f309ded60f938469b932bd7b1900c8, type: 3}
   BossPrefab: {fileID: 1352819912832323548, guid: b00826a1a1cc86d4eaecae7c15ef457d,
     type: 3}
-  DropChance: 0.4
+  DropChance: 0.14
   BossDropCount: 3
   BossDropMultiplier: 2
   RarityDropChance:

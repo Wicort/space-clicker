@@ -34,8 +34,11 @@ public class Clicker : MonoBehaviour
     {
         _gameData = gameData;
         RecalcDamage();
-        if (_enemyHandler.GetCurrentEnemyLevel() > 1 )
+        if (_enemyHandler.GetCurrentEnemyLevel() > 1)
+        {
             _enemyHandler.OfflineKilling(_offlineReward.Init(_gameData, GetAllDamageInSecond(), _enemyHandler.GetCurrentEnemyHealth()));
+            _offlineReward.ShowOfflineRewardPanel();
+        }
     }
 
     private void Start()

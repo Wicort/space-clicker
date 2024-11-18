@@ -87,7 +87,7 @@ public class Modules : MonoBehaviour
         }
     }
 
-    private void RefreshUpgradeButtons()
+    private void RefreshUpgradeButtons(float val = 0)
     {
         foreach (UpgradeButton btn in _buttons)
         {

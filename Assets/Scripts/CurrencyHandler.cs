@@ -17,7 +17,7 @@ public class CurrencyHandler : MonoBehaviour
     private GameData _gameData;
     private float _currencyNumberOffset = 5f;
 
-    public static Action OnCurrencyChanged;
+    public static Action<float> OnCurrencyChanged;
 
     private void OnEnable()
     {
@@ -62,6 +62,6 @@ public class CurrencyHandler : MonoBehaviour
             $"+ ${ShortScaleString.parseDouble(calculatedReward, 3, 1000, true)}");
 
         RefreshCurrencyText();
-        OnCurrencyChanged?.Invoke();
+        OnCurrencyChanged?.Invoke(calculatedReward);
     }
 }
