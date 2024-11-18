@@ -20,8 +20,9 @@ public class OfflineReward : MonoBehaviour
         float delta = (float)Math.Clamp((currentTime - lastTime).TotalSeconds, 0, TimeSpanRestriction);
         var timeToKillEnemy = enemyHealth / damage;
         var offlineEnemyKilled = delta / timeToKillEnemy;
-        Debug.Log($"offline seconds delta {delta}; \ndamage {damage}; \nhealth{enemyHealth}, \ntimeToKillEnemy {timeToKillEnemy}, \nofflineEnemyKilled {offlineEnemyKilled}");
-
+        
         return offlineEnemyKilled;
+        
+        //return 1f;
     }
 }
