@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0036790755, g: 0.0051774327, b: 0.0072589843, a: 1}
+  m_IndirectSpecularColor: {r: 0.0036806304, g: 0.0051790243, b: 0.007259435, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2793,7 +2793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 710664154}
-  - component: {fileID: 710664153}
+  - component: {fileID: 710664155}
   m_Layer: 0
   m_Name: OfflineReward
   m_TagString: Untagged
@@ -2801,19 +2801,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &710664153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710664152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20c58ed8e34a51540926388626b86fff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeSpanRestriction: 86400
 --- !u!4 &710664154
 Transform:
   m_ObjectHideFlags: 0
@@ -2829,6 +2816,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710664155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710664152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c58ed8e34a51540926388626b86fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeSpanRestriction: 7200
 --- !u!1001 &731360081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6283,7 +6283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyHandler: {fileID: 103239250}
-  _offlineReward: {fileID: 710664153}
+  _offlineReward: {fileID: 710664155}
 --- !u!4 &2042146108
 Transform:
   m_ObjectHideFlags: 0

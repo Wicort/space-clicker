@@ -6,7 +6,7 @@ public class OfflineReward : MonoBehaviour
 {
     private GameData _gameData;
 
-    public int TimeSpanRestriction = 24 * 60 * 60;
+    public int TimeSpanRestriction = 2 * 60 * 60;
     
     public float Init(GameData gameData, float damage, float enemyHealth)
     {
