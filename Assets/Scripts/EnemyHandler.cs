@@ -238,7 +238,9 @@ public class EnemyHandler : MonoBehaviour
 
     public Vector3 GetEnemyPosition()
     {
-        return _enemyShip.transform.position;
+        if (_enemyShip != null)
+          return _enemyShip.transform.position;
+        else return Vector3.one;
     }
 
     public float GetCurrentEnemyHealth()

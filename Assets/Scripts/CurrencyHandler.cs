@@ -24,6 +24,7 @@ public class CurrencyHandler : MonoBehaviour
         GameBootstrapper.OnGameLoaded += Init;
         EnemyHandler.OnEnemyKilled += AddReward;
         Modules.OnModuleUpgraded += RefreshCurrencyText;
+        OfflineReward.OnRewardedCurrencyGetted += AddCurrency;
     }
 
     private void OnDisable()
@@ -31,6 +32,19 @@ public class CurrencyHandler : MonoBehaviour
         GameBootstrapper.OnGameLoaded -= Init; 
         EnemyHandler.OnEnemyKilled -= AddReward;
         Modules.OnModuleUpgraded -= RefreshCurrencyText;
+        OfflineReward.OnRewardedCurrencyGetted -= AddCurrency;
+    }
+
+    private void AddCurrency(float val)
+    {
+        _gameData.AddCurrency(val);
+        currencyNumbersPrefab.Spawn(
+            Vector3.zero + new Vector3(UnityEngine.Random.Range(0f, _currencyNumberOffset),
+            0,
+            UnityEngine.Random.Range(0f, _currencyNumberOffset)),
+            $"+ ${ShortScaleString.parseDouble(val, 3, 1000, true)}");
+        RefreshCurrencyText();
+        OnCurrencyChanged?.Invoke(val);
     }
 
     private void Init(GameData gameData)
@@ -53,15 +67,6 @@ public class CurrencyHandler : MonoBehaviour
             calculatedReward *= bossRewardMultiplier;
         }
 
-        _gameData.AddCurrency(calculatedReward);
-
-        currencyNumbersPrefab.Spawn(
-            Vector3.zero + new Vector3(UnityEngine.Random.Range(0f, _currencyNumberOffset), 
-            0, 
-            UnityEngine.Random.Range(0f, _currencyNumberOffset)), 
-            $"+ ${ShortScaleString.parseDouble(calculatedReward, 3, 1000, true)}");
-
-        RefreshCurrencyText();
-        OnCurrencyChanged?.Invoke(calculatedReward);
+        AddCurrency(calculatedReward);
     }
 }
