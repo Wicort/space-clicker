@@ -23,5 +23,9 @@ namespace Assets.Scripts.AssetProvider
         public static string EpicTouretPath = "touret/touretEpic";
         public static string LegTouretPath = "touret/touretLeg";
         public static string MythTouretPath = "touret/touretMyth";
+
+        public static string LightSpaceShipBuilderConfig = "configs/SpaceShipBuilderConfig/LightSpaceShipBuilderConfig";
+        public static string MediumSpaceShipBuilderConfig = "configs/SpaceShipBuilderConfig/MediumSpaceShipBuilderConfig";
+        public static string HeavySpaceShipBuilderConfig = "configs/SpaceShipBuilderConfig/HeavySpaceShipBuilderConfig";
     }
 }

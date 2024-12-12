@@ -64,6 +64,7 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
 
         private bool CanAttackTarget()
         {
+            // добавить проверку угла атаки
             return Vector3.Distance(Data.Self.transform.position, Data.Target.transform.position) < Data.AttackDistance;
         }
 

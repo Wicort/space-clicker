@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Scripts.Arena.Character.Strategy.SpaceShipBuilder;
+using Assets.Scripts.AssetProvider;
+using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
@@ -8,8 +10,8 @@ namespace Assets.Scripts.Arena.Character.StateMachine
     {
         public SpaceShip Self;
         public SpaceShip Target;
-        public int Velocity = Random.Range(1, 5);
         public List<SpaceShip> Enemyes;
+        public int Velocity;
         public int MaxHealthPoints;
         public int HealthPoints;
         public int AttackDistance;
@@ -18,16 +20,18 @@ namespace Assets.Scripts.Arena.Character.StateMachine
 
         public CharacterStateMachineData(SpaceShip self, List<SpaceShip> enemyes)
         {
+            SpaceShipBuilderFabric fabric = new SpaceShipBuilderFabric();
+            SpaceShipBuilderStrategy strategy = fabric.GetRandom();
             Self = self;
             Enemyes = enemyes;
-            Velocity = Random.Range(35, 75);
+            Velocity = strategy.GetVelocity();
             MaxHealthPoints = Random.Range(100, 150);
             HealthPoints = MaxHealthPoints;
             AttackDistance = Random.Range(9, 10);
             AttackValue = Random.Range(10, 50);
 
-            Target = null;
 
+            Target = null;
             Self.Damaged += OnGetDamage;
         }
         private void OnGetDamage(int value)
