@@ -2,10 +2,10 @@
 {
     public class LoadLevelState : IState
     {
-        private IStateSwitcher _stateSwitcher;
+        private GameStateMachine _stateSwitcher;
         private readonly SceneLoader _sceneLoader;
 
-        public LoadLevelState(IStateSwitcher stateSwitcher, SceneLoader sceneLoader)
+        public LoadLevelState(GameStateMachine stateSwitcher, SceneLoader sceneLoader)
         {
             _stateSwitcher = stateSwitcher;
             _sceneLoader = sceneLoader;

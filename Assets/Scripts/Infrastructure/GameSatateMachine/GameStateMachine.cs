@@ -5,37 +5,44 @@ using System.Linq;
 
 namespace Assets.Scripts.Infrastructure.GameSatateMachine
 {
-    public class GameStateMachine : IStateSwitcher
+    public class GameStateMachine
     {
-        private List<IState> _states;
-        private IState _currentState;
+        private List<IExitableState> _states;
+        private IExitableState _currentState;
         
 
-        public IState CurrentState => _currentState;
+        public IExitableState CurrentState => _currentState;
 
         public GameStateMachine(SceneLoader sceneLoader)
         {
-            _states = new List<IState>()
+            _states = new List<IExitableState>()
             {
                 new BootstrapState(this, sceneLoader),
                 new LoadLevelState(this, sceneLoader),
             };
-
-            _currentState = _states[0];
-            _currentState.Enter();
             
         }
 
-        public void SwitchState<T>() where T : IState
+        public void Enter<TState>() where TState : class, IState
         {
-            IState state = _states.FirstOrDefault(state => state is T);
+            _currentState?.Exit();
+            IState state = GetState<TState>();
+            _currentState = state;
+            state.Enter();
+        }
 
-            if (state == null)
-                throw new ArgumentException(nameof(T));
+        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        {
+            IPayloadState<TPayload> state = GetState<TState>();
 
             _currentState.Exit();
             _currentState = state;
-            _currentState.Enter();
+            state.Enter(payload);
+        }
+
+        private TState GetState<TState>() where TState : class, IExitableState
+        {
+            return _states.FirstOrDefault(state => state is TState) as TState;
         }
     }
 }

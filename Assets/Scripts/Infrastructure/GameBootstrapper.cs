@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.GameSatateMachine;
+using Assets.Scripts.Infrastructure.GameSatateMachine.States;
 using UnityEngine;
 
 namespace Assets.Scripts.Infrastructure
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Infrastructure
         private void Awake()
         {
             _gameStateMachine = new GameStateMachine(new SceneLoader(this));
+            _gameStateMachine.Enter<BootstrapState>();
             DontDestroyOnLoad(this);
         }
     }
