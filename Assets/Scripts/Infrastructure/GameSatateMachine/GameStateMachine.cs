@@ -20,24 +20,27 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine
                 new BootstrapState(this, sceneLoader),
                 new LoadLevelState(this, sceneLoader),
             };
-            
         }
 
         public void Enter<TState>() where TState : class, IState
         {
-            _currentState?.Exit();
-            IState state = GetState<TState>();
-            _currentState = state;
+            TState state = ChangeState<TState>();
             state.Enter();
         }
 
-        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
+        public void Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadedState<TPayload>
         {
-            IPayloadState<TPayload> state = GetState<TState>();
-
-            _currentState.Exit();
-            _currentState = state;
+            TState state = ChangeState<TState>();
             state.Enter(payload);
+        }
+        private TState ChangeState<TState>() where TState : class, IExitableState
+        {
+            _currentState?.Exit();
+
+            TState state = GetState<TState>();
+            _currentState = state;
+
+            return state;
         }
 
         private TState GetState<TState>() where TState : class, IExitableState

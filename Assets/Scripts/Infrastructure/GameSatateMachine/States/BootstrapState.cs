@@ -10,14 +10,14 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
     public class BootstrapState : IState
     {
         private const string Initial = "Initial";
-        private GameStateMachine _stateSwitcher;
+        private GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
 
         private AllServices _services => AllServices.Container;
 
         public BootstrapState(GameStateMachine stateSwitcher, SceneLoader sceneLoader)
         {
-            _stateSwitcher = stateSwitcher;
+            _stateMachine = stateSwitcher;
             _sceneLoader = sceneLoader;
         }
 
@@ -29,7 +29,7 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
 
         private void EnterLoadLevel()
         {
-            _stateSwitcher.Enter<LoadLevelState>();
+            _stateMachine.Enter<LoadLevelState, string>("MainMenu");
         }
 
         public void Exit()

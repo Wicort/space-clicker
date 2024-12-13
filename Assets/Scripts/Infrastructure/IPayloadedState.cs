@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Infrastructure
 {
-    public interface IPayloadState<TPayload> : IExitableState
+    public interface IPayloadedState<TPayload> : IExitableState
     {
         void Enter(TPayload payload);
     }
