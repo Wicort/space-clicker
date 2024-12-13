@@ -25,7 +25,7 @@ public class Modules : MonoBehaviour
 
     private void OnEnable()
     {
-        GameBootstrapper.OnGameLoaded += Init;
+        ClickerBootstrapper.OnGameLoaded += Init;
         UpgradeButton.OnModuleUpgraded += UpgradeModule;
         CurrencyHandler.OnCurrencyChanged += RefreshUpgradeButtons;
         ActionPanel.OnEquipButtonClicked += EquipItem;
@@ -34,7 +34,7 @@ public class Modules : MonoBehaviour
 
     private void OnDisable()
     {
-        GameBootstrapper.OnGameLoaded -= Init;
+        ClickerBootstrapper.OnGameLoaded -= Init;
         UpgradeButton.OnModuleUpgraded -= UpgradeModule;
         CurrencyHandler.OnCurrencyChanged -= RefreshUpgradeButtons;
         ActionPanel.OnEquipButtonClicked -= EquipItem;

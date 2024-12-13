@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Infrastructure.GameSatateMachine;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Arena.Character.StateMachine.States
 {
-    public class DeadState : IState
+    public class DeadState : ICharacterState
     {
         protected readonly IStateSwitcher StateSwitcher;
         protected readonly CharacterStateMachineData Data;
@@ -22,7 +23,6 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
 
         public void Enter()
         {
-            Debug.Log(GetType());
             Data.Enemyes.Remove(Data.Self);
             Data.Self.StartCoroutine(DestroySpaceShip());
         }

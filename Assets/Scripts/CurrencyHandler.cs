@@ -21,7 +21,7 @@ public class CurrencyHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        GameBootstrapper.OnGameLoaded += Init;
+        ClickerBootstrapper.OnGameLoaded += Init;
         EnemyHandler.OnEnemyKilled += AddReward;
         Modules.OnModuleUpgraded += RefreshCurrencyText;
         OfflineReward.OnRewardedCurrencyGetted += AddCurrency;
@@ -29,7 +29,7 @@ public class CurrencyHandler : MonoBehaviour
 
     private void OnDisable()
     {
-        GameBootstrapper.OnGameLoaded -= Init; 
+        ClickerBootstrapper.OnGameLoaded -= Init; 
         EnemyHandler.OnEnemyKilled -= AddReward;
         Modules.OnModuleUpgraded -= RefreshCurrencyText;
         OfflineReward.OnRewardedCurrencyGetted -= AddCurrency;

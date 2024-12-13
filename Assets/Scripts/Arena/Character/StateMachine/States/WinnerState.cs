@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Infrastructure.GameSatateMachine;
+using UnityEngine;
 
 namespace Assets.Scripts.Arena.Character.StateMachine.States
 {
-    public class WinnerState : IState
+    public class WinnerState : ICharacterState
     {
         protected readonly IStateSwitcher StateSwitcher;
         protected readonly CharacterStateMachineData Data;
@@ -15,7 +16,6 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
 
         public void Enter()
         {
-            Debug.Log(GetType());
         }
 
         public void Exit()

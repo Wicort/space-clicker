@@ -43,14 +43,14 @@ public class EnemyHandler : MonoBehaviour
     
     private void OnEnable()
     {
-        GameBootstrapper.OnGameLoaded += Init;
+        ClickerBootstrapper.OnGameLoaded += Init;
         Clicker.OnEnemyAttacked += TakeDamage;        
     }
 
     private void OnDisable()
     {
         Clicker.OnEnemyAttacked -= TakeDamage;
-        GameBootstrapper.OnGameLoaded -= Init;
+        ClickerBootstrapper.OnGameLoaded -= Init;
     }
 
     private void Awake()

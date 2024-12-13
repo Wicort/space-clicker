@@ -20,13 +20,13 @@ public class Clicker : MonoBehaviour
 
     private void OnEnable()
     {
-        GameBootstrapper.OnGameLoaded += Init;
+        ClickerBootstrapper.OnGameLoaded += Init;
         Modules.OnModuleUpgraded += RecalcDamage;
     }
 
     private void OnDisable()
     {
-        GameBootstrapper.OnGameLoaded -= Init;
+        ClickerBootstrapper.OnGameLoaded -= Init;
         Modules.OnModuleUpgraded -= RecalcDamage;
     }
 

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Assets.Scripts.Infrastructure.GameSatateMachine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Arena.Character.StateMachine.States
 {
-    public class ScannerState : IState
+    public class ScannerState : ICharacterState
     {
         protected readonly IStateSwitcher StateSwitcher;
         protected readonly CharacterStateMachineData Data;
@@ -15,13 +15,10 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
         {
             StateSwitcher = stateSwitcher;
             Data = data;
-            //Data.Self.Damaged += OnGetDamage;
         }
-
 
         public void Enter()
         {
-            Debug.Log(GetType());
         }
 
         public void Exit()

@@ -1,9 +1,8 @@
-﻿namespace Assets.Scripts.Arena.Character.StateMachine.States
+﻿namespace Assets.Scripts.Infrastructure
 {
     public interface IState
     {
         void Enter();
         void Exit();
-        void Update();
     }
 }
