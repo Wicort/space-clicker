@@ -1,8 +1,10 @@
-﻿
-namespace Assets.Scripts.AssetProvider
+﻿using System.Collections.Generic;
+
+namespace Assets.Scripts.Infrastructure.AssetManagement
 {
-    public class AssetPath
+    public static class AssetPath
     {
+        //sprites
         public static string CommonGunPath = "gun/gunCommon";
         public static string UncommonGunPath = "gun/gunUncommon";
         public static string RareGunPath = "gun/gunRare";
@@ -24,8 +26,16 @@ namespace Assets.Scripts.AssetProvider
         public static string LegTouretPath = "touret/touretLeg";
         public static string MythTouretPath = "touret/touretMyth";
 
-        public static string LightSpaceShipBuilderConfig = "configs/SpaceShipBuilderConfig/LightSpaceShipBuilderConfig";
-        public static string MediumSpaceShipBuilderConfig = "configs/SpaceShipBuilderConfig/MediumSpaceShipBuilderConfig";
-        public static string HeavySpaceShipBuilderConfig = "configs/SpaceShipBuilderConfig/HeavySpaceShipBuilderConfig";
+        //configs
+        public static string LightSpaceShipBuilderConfigPath = "configs/SpaceShipBuilderConfig/LightSpaceShipBuilderConfig";
+        public static string MediumSpaceShipBuilderConfigPath = "configs/SpaceShipBuilderConfig/MediumSpaceShipBuilderConfig";
+        public static string HeavySpaceShipBuilderConfigPath = "configs/SpaceShipBuilderConfig/HeavySpaceShipBuilderConfig";
+
+        //prefabs
+        public static string ArenaPlayerPrefabPath = "prefabs/Arena/Player";
+        public static List<string> ArenaEnemyPrefabPathList = new List<string>
+        {
+            "prefabs/Arena/Enemy1",
+        };
     }
 }

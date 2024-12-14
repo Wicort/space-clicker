@@ -1,4 +1,5 @@
 ﻿using Assets.SaveSystem.Scripts;
+using Assets.Scripts.Infrastructure.AssetManagement;
 using Assets.Services;
 using Inventory;
 using Services;
@@ -13,17 +14,19 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
         private GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
 
-        private AllServices _services => AllServices.Container;
+        private AllServices _services;
 
-        public BootstrapState(GameStateMachine stateSwitcher, SceneLoader sceneLoader)
+        public BootstrapState(GameStateMachine stateSwitcher, SceneLoader sceneLoader, AllServices services)
         {
             _stateMachine = stateSwitcher;
             _sceneLoader = sceneLoader;
+            _services = services;
+
+            RegisterServices();
         }
 
         public void Enter()
-        {
-            RegisterServices();
+        {   
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
         }
 
@@ -41,7 +44,9 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
         {
             _services.RegisterSingle<IItemService>(new ItemService());
             _services.RegisterSingle<IInventoryService>(new InventoryService());
+            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
             _services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
+            
         }
     }
 }

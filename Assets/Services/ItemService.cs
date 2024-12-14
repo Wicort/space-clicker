@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.AssetProvider;
+﻿using Assets.Scripts.Infrastructure.AssetManagement;
 using Items;
 using System.Collections.Generic;
 using UnityEngine;

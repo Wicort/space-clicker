@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Arena.Character.Strategy.SpaceShipBuilder;
-using Assets.Scripts.AssetProvider;
 using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;

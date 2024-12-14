@@ -1,41 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Infrastructure.AssetManagement;
 using UnityEngine;
 
 namespace Assets.Scripts.Arena.Character
 {
     public class SpaceShipFactory
     {
-        private SpaceShip _playerPrfab;
-        private List<SpaceShip> _enemyPrefabs;
+        private readonly IAssetProvider _assets;
 
-        public SpaceShipFactory(SpaceShip playerPrfab, List<SpaceShip> enemyPrefabs)
+        public SpaceShipFactory(IAssetProvider assets)
         {
-            _playerPrfab = playerPrfab;
-            _enemyPrefabs = enemyPrefabs;
+            _assets = assets;
         }
 
         public SpaceShip GetPlayerSpaceShip(Vector3 position)
         {
-            return get(_playerPrfab, position);
-        }
-
-        public SpaceShip GetEnemySpaceShip(Vector3 position)
-        {
-            return GetEnemySpaceShip(position, Quaternion.identity);
+            return _assets.getSpaceship(SpaceShipType.PLAYER, position, Quaternion.identity);
         }
 
         public SpaceShip GetEnemySpaceShip(Vector3 position, Quaternion rotation)
         {
-            return GameObject.Instantiate(
-                _enemyPrefabs[Random.Range(0, _enemyPrefabs.Count)],
-                position,
-                rotation,
-                null);
+            return _assets.getSpaceship(SpaceShipType.PLAYER, position, rotation);
         }
 
-        private SpaceShip get(SpaceShip prefab, Vector3 position)
-        {
-            return GameObject.Instantiate(prefab, position, Quaternion.identity, null);
-        }
+        
     }
 }

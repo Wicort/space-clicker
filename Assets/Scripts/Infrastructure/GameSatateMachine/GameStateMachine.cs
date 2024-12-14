@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.GameSatateMachine.States;
-using System;
+using Services;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,12 +13,13 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine
 
         public IExitableState CurrentState => _currentState;
 
-        public GameStateMachine(SceneLoader sceneLoader)
+        public GameStateMachine(SceneLoader sceneLoader, AllServices services, LoadingCurtain curtain)
         {
             _states = new List<IExitableState>()
             {
-                new BootstrapState(this, sceneLoader),
-                new LoadLevelState(this, sceneLoader),
+                new BootstrapState(this, sceneLoader, services),
+                new LoadLevelState(this, sceneLoader, curtain),
+                new GameLoopState(this),
             };
         }
 

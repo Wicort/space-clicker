@@ -1,5 +1,7 @@
 using Assets.Scripts.Arena.Character;
+using Assets.Scripts.Infrastructure.AssetManagement;
 using Cinemachine;
+using Services;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +13,10 @@ public class ArenaBootStrapper : MonoBehaviour
     [SerializeField] private List<SpaceShip> _targets;
     [SerializeField] private CinemachineVirtualCamera _camera;
     private SpaceShipFactory _spaceShipFactory;
+    private AllServices _container => AllServices.Container;
 
     public List<SpaceShip> Targets => _targets;
+    
 
     private void Awake()
     {
@@ -22,7 +26,7 @@ public class ArenaBootStrapper : MonoBehaviour
     {
         _targets = new List<SpaceShip>();
 
-        _spaceShipFactory = new SpaceShipFactory(_playerPrefab, _enemyPrefabs);
+        _spaceShipFactory = new SpaceShipFactory(_container.Single<IAssetProvider>());
         Vector3 playerPosition = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
 
         SpaceShip player = _spaceShipFactory.GetPlayerSpaceShip(playerPosition);
