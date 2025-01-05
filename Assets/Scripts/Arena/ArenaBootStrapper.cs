@@ -1,6 +1,9 @@
+using Assets.SaveSystem.Scripts;
 using Assets.Scripts.Arena.Character;
 using Assets.Scripts.Infrastructure.AssetManagement;
+using Assets.Services;
 using Cinemachine;
+using Inventory;
 using Services;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +28,8 @@ public class ArenaBootStrapper : MonoBehaviour
     public void Initialize()
     {
         _targets = new List<SpaceShip>();
+
+        RegisterServices();
 
         _spaceShipFactory = new SpaceShipFactory(_container.Single<IAssetProvider>());
         Vector3 playerPosition = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
@@ -56,7 +61,15 @@ public class ArenaBootStrapper : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SpaceShip enemy = _targets[Random.Range(0, _targets.Count)];
-            enemy.GetDamage(150);
+            //enemy.GetDamage(150);
         }
+    }
+    private void RegisterServices()
+    {
+        _container.RegisterSingle<IItemService>(new ItemService());
+        _container.RegisterSingle<IInventoryService>(new InventoryService());
+        _container.RegisterSingle<IAssetProvider>(new AssetProvider());
+        _container.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_container.Single<IInventoryService>(), _container.Single<IItemService>()));
+
     }
 }

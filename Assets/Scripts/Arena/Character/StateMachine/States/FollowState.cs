@@ -70,7 +70,7 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
         private void AttackTarget()
         {
             Debug.Log($"{Data.Self.name} is Attacking {Data.Target.name} DMG({Data.AttackValue})");
-            Data.Target.GetDamage(Data.AttackValue);
+            //Data.Target.GetDamage(Data.AttackValue);
         }
     }
 }

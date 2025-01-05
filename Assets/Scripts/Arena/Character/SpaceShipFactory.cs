@@ -19,7 +19,7 @@ namespace Assets.Scripts.Arena.Character
 
         public SpaceShip GetEnemySpaceShip(Vector3 position, Quaternion rotation)
         {
-            return _assets.getSpaceship(SpaceShipType.PLAYER, position, rotation);
+            return _assets.getSpaceship(SpaceShipType.ENEMY, position, rotation);
         }
 
         
