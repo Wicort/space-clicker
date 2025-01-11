@@ -37,5 +37,6 @@ namespace Assets.Scripts.Infrastructure.AssetManagement
         {
             "prefabs/Arena/Enemy1",
         };
+        public static string BulletPrefabPath = "prefabs/Arena/Bullet";
     }
 }

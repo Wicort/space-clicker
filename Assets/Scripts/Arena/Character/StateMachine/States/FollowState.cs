@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.GameSatateMachine;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Arena.Character.StateMachine.States
@@ -9,6 +10,8 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
         protected readonly CharacterStateMachineData Data;
 
         protected CharacterController Controller;
+
+        private float _scannerCoolDown;
 
         public FollowState(IStateSwitcher stateSwitcher, CharacterStateMachineData data)
         {
@@ -25,11 +28,12 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
 
         public void Enter()
         {
+            _scannerCoolDown = 1f;
+            
         }
 
         public void Exit()
-        {
-            
+        { 
         }
 
         public void Update()
@@ -39,11 +43,30 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
 
             if (CanAttackTarget())
                 AttackTarget();
+
+            TickScannerCooldown();
+            TryToStartScanner();
+        }
+
+        private void TickScannerCooldown()
+        {
+            _scannerCoolDown -= Time.deltaTime;
+        }
+
+        private void TryToStartScanner()
+        {
+            if (_scannerCoolDown <= 0f)
+            {
+                StateSwitcher.SwitchState<ScannerState>();
+                Debug.Log($"{Data.Self.name} Start Scanning");
+            }
         }
 
         private void MoveToTarget()
         {
-            Controller.Move(Data.Self.transform.forward * Data.Velocity * Time.deltaTime);
+            Vector3 position = Data.Self.transform.forward * Data.Velocity * Time.deltaTime;
+            position = new Vector3(position.x, 0, position.z);
+            Controller.Move(position);
         }
 
         private void RotateToTarget()
@@ -53,12 +76,11 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
 
             Vector3 targetPosition = Data.Target.transform.position;
 
-
             Quaternion rotation = Quaternion.Slerp(selfRotation,
                 Quaternion.LookRotation(targetPosition - selfPosition),
-                Time.deltaTime);
+                Time.deltaTime * (Data.AngularVelocity/360f));
 
-            Data.Self.transform.rotation = rotation;
+            Data.Self.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
         }
 
         private bool CanAttackTarget()
@@ -70,6 +92,7 @@ namespace Assets.Scripts.Arena.Character.StateMachine.States
         private void AttackTarget()
         {
             Debug.Log($"{Data.Self.name} is Attacking {Data.Target.name} DMG({Data.AttackValue})");
+            Data.Self.GetComponent<BulletSpawner>().TryToSpawnBullet();
             //Data.Target.GetDamage(Data.AttackValue);
         }
     }

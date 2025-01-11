@@ -22,5 +22,10 @@ namespace Assets.Scripts.Arena.Character.Strategy.SpaceShipBuilder
             SpaceShipBuilders type = (SpaceShipBuilders)Random.Range(0, Enum.GetNames(typeof(SpaceShipBuilders)).Length);
             return Get(type);
         }
+
+        public SpaceShipBuilderStrategy GetMedium()
+        {
+            return Get(SpaceShipBuilders.MEDIUM);
+        }
     }
 }

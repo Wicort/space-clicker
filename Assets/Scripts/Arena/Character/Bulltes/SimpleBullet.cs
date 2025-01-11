@@ -6,9 +6,12 @@ namespace Assets.Scripts.Arena.Character.Bulltes
 {
     public class SimpleBullet : ArenaBullet
     {
+        [Range(0, 10)]
+        public float CoolDown = 1f;
         public float LifeTime = 5f;
         public float Speed;
         public int Damage;
+        public override float GetCoolDown() => CoolDown;
 
         public override void DoDamage(SpaceShip target)
         {

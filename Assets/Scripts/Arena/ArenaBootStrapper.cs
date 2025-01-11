@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class ArenaBootStrapper : MonoBehaviour
 {
+    private const float SpawnRadius = 50f;
     [SerializeField, Range(2,15)] private int _playerCount = 5;
     [SerializeField] private List<SpaceShip> _enemyPrefabs;
     [SerializeField] private SpaceShip _playerPrefab;
@@ -32,7 +33,7 @@ public class ArenaBootStrapper : MonoBehaviour
         RegisterServices();
 
         _spaceShipFactory = new SpaceShipFactory(_container.Single<IAssetProvider>());
-        Vector3 playerPosition = new Vector3(Random.Range(-50f, 50f), 0f, Random.Range(-50f, 50f));
+        Vector3 playerPosition = new Vector3(Random.Range(-SpawnRadius, SpawnRadius), 0f, Random.Range(-SpawnRadius, SpawnRadius));
 
         SpaceShip player = _spaceShipFactory.GetPlayerSpaceShip(playerPosition);
         player.name = "Player";
@@ -42,7 +43,7 @@ public class ArenaBootStrapper : MonoBehaviour
 
         for(int i = 0; i < _playerCount - 1; i++)
         {
-            Vector3 enemyPosition = new Vector3(Random.Range(-50f, 50f) , 0f, Random.Range(-50f, 50f));
+            Vector3 enemyPosition = new Vector3(Random.Range(-SpawnRadius, SpawnRadius) , 0f, Random.Range(-SpawnRadius, SpawnRadius));
             Quaternion enemyRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
             SpaceShip enemy = _spaceShipFactory.GetEnemySpaceShip(enemyPosition, enemyRotation);
             enemy.name = $"Enemy_{i}";

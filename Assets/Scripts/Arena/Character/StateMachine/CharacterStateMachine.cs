@@ -17,6 +17,7 @@ namespace Assets.Scripts.Arena.Character.StateMachine
         public CharacterStateMachine(SpaceShip spaceShip, List<SpaceShip> enemyes)
         {
             CharacterStateMachineData data = new CharacterStateMachineData(spaceShip, enemyes);
+            spaceShip.SetBulletPrefab(data.Bullet);
             _states = new List<ICharacterState>()
             {
                 new ScannerState(this, data),

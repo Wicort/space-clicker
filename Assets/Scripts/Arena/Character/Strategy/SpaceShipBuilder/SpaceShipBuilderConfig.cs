@@ -12,5 +12,6 @@ namespace Assets.Scripts.Arena.Character
         public int AttackValue;
         public float Cooldown;
         public float RandomCoefficient;
+        public string BulletPrefabAssetPath = "prefabs/Arena/Bullet";
     }
 }

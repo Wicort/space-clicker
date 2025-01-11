@@ -6,32 +6,36 @@ public class BulletSpawner : MonoBehaviour
 {
 
     public Transform _firePoint;
-    [Range(0, 10)]
-    public float coolDown;
-    public ArenaBullet effectToSpawn;
+    private ArenaBullet _effectToSpawn;
 
     private bool canAttack;
 
-    private void Awake()
+    public void Initialize(ArenaBullet effectToSpawn)
     {
         canAttack = true;
-    }
-
-    private void Update()
-    {
-        if (canAttack)
-        {
-            canAttack = false;
-            ArenaBullet bullet = Instantiate(effectToSpawn, _firePoint.transform);
-            bullet.transform.SetParent(null);
-            bullet.Initialize(null);
-            StartCoroutine(StartCoolDown());
-        }
+        _effectToSpawn = effectToSpawn;
     }
 
     private IEnumerator StartCoolDown()
     {
-        yield return new WaitForSeconds(coolDown);
+        yield return new WaitForSeconds(_effectToSpawn.GetCoolDown());
         canAttack = true;
+    }
+
+    public void TryToSpawnBullet()
+    {
+        if (canAttack)
+        {
+            canAttack = false;
+            SpawnBullet();
+        }
+    }
+
+    private void SpawnBullet()
+    {
+        ArenaBullet bullet = Instantiate(_effectToSpawn, _firePoint.transform);
+        bullet.transform.SetParent(null);
+        bullet.Initialize(null);
+        StartCoroutine(StartCoolDown());
     }
 }

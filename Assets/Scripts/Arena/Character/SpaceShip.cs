@@ -1,3 +1,4 @@
+using Assets.Scripts.Arena.Character.Bulltes;
 using Assets.Scripts.Arena.Character.StateMachine;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ public class SpaceShip : MonoBehaviour
 {
     public Action<int> Damaged;
     public Action Dead;
+    public BulletSpawner BulletSpawner;
     private CharacterStateMachine _stateMachine;
     private CharacterController _characterController;
 
@@ -18,6 +20,11 @@ public class SpaceShip : MonoBehaviour
     {
         _characterController = GetComponent<CharacterController>();
         _stateMachine = new CharacterStateMachine(this, enemyes);
+    }
+
+    public void SetBulletPrefab(ArenaBullet bulletPrefab)
+    {
+        BulletSpawner.Initialize(bulletPrefab);
     }
 
     private void Update()
