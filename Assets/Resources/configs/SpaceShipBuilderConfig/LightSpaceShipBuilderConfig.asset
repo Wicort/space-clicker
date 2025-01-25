@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1b118571f82be44b56a564301e321c, type: 3}
   m_Name: LightSpaceShipBuilderConfig
   m_EditorClassIdentifier: 
-  Velocity: 100
-  AngularVelocity: 200
+  Velocity: 50
+  AngularVelocity: 500
   MaxHealthPoints: 100
   AttackDistance: 40
   AttackValue: 5

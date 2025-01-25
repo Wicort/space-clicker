@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1b118571f82be44b56a564301e321c, type: 3}
   m_Name: HeavySpaceShipBuilderConfig
   m_EditorClassIdentifier: 
-  Velocity: 50
-  AngularVelocity: 80
+  Velocity: 20
+  AngularVelocity: 500
   MaxHealthPoints: 0
   AttackDistance: 40
   AttackValue: 0
   Cooldown: 0
   RandomCoefficient: 0.2
-  BulletPrefabAssetPath: prefabs/Arena/Bullet
+  BulletPrefabAssetPath: prefabs/Arena/BulletHeavy

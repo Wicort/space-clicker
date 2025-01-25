@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2957948396325300020}
   - component: {fileID: 1070568645775357283}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BulletHeavy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5.7}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b48bb6d6f5fe374888c8cc16f0994fd, type: 2}
+  - {fileID: 2100000, guid: 44b159624e1d3184ca3f71bd53b9b271, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2e27f72c85f854aa512aa8af01a19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoolDown: 0.2
+  CoolDown: 1.5
   LifeTime: 5
-  Speed: 150
-  Damage: 200
+  Speed: 50
+  Damage: 250
