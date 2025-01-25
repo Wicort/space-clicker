@@ -19,4 +19,4 @@ MonoBehaviour:
   AttackValue: 5
   Cooldown: 0.2
   RandomCoefficient: 0.4
-  BulletPrefabAssetPath: prefabs/Arena/Bullet
+  BulletPrefabAssetPath: prefabs/Arena/Bullets/BulletLight

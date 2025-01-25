@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Assets.Scripts.Arena.Character.Bulltes
 {
@@ -31,7 +32,8 @@ namespace Assets.Scripts.Arena.Character.Bulltes
 
         public override void Move()
         {
-            transform.position += transform.forward * Speed * Time.deltaTime;
+            Vector3 newPosition = transform.position + transform.forward * Speed * Time.deltaTime;
+            transform.position = new Vector3(newPosition.x, 0, newPosition.z);
         }
 
         public override void SelfDestroy()

@@ -19,4 +19,4 @@ MonoBehaviour:
   AttackValue: 0
   Cooldown: 0
   RandomCoefficient: 0.2
-  BulletPrefabAssetPath: prefabs/Arena/BulletHeavy
+  BulletPrefabAssetPath: prefabs/Arena/Bullets/BulletHeavy
