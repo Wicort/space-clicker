@@ -17,6 +17,7 @@ public class Clicker : MonoBehaviour
 
     public static Action<float> OnEnemyAttacked;
     public static Action<Vector3> OnPlayerClick;
+    public static Action OnArenaButtonClicked;
 
     private void OnEnable()
     {
@@ -100,5 +101,10 @@ public class Clicker : MonoBehaviour
     public float GetAllDamageInSecond()
     {
         return _autoClickDamage + _clickDamage;
+    }
+
+    public void OnArenaButtonClick()
+    {
+        OnArenaButtonClicked?.Invoke();
     }
 }

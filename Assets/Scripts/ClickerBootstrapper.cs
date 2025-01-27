@@ -30,11 +30,8 @@ public class ClickerBootstrapper : MonoBehaviour
 
     private void Initialize()
     {
-        
-
         ISaveSystem saveSystem = _services.Single<ISaveSystem>();
         gameData = saveSystem.Load();
         OnGameLoaded?.Invoke(gameData);
     }
-
 }

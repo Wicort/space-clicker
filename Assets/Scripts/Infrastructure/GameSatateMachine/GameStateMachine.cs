@@ -19,7 +19,9 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine
             {
                 new BootstrapState(this, sceneLoader, services),
                 new LoadLevelState(this, sceneLoader, curtain),
+                new MainMenuState(this),
                 new GameLoopState(this),
+                new ArenaLoopState(this),
             };
         }
 

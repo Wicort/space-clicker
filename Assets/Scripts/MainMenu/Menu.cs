@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    public static Action OnStartGameButtonClicked;
+
     public void OnQuitButtonClick()
     {
         Application.Quit();
@@ -10,7 +13,9 @@ public class Menu : MonoBehaviour
 
     public void OnStartButonClick()
     {
-        SceneManager.LoadScene("Clicker");
+        Debug.Log("OnStartGameButtonClicked");
+        OnStartGameButtonClicked?.Invoke();
+        //SceneManager.LoadScene("Clicker");
     }
 
     public void OnSettingsButtonClick()
