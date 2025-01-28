@@ -68,6 +68,11 @@ namespace Michsky.MUIP
             if (eventSource != null) { eventSource.value = currentPercent; }
         }
 
+        public void SetText(string value)
+        {
+            textPercent.text = value;
+        }
+
         public void InitializeEvents()
         {
             if (Application.isPlaying && onValueChanged.GetPersistentEventCount() != 0)
