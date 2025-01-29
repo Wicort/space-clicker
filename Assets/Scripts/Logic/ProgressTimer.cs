@@ -1,5 +1,8 @@
 ﻿using Michsky.MUIP;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+using static Assets.Scripts.Logic.ProgressTimer;
 
 namespace Assets.Scripts.Logic
 {
@@ -10,12 +13,16 @@ namespace Assets.Scripts.Logic
         public float MaxActiveTime = 30f;
         [Range(0f, 300f)]
         public float CoolDown = 60f;
+        public Button StartTimerButton;
 
         private ProgressTimerState _timerState = ProgressTimerState.Stopped;
         public float _currentCoolDown = 0f;
 
+        public UnityEvent onActivate;
+        public UnityEvent onDeactivate;
+
         
-        private void Awake()
+        private void Start()
         {
             StopTimer();
         }
@@ -89,14 +96,15 @@ namespace Assets.Scripts.Logic
         {
             _timerState = ProgressTimerState.Active;
             _currentCoolDown = MaxActiveTime;
-            Debug.Log(_timerState);
+            StartTimerButton.gameObject.SetActive(false);
+            onActivate?.Invoke();
         }
 
         private void StartTimerCooldown()
         {
             _timerState = ProgressTimerState.CoolDown;
             _currentCoolDown = CoolDown;
-            Debug.Log(_timerState);
+            onDeactivate?.Invoke();
         }
 
         private void StopTimer()
@@ -104,8 +112,8 @@ namespace Assets.Scripts.Logic
             _timerState = ProgressTimerState.Stopped;
             _currentCoolDown = 0;
             Progress.SetValue(100);
-            Progress.SetText(MaxActiveTime.ToString());
-            Debug.Log(_timerState);
+            Progress.SetText("");
+            StartTimerButton.gameObject.SetActive(true);
         }
 
         private bool IsStopped()
