@@ -7036,6 +7036,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6910084582898383231, guid: 826767c3e24984f4991e45821fb5339e,
         type: 3}
+      propertyPath: CoolDown
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910084582898383231, guid: 826767c3e24984f4991e45821fb5339e,
+        type: 3}
+      propertyPath: MaxActiveTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910084582898383231, guid: 826767c3e24984f4991e45821fb5339e,
+        type: 3}
       propertyPath: onActivate.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -8472,6 +8482,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910084582898383231, guid: 826767c3e24984f4991e45821fb5339e,
+        type: 3}
+      propertyPath: CoolDown
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910084582898383231, guid: 826767c3e24984f4991e45821fb5339e,
+        type: 3}
+      propertyPath: MaxActiveTime
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6910084582898383231, guid: 826767c3e24984f4991e45821fb5339e,
         type: 3}

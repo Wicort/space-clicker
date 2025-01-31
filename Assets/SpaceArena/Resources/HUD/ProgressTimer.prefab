@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Progress: {fileID: 3368647197762463406}
   MaxActiveTime: 5
-  CoolDown: 5
+  CoolDown: 10
   StartTimerButton: {fileID: 3881817013588549299}
   _currentCoolDown: 0
   onActivate:
