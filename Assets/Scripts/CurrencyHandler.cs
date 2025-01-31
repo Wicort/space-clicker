@@ -1,3 +1,4 @@
+using Assets.Services;
 using DamageNumbersPro;
 using System;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class CurrencyHandler : MonoBehaviour
 
     private GameData _gameData;
     private float _currencyNumberOffset = 5f;
+    private float _moneyMultiplier = 1f;
 
     public static Action<float> OnCurrencyChanged;
 
@@ -25,6 +27,8 @@ public class CurrencyHandler : MonoBehaviour
         EnemyHandler.OnEnemyKilled += AddReward;
         Modules.OnModuleUpgraded += RefreshCurrencyText;
         OfflineReward.OnRewardedCurrencyGetted += AddCurrency;
+        AdsService.OnStartDoubleMoney += SetDoubleMoney;
+        AdsService.OnStopDoubleMoney += SetSingleMoney;
     }
 
     private void OnDisable()
@@ -33,6 +37,8 @@ public class CurrencyHandler : MonoBehaviour
         EnemyHandler.OnEnemyKilled -= AddReward;
         Modules.OnModuleUpgraded -= RefreshCurrencyText;
         OfflineReward.OnRewardedCurrencyGetted -= AddCurrency;
+        AdsService.OnStartDoubleMoney -= SetDoubleMoney;
+        AdsService.OnStopDoubleMoney -= SetSingleMoney;
     }
 
     private void AddCurrency(float val)
@@ -61,12 +67,23 @@ public class CurrencyHandler : MonoBehaviour
 
     private void AddReward(EnemyData _enemy, float  coeff = 1)
     {
+
         float calculatedReward = Mathf.Ceil(_baseReward * Mathf.Pow(1 + _rewardGrowthRate, _enemy.EnemyLevel - 1)) * coeff;
         if (_enemy.IsBoss)
         {
             calculatedReward *= bossRewardMultiplier;
         }
 
-        AddCurrency(calculatedReward);
+        AddCurrency(calculatedReward * _moneyMultiplier);
+    }
+
+    private void SetDoubleMoney()
+    {
+        _moneyMultiplier = 2f;
+    }
+
+    private void SetSingleMoney()
+    {
+        _moneyMultiplier = 1f;
     }
 }

@@ -1,28 +1,34 @@
 ﻿
 
+using System;
 using UnityEngine;
 
 namespace Assets.Services
 {
-    public class AdsService: MonoBehaviour
+    public class AdsService : MonoBehaviour, IAdsService
     {
+        public static Action OnStartDoubleDamage;
+        public static Action OnStopDoubleDamage;
+        public static Action OnStartDoubleMoney;
+        public static Action OnStopDoubleMoney;
+
         public void DoubleDamage()
         {
-            Debug.Log("Double damage started");
+            OnStartDoubleDamage?.Invoke();
         }
         public void DoubleMoney()
         {
-            Debug.Log("Double money started");
+            OnStartDoubleMoney?.Invoke();
         }
 
         public void StopDoubleDamage()
         {
-            Debug.Log("Double damage stopped");
+            OnStopDoubleDamage?.Invoke();
         }
 
         public void StopDoubleMoney()
         {
-            Debug.Log("Double money stopped");
+            OnStopDoubleMoney?.Invoke();
         }
     }
 }

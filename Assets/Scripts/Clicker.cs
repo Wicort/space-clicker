@@ -1,3 +1,4 @@
+using Assets.Services;
 using Items;
 using System;
 using System.Collections;
@@ -15,6 +16,9 @@ public class Clicker : MonoBehaviour
     private float _clickDamage = 0;
     private float _autoClickDamage = 0;
 
+    private float _clickMultiplier = 1f;
+    private float _autoClickMultiplier = 1f;
+
     public static Action<float> OnEnemyAttacked;
     public static Action<Vector3> OnPlayerClick;
     public static Action OnArenaButtonClicked;
@@ -23,12 +27,16 @@ public class Clicker : MonoBehaviour
     {
         ClickerBootstrapper.OnGameLoaded += Init;
         Modules.OnModuleUpgraded += RecalcDamage;
+        AdsService.OnStartDoubleDamage += SetDoubleDamage;
+        AdsService.OnStopDoubleDamage += SetSingleDamage;
     }
 
     private void OnDisable()
     {
         ClickerBootstrapper.OnGameLoaded -= Init;
         Modules.OnModuleUpgraded -= RecalcDamage;
+        AdsService.OnStartDoubleDamage -= SetDoubleDamage;
+        AdsService.OnStopDoubleDamage -= SetSingleDamage;
     }
 
     public void Init(GameData gameData)
@@ -42,11 +50,6 @@ public class Clicker : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        StartCoroutine(Autoclick());
-    }
-
     public void OnClick()
     {
         OnEnemyAttacked?.Invoke(GetClickDamage());
@@ -56,6 +59,23 @@ public class Clicker : MonoBehaviour
     public void OnAutoClick()
     {
         OnEnemyAttacked?.Invoke(GetAutoClickDamage());
+    }
+
+    private void Start()
+    {
+        StartCoroutine(Autoclick());
+    }
+
+    private void SetDoubleDamage()
+    {
+        _clickMultiplier = 2f;
+        _autoClickMultiplier = 2f;
+    }
+
+    private void SetSingleDamage()
+    {
+        _clickMultiplier = 1f;
+        _autoClickMultiplier = 1f;
     }
 
     private IEnumerator Autoclick()
@@ -69,12 +89,12 @@ public class Clicker : MonoBehaviour
 
     private float GetClickDamage()
     {
-        return _clickDamage;
+        return _clickDamage * _clickMultiplier;
     }
 
     private float GetAutoClickDamage()
     {
-        return _autoClickDamage;
+        return _autoClickDamage * _autoClickMultiplier;
     }
 
     private void RecalcDamage()
