@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class OfflineReward : MonoBehaviour
 {
@@ -57,18 +58,18 @@ public class OfflineReward : MonoBehaviour
     public float Init(GameData gameData, float damage, float enemyHealth)
     {
         _gameData = gameData;
-        var lastTime = _gameData.LastPlayedTime;
-        var currentTime = DateTime.UtcNow;
+        DateTime lastTime = _gameData.LastPlayedTime;
+        DateTime currentTime = DateTime.UtcNow;
+        float offlineEnemyKilled = 0f;
 
         if (lastTime == null) return 0;
 
-        
         float delta = (float)Math.Clamp((currentTime - lastTime).TotalSeconds, 0, TimeSpanRestriction);
         Debug.Log($"TimeSpanRestriction: {TimeSpanRestriction}");
         Debug.Log($"delta: {delta}");
         Debug.Log($"currentTime - lastTime: {(currentTime - lastTime).TotalSeconds}");
-        var timeToKillEnemy = Mathf.Max(1f, enemyHealth / damage);
-        var offlineEnemyKilled = delta / timeToKillEnemy;
+        float timeToKillEnemy = Mathf.Max(5f, enemyHealth / damage);
+        offlineEnemyKilled = delta / timeToKillEnemy;
         
         return offlineEnemyKilled / 2f;
     }
@@ -85,19 +86,20 @@ public class OfflineReward : MonoBehaviour
 
     public void GetX2()
     {
-        DropHandler.OnItemDropped -= SetItemReward;
-        Debug.Log("X2 getted");
-        OnRewardedCurrencyGetted?.Invoke(RewardedCurrency);
-        
-        foreach (Item item in RewardedItemsList)
+        YG2.RewardedAdvShow("DoubleReward", () =>
         {
-            OnRewardedItemGetted?.Invoke(item);
-        }
+            DropHandler.OnItemDropped -= SetItemReward;
+            Debug.Log("X2 getted");
+            OnRewardedCurrencyGetted?.Invoke(RewardedCurrency);
 
-        OfflineRevardHUD.gameObject.SetActive(false);
-        StartCoroutine(SaveAndClose());
+            foreach (Item item in RewardedItemsList)
+            {
+                OnRewardedItemGetted?.Invoke(item);
+            }
 
-        
+            OfflineRevardHUD.gameObject.SetActive(false);
+            StartCoroutine(SaveAndClose());
+        });
     }
 
     System.Collections.IEnumerator SaveAndClose()

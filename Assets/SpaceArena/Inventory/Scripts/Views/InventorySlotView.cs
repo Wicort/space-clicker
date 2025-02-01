@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.Services;
+using Services;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,16 +11,19 @@ namespace Inventory
         [SerializeField] private Text _textTitle;
         [SerializeField] private Text _textAmount;
         [SerializeField] private Image _itemImage;
+        [SerializeField] private Sprite _emptySprite;
 
         public static Action<string, int> OnInventoryButtonClicked;
 
         private string _itemId;
+        private IItemService _itemService;
 
         private void Awake()
         {
             _textTitle.text = "";
             _textAmount.text = "";
             _itemId = "";
+            _itemService = AllServices.Container.Single<IItemService>();
         }
 
         public string Title
@@ -38,7 +43,10 @@ namespace Inventory
             get => _itemImage.sprite;
             set
             {
-                _itemImage.sprite = value;
+                Debug.Log(value);
+                if (_itemId != null && _itemId != "")
+                    _itemImage.sprite = value;
+                else _itemImage.sprite = _emptySprite;
             }
         }
 
@@ -48,12 +56,17 @@ namespace Inventory
             set 
             { 
                 _itemId = value;
+                Debug.Log(_itemId);
+                if (_itemId != null && _itemId != "")
+                    _itemImage.sprite = _itemService.GetItemInfo(value).Icon;
+                else _itemImage.sprite = _emptySprite;
             }
         }
 
         public void OnInventoryButtonClick()
         {
-            if (_itemId != null) OnInventoryButtonClicked?.Invoke(_itemId, Convert.ToInt32(_textAmount.text));
+            if (_itemId != null && _itemId != "") 
+                OnInventoryButtonClicked?.Invoke(_itemId, Convert.ToInt32(_textAmount.text));
         }
     }
 }

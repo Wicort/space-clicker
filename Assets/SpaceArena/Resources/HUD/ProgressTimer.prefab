@@ -228,10 +228,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Progress: {fileID: 3368647197762463406}
+  ProgressBarImage: {fileID: 3368675589088188776}
   MaxActiveTime: 5
   CoolDown: 10
+  ReadyColor: {r: 0.26666668, g: 0.7176471, b: 0.2901961, a: 1}
+  ActiveColor: {r: 0.9535954, g: 0.9622642, b: 0.35857958, a: 1}
+  CoolDownColor: {r: 0.6886792, g: 0.30210927, b: 0.30210927, a: 1}
   StartTimerButton: {fileID: 3881817013588549299}
-  _currentCoolDown: 0
+  rewardID: 
   onActivate:
     m_PersistentCalls:
       m_Calls: []
@@ -299,6 +303,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114827051713809814, guid: 3e86700be571c71468308b117b38eed2,
+        type: 3}
+      propertyPath: overrideColors
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224023169610821218, guid: 3e86700be571c71468308b117b38eed2,
         type: 3}
@@ -421,5 +430,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20c6dbf0102c7bc468113ccdd97dad83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3368675589088188776 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114293106415522588, guid: 3e86700be571c71468308b117b38eed2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3398524883662916212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
