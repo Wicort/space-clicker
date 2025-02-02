@@ -1,3 +1,4 @@
+using Assets.SpaceArena.Scripts.Infrastructure.Localization;
 using DamageNumbersPro;
 using Services;
 using System;
@@ -38,6 +39,7 @@ public class EnemyHandler : MonoBehaviour
     private EnemyData _enemyData;
     private float _currentBossTime;
     private ISaveSystem _saveSystem;
+    private ILocalizationService _localizationService;
 
     public static Action<EnemyData, float> OnEnemyKilled;
     
@@ -63,6 +65,7 @@ public class EnemyHandler : MonoBehaviour
     private void Init(GameData gameData)
     {
         _saveSystem = AllServices.Container.Single<ISaveSystem>();
+        _localizationService = AllServices.Container.Single<ILocalizationService>();
         _gameData = gameData;
         GetNextEnemyData();
         _bosRushButton.gameObject.SetActive(_gameData.IsBossFailed && !_enemyData.IsBoss);
@@ -189,8 +192,8 @@ public class EnemyHandler : MonoBehaviour
 
     private void ShowLevelInfo()
     {
-        string bossAlert = _enemyData.IsBoss ? " *BOSS*" : "";
-        _enemyLevelText.text = $"Lvl {_gameData.Level}{bossAlert}";
+        string bossAlert = _enemyData.IsBoss ? $" *{_localizationService.GetUIByKey("BOSS")}*" : "";
+        _enemyLevelText.text = $"{_localizationService.GetUIByKey("Lvl")}. {_gameData.Level}{bossAlert}";
     }
 
     private void ShowNewEnemy()
@@ -220,7 +223,7 @@ public class EnemyHandler : MonoBehaviour
         _healthBarSlider.value = _enemyCurrentHealth / _enemyMaxHealth;
         if (_isDead)
         {
-            _healthBarText.text = "Dead";
+            _healthBarText.text = _localizationService.GetUIByKey("Dead");
         }
         else
         {

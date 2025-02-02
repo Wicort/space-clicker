@@ -1,4 +1,5 @@
 using Assets.Services;
+using Assets.SpaceArena.Scripts.Infrastructure.Localization;
 using DamageNumbersPro;
 using Inventory;
 using Items;
@@ -16,6 +17,7 @@ public class DropHandler : MonoBehaviour
 
     private IItemService _itemService;
     private IInventoryService _inventoryService;
+    private ILocalizationService _localizationService;
 
     public static Action<Item> OnItemDropped;
 
@@ -23,6 +25,11 @@ public class DropHandler : MonoBehaviour
     {
         EnemyHandler.OnEnemyKilled += GetDrop;
         OfflineReward.OnRewardedItemGetted += GetDrop;
+    }
+
+    private void OnDisable()
+    {
+        EnemyHandler.OnEnemyKilled -= GetDrop;
     }
 
     private void GetDrop(Item item)
@@ -43,15 +50,11 @@ public class DropHandler : MonoBehaviour
 
         var dropText = dropDNPrefab.Spawn(Vector3.zero +
             new Vector3(2, -4, 0),
-            $"{item.Name} added");
+            $"{item.Name} {_localizationService.GetUIByKey("added")}");
         dropText.SetColor(dropColor);
         dropText.UpdateText();
     }
 
-    private void OnDisable()
-    {
-        EnemyHandler.OnEnemyKilled -= GetDrop;
-    }
 
     private void GetDrop(EnemyData enemy, float coeff = 1)
     {
@@ -68,6 +71,7 @@ public class DropHandler : MonoBehaviour
 
         _itemService = AllServices.Container.Single<IItemService>();
         _inventoryService = AllServices.Container.Single<IInventoryService>();
+        _localizationService = AllServices.Container.Single<ILocalizationService>();
 
         bool isBoss = (enemyLevel > 0 && enemyLevel % 10 == 0);
 

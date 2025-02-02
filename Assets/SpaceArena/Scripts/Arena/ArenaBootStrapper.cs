@@ -2,6 +2,7 @@ using Assets.SaveSystem.Scripts;
 using Assets.Scripts.Arena.Character;
 using Assets.Scripts.Infrastructure.AssetManagement;
 using Assets.Services;
+using Assets.SpaceArena.Scripts.Infrastructure.Localization;
 using Cinemachine;
 using Inventory;
 using Services;
@@ -67,7 +68,10 @@ public class ArenaBootStrapper : MonoBehaviour
     }
     private void RegisterServices()
     {
-        _container.RegisterSingle<IItemService>(new ItemService());
+        ILocalizationService localizationService = new EnLocalizationService();
+
+        _container.RegisterSingle<ILocalizationService>(localizationService);
+        _container.RegisterSingle<IItemService>(new ItemService(localizationService));
         _container.RegisterSingle<IInventoryService>(new InventoryService());
         _container.RegisterSingle<IAssetProvider>(new AssetProvider());
         _container.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_container.Single<IInventoryService>(), _container.Single<IItemService>()));

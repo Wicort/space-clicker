@@ -19,7 +19,7 @@ public class Modules : MonoBehaviour
 
     private GameData _gameData;
     private List<UpgradeButton> _buttons;
-    private ItemService _itemService;
+    private IItemService _itemService;
 
     public static Action OnModuleUpgraded;
 
@@ -62,7 +62,7 @@ public class Modules : MonoBehaviour
     private void Init(GameData gameData)
     {
         _gameData = gameData;
-        _itemService = new ItemService();
+        _itemService = AllServices.Container.Single<IItemService>();
 
 
         if (_gameData.Modules == null || _gameData.Modules.Count == 0)

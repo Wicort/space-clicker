@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Infrastructure.AssetManagement;
+using Assets.SpaceArena.Scripts.Infrastructure.Localization;
 using Items;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,16 +9,19 @@ namespace Assets.Services
     public class ItemService : IItemService
     {
         private List<Item> _items;
+        private ILocalizationService _localizationService;
+
+        public ItemService(ILocalizationService localizationService)
+        {
+            _localizationService = localizationService;
+            SetItemsList();
+        }
+
         public Item GetItemInfo(string itemId)
         {
             return _items.Find(item => item.Id == itemId);
         }
-
-        public ItemService()
-        {
-            SetTestItemsList();
-        }
-
+        
         public Item GetCommonItemByType(ItemType moduleItemType)
         {
             return _items.Find(item => item.ItemType == moduleItemType);
@@ -37,15 +41,15 @@ namespace Assets.Services
             return rarityItems[index];
         }
 
-        public void SetTestItemsList()
+        public void SetItemsList()
         {
             _items = new List<Item>();
             //Common
             Item item = new Item(
                 "CommonGun",
-                "Common Gun",
+                _localizationService.GetItemName("CommonGun"),
                 ItemType.GUN,
-                "Description for Common Gun",
+                _localizationService.GetItemDescription("CommonGun"),
                 Resources.Load<Sprite>(AssetPath.CommonGunPath),
                 ItemRarity.COMMON,
                 1
@@ -54,9 +58,9 @@ namespace Assets.Services
 
             item = new Item(
                 "CommonDrone",
-                "Common Drone",
+                _localizationService.GetItemName("CommonDrone"),
                 ItemType.DRONE,
-                "Description for Common Drone",
+                _localizationService.GetItemDescription("CommonDrone"),
                 Resources.Load<Sprite>(AssetPath.CommonDronePath),
                 ItemRarity.COMMON,
                 1
@@ -65,9 +69,9 @@ namespace Assets.Services
 
             item = new Item(
                 "CommonTouret",
-                "Common Touret",
+                _localizationService.GetItemName("CommonTouret"),
                 ItemType.TOURET,
-                "Description for Common Touret",
+                _localizationService.GetItemDescription("CommonTouret"),
                 Resources.Load<Sprite>(AssetPath.CommonTouretPath),
                 ItemRarity.COMMON,
                 10
@@ -77,9 +81,9 @@ namespace Assets.Services
             //UNCOMMON
             item = new Item(
                 "UNCOMMONGun",
-                "UNCOMMON Gun",
+                _localizationService.GetItemName("UNCOMMONGun"),
                 ItemType.GUN,
-                "Description for UNCOMMON Gun",
+                _localizationService.GetItemDescription("UNCOMMONGun"),
                 Resources.Load<Sprite>(AssetPath.UncommonGunPath),
                 ItemRarity.UNCOMMON,
                 2
@@ -88,9 +92,9 @@ namespace Assets.Services
 
             item = new Item(
                 "UNCOMMONDrone",
-                "UNCOMMON Drone",
+                _localizationService.GetItemName("UNCOMMONDrone"),
                 ItemType.DRONE,
-                "Description for UNCOMMON Drone",
+                _localizationService.GetItemDescription("UNCOMMONDrone"),
                 Resources.Load<Sprite>(AssetPath.UncommonDronePath),
                 ItemRarity.UNCOMMON,
                 2
@@ -99,9 +103,9 @@ namespace Assets.Services
 
             item = new Item(
                 "UNCOMMONTouret",
-                "UNCOMMON Touret",
+                _localizationService.GetItemName("UNCOMMONTouret"),
                 ItemType.TOURET,
-                "Description for UNCOMMON Touret",
+                _localizationService.GetItemDescription("UNCOMMONTouret"),
                 Resources.Load<Sprite>(AssetPath.UncommonTouretPath),
                 ItemRarity.UNCOMMON,
                 20
@@ -111,9 +115,9 @@ namespace Assets.Services
             //RARE
             item = new Item(
                 "RAREGun",
-                "RARE Gun",
+                _localizationService.GetItemName("RAREGun"),
                 ItemType.GUN,
-                "Description for RARE Gun",
+                _localizationService.GetItemDescription("RAREGun"),
                 Resources.Load<Sprite>(AssetPath.RareGunPath),
                 ItemRarity.RARE,
                 5
@@ -122,9 +126,9 @@ namespace Assets.Services
 
             item = new Item(
                 "RAREDrone",
-                "RARE Drone",
+                _localizationService.GetItemName("RAREDrone"),
                 ItemType.DRONE,
-                "Description for RARE Drone",
+                _localizationService.GetItemDescription("RAREDrone"),
                 Resources.Load<Sprite>(AssetPath.RareDronePath),
                 ItemRarity.RARE,
                 5
@@ -133,9 +137,9 @@ namespace Assets.Services
 
             item = new Item(
                 "RARETouret",
-                "RARE Touret",
+                _localizationService.GetItemName("RARETouret"),
                 ItemType.TOURET,
-                "Description for RARE Touret",
+                _localizationService.GetItemDescription("RARETouret"),
                 Resources.Load<Sprite>(AssetPath.RareTouretPath),
                 ItemRarity.RARE,
                 50
@@ -145,9 +149,9 @@ namespace Assets.Services
             //EPIC
             item = new Item(
                 "EPICGun",
-                "EPIC Gun",
+                _localizationService.GetItemName("EPICGun"),
                 ItemType.GUN,
-                "Description for EPIC Gun",
+                _localizationService.GetItemDescription("EPICGun"),
                 Resources.Load<Sprite>(AssetPath.EpicGunPath),
                 ItemRarity.EPIC,
                 10
@@ -156,9 +160,9 @@ namespace Assets.Services
 
             item = new Item(
                 "EPICDrone",
-                "EPIC Drone",
+                _localizationService.GetItemName("EPICDrone"),
                 ItemType.DRONE,
-                "Description for EPIC Drone",
+                _localizationService.GetItemDescription("EPICDrone"),
                 Resources.Load<Sprite>(AssetPath.EpicDronePath),
                 ItemRarity.EPIC,
                 10
@@ -167,9 +171,9 @@ namespace Assets.Services
 
             item = new Item(
                 "EPICTouret",
-                "EPIC Touret",
+                _localizationService.GetItemName("EPICTouret"),
                 ItemType.TOURET,
-                "Description for EPIC Touret",
+                _localizationService.GetItemDescription("EPICTouret"),
                 Resources.Load<Sprite>(AssetPath.EpicTouretPath),
                 ItemRarity.EPIC,
                 100
@@ -179,9 +183,9 @@ namespace Assets.Services
             //LEGENDARY
             item = new Item(
                 "LEGENDARYGun",
-                "LEGENDARY Gun",
+                _localizationService.GetItemName("LEGENDARYGun"),
                 ItemType.GUN,
-                "Description for LEGENDARY Gun",
+                _localizationService.GetItemDescription("LEGENDARYGun"),
                 Resources.Load<Sprite>(AssetPath.LegGunPath),
                 ItemRarity.LEGENDARY,
                 15
@@ -190,9 +194,9 @@ namespace Assets.Services
 
             item = new Item(
                 "LEGENDARYDrone",
-                "LEGENDARY Drone",
+                _localizationService.GetItemName("LEGENDARYDrone"),
                 ItemType.DRONE,
-                "Description for LEGENDARY Drone",
+                _localizationService.GetItemDescription("LEGENDARYDrone"),
                 Resources.Load<Sprite>(AssetPath.LegDronePath),
                 ItemRarity.LEGENDARY,
                 15
@@ -201,9 +205,9 @@ namespace Assets.Services
 
             item = new Item(
                 "LEGENDARYTouret",
-                "LEGENDARY Touret",
+                _localizationService.GetItemName("LEGENDARYTouret"),
                 ItemType.TOURET,
-                "Description for LEGENDARY Touret",
+                _localizationService.GetItemDescription("LEGENDARYTouret"),
                 Resources.Load<Sprite>(AssetPath.LegTouretPath),
                 ItemRarity.LEGENDARY,
                 150
@@ -213,9 +217,9 @@ namespace Assets.Services
             //MYPHICAL
             item = new Item(
                 "MYTHICALGun",
-                "MYTHICAL Gun",
+                _localizationService.GetItemName("MYTHICALGun"),
                 ItemType.GUN,
-                "Description for MYTHICAL Gun",
+                _localizationService.GetItemDescription("MYTHICALGun"),
                 Resources.Load<Sprite>(AssetPath.MythGunPath),
                 ItemRarity.MYTHICAL,
                 20
@@ -224,9 +228,9 @@ namespace Assets.Services
 
             item = new Item(
                 "MYTHICALDrone",
-                "MYTHICAL Drone",
+                _localizationService.GetItemName("MYTHICALDrone"),
                 ItemType.DRONE,
-                "Description for MYTHICAL Drone",
+                _localizationService.GetItemDescription("MYTHICALDrone"),
                 Resources.Load<Sprite>(AssetPath.MythDronePath),
                 ItemRarity.MYTHICAL,
                 20
@@ -235,9 +239,9 @@ namespace Assets.Services
 
             item = new Item(
                 "MYTHICALTouret",
-                "MYTHICAL Touret",
+                _localizationService.GetItemName("MYTHICALTouret"),
                 ItemType.TOURET,
-                "Description for MYTHICAL Touret",
+                _localizationService.GetItemDescription("MYTHICALTouret"),
                 Resources.Load<Sprite>(AssetPath.MythTouretPath),
                 ItemRarity.MYTHICAL,
                 200

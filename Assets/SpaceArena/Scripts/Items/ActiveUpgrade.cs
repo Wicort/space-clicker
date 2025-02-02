@@ -17,6 +17,8 @@ namespace Items
         public int CurrentLevel => _currentLevel;
         public float CurrentPrice => _currentPrice;
 
+        public static Action OnFirstDroneUpgrade;
+
         public void SetCurrentPrice(float value)
         {
             _currentPrice = value;
@@ -24,6 +26,9 @@ namespace Items
 
         public void UpgradeLevel(int count = 1)
         {
+            if (_module.ModuleItemType == ItemType.DRONE && _currentLevel == 0 && count > 0)
+                OnFirstDroneUpgrade?.Invoke();
+
             _currentLevel += count;
         }
 

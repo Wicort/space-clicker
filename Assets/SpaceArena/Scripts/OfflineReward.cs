@@ -68,7 +68,7 @@ public class OfflineReward : MonoBehaviour
         Debug.Log($"TimeSpanRestriction: {TimeSpanRestriction}");
         Debug.Log($"delta: {delta}");
         Debug.Log($"currentTime - lastTime: {(currentTime - lastTime).TotalSeconds}");
-        float timeToKillEnemy = Mathf.Max(5f, enemyHealth / damage);
+        float timeToKillEnemy = Mathf.Max(10f, enemyHealth / damage);
         offlineEnemyKilled = delta / timeToKillEnemy;
         
         return offlineEnemyKilled / 2f;
@@ -89,7 +89,7 @@ public class OfflineReward : MonoBehaviour
         YG2.RewardedAdvShow("DoubleReward", () =>
         {
             DropHandler.OnItemDropped -= SetItemReward;
-            Debug.Log("X2 getted");
+            
             OnRewardedCurrencyGetted?.Invoke(RewardedCurrency);
 
             foreach (Item item in RewardedItemsList)

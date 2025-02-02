@@ -57,7 +57,7 @@ namespace Inventory
             { 
                 _itemId = value;
                 Debug.Log(_itemId);
-                if (_itemId != null && _itemId != "")
+                if (_itemId != null && _itemId != "" && _itemService != null)
                     _itemImage.sprite = _itemService.GetItemInfo(value).Icon;
                 else _itemImage.sprite = _emptySprite;
             }

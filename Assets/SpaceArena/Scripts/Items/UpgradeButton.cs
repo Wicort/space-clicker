@@ -1,3 +1,5 @@
+using Assets.SpaceArena.Scripts.Infrastructure.Localization;
+using Services;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,8 +23,9 @@ namespace Items
         [SerializeField]
         private Button _upgradeButton;
 
-        public int Id => _id;
+        private ILocalizationService _localizationService;
 
+        public int Id => _id;
 
         public static Action<int> OnModuleUpgraded;
 
@@ -34,6 +37,8 @@ namespace Items
             int level,
             bool isBtnEnabled)
         {
+            _localizationService = AllServices.Container.Single<ILocalizationService>();
+
             _id = id;
             _icon.sprite = icon;
             _name.text = name;
@@ -59,7 +64,7 @@ namespace Items
             _name.text = name;
             _description.text = description;
             _price.text = $"${ShortScaleString.parseDouble(price,1, 1000, true)}";
-            _level.text = $"Lvl. {level}";
+            _level.text = $"{_localizationService.GetUIByKey("Lvl")}. {level}";
             SetInterractable(isBtnEnabled);
         }
     }

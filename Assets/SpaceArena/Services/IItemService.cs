@@ -9,6 +9,6 @@ namespace Assets.Services
         Item GetItemInfo(string itemId);
         Item GetRandomItemByRarity(ItemRarity rarity);
         Item GetItemByTypeAndRariry(ItemType moduleItemType, ItemRarity rarity);
-        void SetTestItemsList();
+        void SetItemsList();
     }
 }

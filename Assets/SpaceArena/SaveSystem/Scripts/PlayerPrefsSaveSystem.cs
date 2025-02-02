@@ -3,6 +3,7 @@ using Inventory;
 using Items;
 using System;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Assets.SaveSystem.Scripts
 {
@@ -37,6 +38,9 @@ namespace Assets.SaveSystem.Scripts
             gameData.Module1Rarity = PlayerPrefs.HasKey("Module1Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module1Rarity")) : ItemRarity.COMMON;
             gameData.Module2Rarity = PlayerPrefs.HasKey("Module2Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module2Rarity")) : ItemRarity.COMMON;
 
+            gameData.DroneIsReady = LoadBool("DroneIsReady");
+            Debug.Log($"gameData.DroneIsReady = {gameData.DroneIsReady}");
+
             var size = _inventory.GetInventory("Player").Size;
             for (var x = 0; x < size.x; x++)
             {
@@ -58,30 +62,32 @@ namespace Assets.SaveSystem.Scripts
 
         }
 
-        public void Save(GameData data)
+        public void Save(GameData gameData)
         {
             PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
 
-            PlayerPrefs.SetInt(LEVEL, data.Level - 1);
-            if (data.Level % 10 == 0)
+            PlayerPrefs.SetInt(LEVEL, gameData.Level - 1);
+            if (gameData.Level % 10 == 0)
             {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
             }
             else
             {   
-                PlayerPrefs.SetInt(IS_BOSS_FAILED, data.IsBossFailed ? 1 : 0);
+                PlayerPrefs.SetInt(IS_BOSS_FAILED, gameData.IsBossFailed ? 1 : 0);
             }
-            PlayerPrefs.SetFloat(CURRENCY, data.Currency);
+            PlayerPrefs.SetFloat(CURRENCY, gameData.Currency);
 
-            if (data.Modules == null) return;
+            if (gameData.Modules == null) return;
 
             int i = 0;
-            foreach(ActiveUpgrade upg in data.Modules)
+            foreach(ActiveUpgrade upg in gameData.Modules)
             {
                 PlayerPrefs.SetInt("Module" + i + "Lvl", upg.CurrentLevel);
                 PlayerPrefs.SetString("Module" + i + "Rarity", upg.GetModule().GetRarity().ToString());
                 i++;
             }
+            PlayerPrefs.SetInt("DroneIsReady", gameData.DroneIsReady ? 1 : 0);
+            Debug.Log($"gameData.DroneIsReady = {gameData.DroneIsReady}");
 
             if (_inventory != null)
             {
@@ -124,6 +130,12 @@ namespace Assets.SaveSystem.Scripts
             if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetInt(key, 0);
 
             return 0;
+        }
+
+        private bool LoadBool(string key)
+        {
+            int val = LoadInt(key);
+            return val == 0 ? false : true;
         }
 
         private float LoadFloat(string key)

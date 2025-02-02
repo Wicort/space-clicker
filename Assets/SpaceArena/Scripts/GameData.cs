@@ -22,6 +22,7 @@ public class GameData
     public float Currency => _currency;
     
     public List<ActiveUpgrade> Modules;
+    public bool DroneIsReady;
 
     public bool IsBossFailed => _isBossFailed;
     public GameData()
