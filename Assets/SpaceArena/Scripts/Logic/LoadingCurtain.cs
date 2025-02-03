@@ -26,8 +26,8 @@ public class LoadingCurtain : MonoBehaviour
     {
         while (Curtain.alpha > 0)
         {
-            Curtain.alpha -= 0.03f;
-            yield return new WaitForSeconds(0.03f);
+            Curtain.alpha -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
         }
 
         gameObject.SetActive(false);

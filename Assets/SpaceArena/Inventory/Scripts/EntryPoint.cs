@@ -36,5 +36,11 @@ namespace Inventory
                 _screenView.gameObject.SetActive(!_screenView.gameObject.activeInHierarchy);
             }
         }
+
+        public void OpenInventory()
+        {
+            _screenView.gameObject.SetActive(true);
+            Debug.Log("Inventory is opened");
+        }
     }
 }

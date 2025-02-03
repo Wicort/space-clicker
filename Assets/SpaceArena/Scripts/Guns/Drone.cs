@@ -7,7 +7,9 @@ using UnityEngine.Playables;
 
 public class Drone : MonoBehaviour
 {
-    public GameObject droneObject;
+    [SerializeField] private GameObject droneObject;
+    [SerializeField] private Transform _firePoint;
+    [SerializeField] private Bullet _bulletPrefab;
 
     private ISaveSystem _saveSystem;
     private GameData _gameData;
@@ -21,7 +23,11 @@ public class Drone : MonoBehaviour
     {
         ClickerBootstrapper.OnGameLoaded += Initialize;
     }
-    
+    private void OnDisable()
+    {
+        ClickerBootstrapper.OnGameLoaded -= Initialize;
+        Clicker.OnAutoclick -= Attack;
+    }
 
     private void Initialize(GameData gameData)
     {
@@ -29,6 +35,7 @@ public class Drone : MonoBehaviour
         if (_gameData.DroneIsReady)
         {
             droneObject.SetActive(true);
+            Clicker.OnAutoclick += Attack;
         } else
         {
             droneObject.SetActive(false);
@@ -40,7 +47,14 @@ public class Drone : MonoBehaviour
     {
         droneObject.SetActive(true);
         ActiveUpgrade.OnFirstDroneUpgrade -= ShowDrone;
+        Clicker.OnAutoclick += Attack;
         _gameData.DroneIsReady = true;
         _saveSystem.Save(_gameData);
+    }
+
+    private void Attack(Vector3 targetPosition)
+    {
+        Bullet bullet = Instantiate(_bulletPrefab, transform);
+        bullet.Init(targetPosition);
     }
 }

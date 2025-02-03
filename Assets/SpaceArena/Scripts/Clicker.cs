@@ -21,6 +21,7 @@ public class Clicker : MonoBehaviour
 
     public static Action<float> OnEnemyAttacked;
     public static Action<Vector3> OnPlayerClick;
+    public static Action<Vector3> OnAutoclick;
     public static Action OnArenaButtonClicked;
 
     private void OnEnable()
@@ -59,6 +60,7 @@ public class Clicker : MonoBehaviour
     public void OnAutoClick()
     {
         OnEnemyAttacked?.Invoke(GetAutoClickDamage());
+        OnAutoclick?.Invoke(_enemyHandler.GetEnemyPosition());
     }
 
     private void Start()
