@@ -4,8 +4,7 @@ using Assets.Services;
 using Assets.SpaceArena.Scripts.Infrastructure.Localization;
 using Inventory;
 using Services;
-using System;
-using UnityEngine;
+using YG;
 
 namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
 {
@@ -43,7 +42,13 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
 
         private void RegisterServices()
         {
-            ILocalizationService localizationService = new RuLocalizationService();
+            ILocalizationService localizationService;
+            //YG2.SwitchLanguage("en");
+
+            if (YG2.lang == "ru")
+                localizationService = new RuLocalizationService();
+            else
+                localizationService = new EnLocalizationService();
 
             _services.RegisterSingle<ILocalizationService>(localizationService);
             _services.RegisterSingle<IItemService>(new ItemService(localizationService));

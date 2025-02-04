@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.SpaceArena.Scripts.Infrastructure.Localization;
+using Services;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Inventory
@@ -6,9 +8,11 @@ namespace Inventory
     public class InventoryService : IInventoryService
     {
         public readonly Dictionary<string, InventoryGrid> _inventoriesMap = new();
+        private ILocalizationService _localizationService;
 
         public InventoryService() 
         {
+            _localizationService = AllServices.Container.Single<ILocalizationService>();
             var inventoryDataPlayer = CreatePlayerInventory("Player");
             RegisterInventory(inventoryDataPlayer);
         }

@@ -53,6 +53,7 @@ namespace Assets.SpaceArena.Scripts.Infrastructure.Localization
             {"Loading...", "Загрузка..." },
             {"added", "на борту" },
             {"Dead", "Мертв" },
+            {"Inventory", "Инвентарь" },
         };
 
         public string GetItemName(string itemId)
