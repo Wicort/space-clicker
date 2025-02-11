@@ -65,6 +65,8 @@ namespace Inventory
 
         public void OnInventoryButtonClick()
         {
+            Sound.instance.PlayButtonClick();
+
             if (_itemId != null && _itemId != "") 
                 OnInventoryButtonClicked?.Invoke(_itemId, Convert.ToInt32(_textAmount.text));
         }

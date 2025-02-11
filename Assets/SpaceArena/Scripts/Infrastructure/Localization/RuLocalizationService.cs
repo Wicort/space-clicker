@@ -54,6 +54,9 @@ namespace Assets.SpaceArena.Scripts.Infrastructure.Localization
             {"added", "на борту" },
             {"Dead", "Мертв" },
             {"Inventory", "Инвентарь" },
+            {"Space Arena", "Космическая арена" },
+            {"Sounds", "Звуки" },
+            {"Music", "Музыка" },
         };
 
         public string GetItemName(string itemId)

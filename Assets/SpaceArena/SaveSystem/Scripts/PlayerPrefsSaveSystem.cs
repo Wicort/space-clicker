@@ -1,9 +1,9 @@
 ﻿using Assets.Services;
+using Assets.SpaceArena.SaveSystem.Scripts;
 using Inventory;
 using Items;
 using System;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace Assets.SaveSystem.Scripts
 {
@@ -12,8 +12,11 @@ namespace Assets.SaveSystem.Scripts
         private const string IS_BOSS_FAILED = "IsBossFailed";
         private const string LEVEL = "Level";
         private const string CURRENCY = "Currency";
+        private const string IS_SOUNDS_OFF = "IsSoundsOff";
+        private const string IS_MUSIC_OFF = "IsMusidOff";
         private IInventoryService _inventory;
         private IItemService _itemService;
+        private GameData _gameData;
 
         public PlayerPrefsSaveSystem (IInventoryService inventory, IItemService itemService)
         {
@@ -21,25 +24,30 @@ namespace Assets.SaveSystem.Scripts
             _itemService = itemService;
         }
 
-        public GameData Load()
+        public GameData LoadGame()
         {
-            GameData gameData = new GameData();
+            _gameData = new GameData();
 
-            gameData.SetIsBossFailed(LoadInt(IS_BOSS_FAILED) == 1);
-            gameData.SetLevel(LoadInt(LEVEL));
-            gameData.AddCurrency(LoadFloat(CURRENCY));
+            if (_gameData.Settings == null)
+                _gameData.Settings = new SettingsData();
 
-            gameData.Module0Lvl = LoadInt("Module0Lvl");
-            if (gameData.Module0Lvl == 0) gameData.Module0Lvl = 1;
-            gameData.Module1Lvl = LoadInt("Module1Lvl");
-            gameData.Module2Lvl = LoadInt("Module2Lvl");
+            _gameData.Settings.IsSoundMute = LoadBool(IS_SOUNDS_OFF);
+            _gameData.Settings.IsMusicMute = LoadBool(IS_MUSIC_OFF);
 
-            gameData.Module0Rarity = PlayerPrefs.HasKey("Module0Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module0Rarity")) : ItemRarity.COMMON;
-            gameData.Module1Rarity = PlayerPrefs.HasKey("Module1Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module1Rarity")) : ItemRarity.COMMON;
-            gameData.Module2Rarity = PlayerPrefs.HasKey("Module2Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module2Rarity")) : ItemRarity.COMMON;
+            _gameData.SetIsBossFailed(LoadInt(IS_BOSS_FAILED) == 1);
+            _gameData.SetLevel(LoadInt(LEVEL));
+            _gameData.AddCurrency(LoadFloat(CURRENCY));
 
-            gameData.DroneIsReady = LoadBool("DroneIsReady");
-            Debug.Log($"gameData.DroneIsReady = {gameData.DroneIsReady}");
+            _gameData.Module0Lvl = LoadInt("Module0Lvl");
+            if (_gameData.Module0Lvl == 0) _gameData.Module0Lvl = 1;
+            _gameData.Module1Lvl = LoadInt("Module1Lvl");
+            _gameData.Module2Lvl = LoadInt("Module2Lvl");
+
+            _gameData.Module0Rarity = PlayerPrefs.HasKey("Module0Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module0Rarity")) : ItemRarity.COMMON;
+            _gameData.Module1Rarity = PlayerPrefs.HasKey("Module1Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module1Rarity")) : ItemRarity.COMMON;
+            _gameData.Module2Rarity = PlayerPrefs.HasKey("Module2Rarity") ? Enum.Parse<ItemRarity>(LoadString("Module2Rarity")) : ItemRarity.COMMON;
+
+            _gameData.DroneIsReady = LoadBool("DroneIsReady");
 
             var size = _inventory.GetInventory("Player").Size;
             for (var x = 0; x < size.x; x++)
@@ -56,38 +64,41 @@ namespace Assets.SaveSystem.Scripts
             }
             string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.UtcNow.ToString());
             if (lastPlayedTimeString != null)
-                gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
+                _gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
 
-            return gameData;
+            return _gameData;
 
         }
 
-        public void Save(GameData gameData)
+        public void SaveGame()
         {
             PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
 
-            PlayerPrefs.SetInt(LEVEL, gameData.Level - 1);
-            if (gameData.Level % 10 == 0)
+            PlayerPrefs.SetInt(IS_SOUNDS_OFF, _gameData.Settings.IsSoundMute ? 1 : 0);
+            PlayerPrefs.SetInt(IS_MUSIC_OFF, _gameData.Settings.IsMusicMute ? 1 : 0);
+
+            PlayerPrefs.SetInt(LEVEL, _gameData.Level - 1);
+            if (_gameData.Level % 10 == 0)
             {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
             }
             else
             {   
-                PlayerPrefs.SetInt(IS_BOSS_FAILED, gameData.IsBossFailed ? 1 : 0);
+                PlayerPrefs.SetInt(IS_BOSS_FAILED, _gameData.IsBossFailed ? 1 : 0);
             }
-            PlayerPrefs.SetFloat(CURRENCY, gameData.Currency);
+            PlayerPrefs.SetFloat(CURRENCY, _gameData.Currency);
 
-            if (gameData.Modules == null) return;
+            if (_gameData.Modules == null) return;
 
             int i = 0;
-            foreach(ActiveUpgrade upg in gameData.Modules)
+            foreach(ActiveUpgrade upg in _gameData.Modules)
             {
                 PlayerPrefs.SetInt("Module" + i + "Lvl", upg.CurrentLevel);
                 PlayerPrefs.SetString("Module" + i + "Rarity", upg.GetModule().GetRarity().ToString());
                 i++;
             }
-            PlayerPrefs.SetInt("DroneIsReady", gameData.DroneIsReady ? 1 : 0);
-            Debug.Log($"gameData.DroneIsReady = {gameData.DroneIsReady}");
+            PlayerPrefs.SetInt("DroneIsReady", _gameData.DroneIsReady ? 1 : 0);
+            Debug.Log($"gameData.DroneIsReady = {_gameData.DroneIsReady}");
 
             if (_inventory != null)
             {
@@ -145,6 +156,12 @@ namespace Assets.SaveSystem.Scripts
             if (PlayerPrefs.HasKey(key)) return PlayerPrefs.GetFloat(key, 0f);
 
             return 0f;
+        }
+
+        public void SaveSettings(SettingsData data)
+        {
+            _gameData.Settings = data;
+            SaveGame();
         }
     }
 }

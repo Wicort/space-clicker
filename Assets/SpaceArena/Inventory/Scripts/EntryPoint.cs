@@ -39,6 +39,7 @@ namespace Inventory
 
         public void OpenInventory()
         {
+            Sound.instance.PlayButtonClick();
             _screenView.gameObject.SetActive(true);
             Debug.Log("Inventory is opened");
         }

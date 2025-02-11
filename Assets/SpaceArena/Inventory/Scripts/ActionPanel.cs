@@ -45,6 +45,8 @@ public class ActionPanel : MonoBehaviour
     {
         if (_itemId == null || _itemId == "") return;
 
+        Sound.instance.PlayInspectClick();
+
         OnEquipButtonClicked?.Invoke(_itemId);
         _itemId = null;
         OnCloseButtonClick();
@@ -52,12 +54,16 @@ public class ActionPanel : MonoBehaviour
 
     public void OnCloseButtonClick()
     {
+        Sound.instance.PlayButtonClick();
+
         gameObject.SetActive(false);
     }
 
     public void OnUseUpgradeButtonClick()
     {
         if (_itemId == null || _itemId == "") return;
+
+        Sound.instance.PlayInspectClick();
 
         OnUseUpgradeButtonClicked?.Invoke(_itemId, _itemsCount);
         _itemId = null;

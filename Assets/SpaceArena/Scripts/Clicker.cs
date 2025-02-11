@@ -23,6 +23,7 @@ public class Clicker : MonoBehaviour
     public static Action<Vector3> OnPlayerClick;
     public static Action<Vector3> OnAutoclick;
     public static Action OnArenaButtonClicked;
+    public static Action OnMenuButtonClicked;
 
     private void OnEnable()
     {
@@ -40,6 +41,11 @@ public class Clicker : MonoBehaviour
         AdsService.OnStopDoubleDamage -= SetSingleDamage;
     }
 
+    private void Start()
+    {
+        StartCoroutine(Autoclick());
+    }
+
     public void Init(GameData gameData)
     {
         _gameData = gameData;
@@ -55,6 +61,7 @@ public class Clicker : MonoBehaviour
     {
         OnEnemyAttacked?.Invoke(GetClickDamage());
         OnPlayerClick?.Invoke(_enemyHandler.GetEnemyPosition());
+        Sound.instance.PlayClickShot();
     }
 
     public void OnAutoClick()
@@ -63,9 +70,18 @@ public class Clicker : MonoBehaviour
         OnAutoclick?.Invoke(_enemyHandler.GetEnemyPosition());
     }
 
-    private void Start()
+    public float GetAllDamageInSecond()
     {
-        StartCoroutine(Autoclick());
+        return _autoClickDamage + _clickDamage;
+    }
+
+    public void OnArenaButtonClick()
+    {
+        OnArenaButtonClicked?.Invoke();
+    }
+    public void OnMenuButtonClick()
+    {
+        OnMenuButtonClicked?.Invoke();
     }
 
     private void SetDoubleDamage()
@@ -119,14 +135,5 @@ public class Clicker : MonoBehaviour
             }
         }
         //_clickDamage = 500000f;
-    }
-    public float GetAllDamageInSecond()
-    {
-        return _autoClickDamage + _clickDamage;
-    }
-
-    public void OnArenaButtonClick()
-    {
-        OnArenaButtonClicked?.Invoke();
     }
 }

@@ -10,6 +10,7 @@ namespace Inventory
 
         public void OnInventoryCloseButtonClick()
         {
+            Sound.instance.PlayButtonClick();
             gameObject.SetActive(false);
         }
 

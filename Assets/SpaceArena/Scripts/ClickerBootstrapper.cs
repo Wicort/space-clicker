@@ -13,25 +13,25 @@ public class ClickerBootstrapper : MonoBehaviour
     public static ClickerBootstrapper Instance;
     public GameData gameData;
 
-    private void Start()
+    private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+            //DontDestroyOnLoad(gameObject);
 
             Initialize();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     private void Initialize()
     {
         ISaveSystem saveSystem = _services.Single<ISaveSystem>();
-        gameData = saveSystem.Load();
+        gameData = saveSystem.LoadGame();
         OnGameLoaded?.Invoke(gameData);
     }
 }

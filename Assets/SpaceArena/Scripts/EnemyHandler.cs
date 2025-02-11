@@ -156,7 +156,7 @@ public class EnemyHandler : MonoBehaviour
         OnEnemyKilled?.Invoke(_enemyData, 1);
         GetNextEnemyData();
         yield return new WaitForSeconds(_timeForNewEnemy);
-        _saveSystem.Save(_gameData);
+        _saveSystem.SaveGame();
         RespawnEnemy();
     }
 
@@ -182,7 +182,7 @@ public class EnemyHandler : MonoBehaviour
             _currentBossTime = _maxBossTime;
             _bossTimeText.gameObject.SetActive(true);
         }
-        _saveSystem.Save(_gameData);
+        _saveSystem.SaveGame();
     }
 
     private void CalcEnemyParams()

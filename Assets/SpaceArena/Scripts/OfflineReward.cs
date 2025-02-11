@@ -76,6 +76,7 @@ public class OfflineReward : MonoBehaviour
 
     public void OnCloseBullonClick()
     {
+        Sound.instance.PlayButtonClick();
         gameObject.SetActive(false);
     }
 
@@ -86,6 +87,8 @@ public class OfflineReward : MonoBehaviour
 
     public void GetX2()
     {
+        Sound.instance.PlayButtonClick();
+
         YG2.RewardedAdvShow("DoubleReward", () =>
         {
             DropHandler.OnItemDropped -= SetItemReward;
@@ -106,7 +109,7 @@ public class OfflineReward : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         ISaveSystem saveSystem = AllServices.Container.Single<ISaveSystem>();
-        saveSystem.Save(_gameData);
+        saveSystem.SaveGame();
         OnCloseBullonClick();
     }
     

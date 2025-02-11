@@ -49,7 +49,7 @@ public class Drone : MonoBehaviour
         ActiveUpgrade.OnFirstDroneUpgrade -= ShowDrone;
         Clicker.OnAutoclick += Attack;
         _gameData.DroneIsReady = true;
-        _saveSystem.Save(_gameData);
+        _saveSystem.SaveGame();
     }
 
     private void Attack(Vector3 targetPosition)
