@@ -41,7 +41,6 @@ public class Sound : MonoBehaviour
     {
         _saveSystem = AllServices.Container.Single<ISaveSystem>();
 
-        Debug.Log($"_saveSystem = {_saveSystem}");
         _gameData = _saveSystem.LoadGame();
         _settings = _gameData.Settings;
     }

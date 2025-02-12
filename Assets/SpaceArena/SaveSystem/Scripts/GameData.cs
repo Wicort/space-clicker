@@ -55,7 +55,7 @@ public class GameData
     {
         _currency += value;
     }
-
+    
     public void SetIsBossFailed(bool value)
     {
         _isBossFailed = value;

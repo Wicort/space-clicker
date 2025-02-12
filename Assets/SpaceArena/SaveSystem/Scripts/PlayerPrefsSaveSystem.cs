@@ -1,11 +1,10 @@
 ﻿using Assets.Services;
-using Assets.SpaceArena.SaveSystem.Scripts;
 using Inventory;
 using Items;
 using System;
 using UnityEngine;
 
-namespace Assets.SaveSystem.Scripts
+namespace Assets.SpaceArena.SaveSystem.Scripts
 {
     public class PlayerPrefsSaveSystem : ISaveSystem
     {
@@ -18,7 +17,7 @@ namespace Assets.SaveSystem.Scripts
         private IItemService _itemService;
         private GameData _gameData;
 
-        public PlayerPrefsSaveSystem (IInventoryService inventory, IItemService itemService)
+        public PlayerPrefsSaveSystem(IInventoryService inventory, IItemService itemService)
         {
             _inventory = inventory;
             _itemService = itemService;
@@ -83,7 +82,7 @@ namespace Assets.SaveSystem.Scripts
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
             }
             else
-            {   
+            {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, _gameData.IsBossFailed ? 1 : 0);
             }
             PlayerPrefs.SetFloat(CURRENCY, _gameData.Currency);
@@ -91,24 +90,23 @@ namespace Assets.SaveSystem.Scripts
             if (_gameData.Modules == null) return;
 
             int i = 0;
-            foreach(ActiveUpgrade upg in _gameData.Modules)
+            foreach (ActiveUpgrade upg in _gameData.Modules)
             {
                 PlayerPrefs.SetInt("Module" + i + "Lvl", upg.CurrentLevel);
                 PlayerPrefs.SetString("Module" + i + "Rarity", upg.GetModule().GetRarity().ToString());
                 i++;
             }
             PlayerPrefs.SetInt("DroneIsReady", _gameData.DroneIsReady ? 1 : 0);
-            Debug.Log($"gameData.DroneIsReady = {_gameData.DroneIsReady}");
 
             if (_inventory != null)
             {
-                var size = _inventory.GetInventory("Player").Size;
-                var slots = _inventory.GetInventory("Player").GetSlots();
+                Vector2Int size = _inventory.GetInventory("Player").Size;
+                IReadOnlyInventorySlot[,] slots = _inventory.GetInventory("Player").GetSlots();
                 for (var x = 0; x < size.x; x++)
                 {
                     for (var y = 0; y < size.y; y++)
                     {
-                        var slot = slots[x, y];
+                        IReadOnlyInventorySlot slot = slots[x, y];
                         if (slot.ItemId != null)
                         {
                             var item = _itemService.GetItemInfo(slot.ItemId);

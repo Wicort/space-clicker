@@ -1,0 +1,26 @@
+{
+    "intExample": 5,
+    "strExample": "Hello!",
+    "boolExample": [
+        false,
+        false,
+        false,
+        false
+    ],
+    "idSave": 192,
+    "IsBossFailed": false,
+    "Level": 25,
+    "Currency": 1968.140869140625,
+    "Module0Lvl": 30,
+    "Module0Rarity": "EPIC",
+    "Module1Lvl": 25,
+    "Module1Rarity": "COMMON",
+    "Module2Lvl": 10,
+    "Module2Rarity": "COMMON",
+    "LastPlayedTime": "12.02.2025 13:48:52",
+    "Settings": {
+        "SoundVolume": 1.0,
+        "IsSoundMute": true,
+        "IsMusicMute": true
+    }
+}

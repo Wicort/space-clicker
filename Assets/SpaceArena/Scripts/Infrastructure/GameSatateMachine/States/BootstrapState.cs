@@ -1,10 +1,9 @@
-﻿using Assets.SaveSystem.Scripts;
-using Assets.Scripts.Infrastructure.AssetManagement;
+﻿using Assets.Scripts.Infrastructure.AssetManagement;
 using Assets.Services;
+using Assets.SpaceArena.SaveSystem.Scripts;
 using Assets.SpaceArena.Scripts.Infrastructure.Localization;
 using Inventory;
 using Services;
-using UnityEngine;
 using YG;
 
 namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
@@ -43,6 +42,8 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
 
         private void RegisterServices()
         {
+            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
+
             ILocalizationService localizationService;
             //YG2.SwitchLanguage("en");
 
@@ -51,13 +52,13 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
             else
                 localizationService = new EnLocalizationService();
 
-            Debug.Log("============= DI Container initialization");
-
             _services.RegisterSingle<ILocalizationService>(localizationService);
             _services.RegisterSingle<IItemService>(new ItemService(localizationService));
             _services.RegisterSingle<IInventoryService>(new InventoryService());
-            _services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
-            _services.RegisterSingle<IAssetProvider>(new AssetProvider());
+            
+            //_services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
+            _services.RegisterSingle<ISaveSystem>(new YandexCloudSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
+            
             
         }
     }
