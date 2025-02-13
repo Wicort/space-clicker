@@ -3,6 +3,7 @@ using Inventory;
 using Items;
 using System;
 using UnityEngine;
+using PlayerPrefs = RedefineYG.PlayerPrefs;
 
 namespace Assets.SpaceArena.SaveSystem.Scripts
 {
@@ -33,7 +34,8 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
             _gameData.Settings.IsSoundMute = LoadBool(IS_SOUNDS_OFF);
             _gameData.Settings.IsMusicMute = LoadBool(IS_MUSIC_OFF);
 
-            _gameData.SetIsBossFailed(LoadInt(IS_BOSS_FAILED) == 1);
+            //_gameData.SetIsBossFailed(LoadInt(IS_BOSS_FAILED) == 1);
+            _gameData.SetIsBossFailed(false);
             _gameData.SetLevel(LoadInt(LEVEL));
             _gameData.AddCurrency(LoadFloat(CURRENCY));
 
@@ -48,6 +50,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
 
             _gameData.DroneIsReady = LoadBool("DroneIsReady");
 
+            _inventory.ClearInventory("Player");
             var size = _inventory.GetInventory("Player").Size;
             for (var x = 0; x < size.x; x++)
             {
@@ -57,7 +60,11 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                     {
                         string itemId = LoadString($"Inv_{x}_{y}_id");
                         if (itemId != null)
-                            _inventory.AddItems("Player", itemId, LoadInt($"Inv_{x}_{y}_amount"));
+                        {
+                            int amount = LoadInt($"Inv_{x}_{y}_amount");
+                            _inventory.AddItems("Player", itemId, amount);
+                            Debug.Log($"Loading item {itemId}, {amount}");
+                        }
                     }
                 }
             }
@@ -77,14 +84,14 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
             PlayerPrefs.SetInt(IS_MUSIC_OFF, _gameData.Settings.IsMusicMute ? 1 : 0);
 
             PlayerPrefs.SetInt(LEVEL, _gameData.Level - 1);
-            if (_gameData.Level % 10 == 0)
+            /*if (_gameData.Level % 10 == 0)
             {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
             }
             else
             {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, _gameData.IsBossFailed ? 1 : 0);
-            }
+            }*/
             PlayerPrefs.SetFloat(CURRENCY, _gameData.Currency);
 
             if (_gameData.Modules == null) return;
@@ -107,11 +114,12 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                     for (var y = 0; y < size.y; y++)
                     {
                         IReadOnlyInventorySlot slot = slots[x, y];
-                        if (slot.ItemId != null)
+                        if (slot.ItemId != null && slot.ItemId != "")
                         {
                             var item = _itemService.GetItemInfo(slot.ItemId);
                             PlayerPrefs.SetString($"Inv_{x}_{y}_id", slot.ItemId);
                             PlayerPrefs.SetInt($"Inv_{x}_{y}_amount", slot.Amount);
+                            Debug.Log($"Saving item {slot.ItemId}, {slot.Amount}");
                         }
                         else
                         {
@@ -121,6 +129,8 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                     }
                 }
             }
+
+            PlayerPrefs.Save();
         }
 
         private string LoadString(string key, string defVal = null)

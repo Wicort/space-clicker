@@ -20,6 +20,7 @@ public class Modules : MonoBehaviour
     private GameData _gameData;
     private List<UpgradeButton> _buttons;
     private IItemService _itemService;
+    private ISaveSystem _saveSystem;
 
     public static Action OnModuleUpgraded;
 
@@ -57,13 +58,15 @@ public class Modules : MonoBehaviour
         IInventoryService inventoryService = AllServices.Container.Single<IInventoryService>();
         inventoryService.RemoveItems("Player", itemId, 1);
         inventoryService.AddItems("Player", oldItemId, 1);
+
+        _saveSystem.SaveGame();
     }
 
     private void Init(GameData gameData)
     {
         _gameData = gameData;
         _itemService = AllServices.Container.Single<IItemService>();
-
+        _saveSystem = AllServices.Container.Single<ISaveSystem>();
 
         if (_gameData.Modules == null || _gameData.Modules.Count == 0)
         {
@@ -108,7 +111,6 @@ public class Modules : MonoBehaviour
         int i = 0;
         foreach (var upgrade in _upgrades)
         {
-            //Item item = _itemService.GetCommonItemByType(upgrade.GetModule().ModuleItemType);
             Item item = _itemService.GetItemByTypeAndRariry(upgrade.GetModule().ModuleItemType,
                 i == 0 ? _gameData.Module0Rarity : (i == 1 ? _gameData.Module1Rarity : _gameData.Module2Rarity));
             if (item == null) continue;
@@ -146,17 +148,13 @@ public class Modules : MonoBehaviour
         OnModuleUpgraded?.Invoke();
 
         RefreshUpgradeButtons();
+        _saveSystem.SaveGame();
     }
 
     private void UseUpgradeModule(string itemId, int count = 1)
     {
         Item item = _itemService.GetItemInfo(itemId);
         var upgradeBtn = _upgrades.Find(upg => upg.GetModule().GetItemType() == item.ItemType);
-
-        /*var requiredUpgrade = upgradeBtn.GetModule().RequiredUpgrade;
-        var requiredLevel = upgradeBtn.GetModule().RequiredLevel;
-        var requiredItemType = requiredUpgrade.GetItemType();
-        var rquiredModuleLevel = _upgrades.Find(upg => upg.GetModule().GetItemType() == requiredItemType).CurrentLevel;*/
 
         int rarity = Convert.ToInt32(item.Rarity) + 1;
         Debug.Log($"upgrading item {itemId}, rarity {rarity}");
@@ -175,6 +173,8 @@ public class Modules : MonoBehaviour
         OnModuleUpgraded?.Invoke();
 
         RefreshUpgradeButtons();
+
+        _saveSystem.SaveGame();
     }
 
     private bool IsModuleButtonActive(ActiveUpgrade upgradeBtn)

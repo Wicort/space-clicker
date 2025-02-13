@@ -156,7 +156,7 @@ public class EnemyHandler : MonoBehaviour
         OnEnemyKilled?.Invoke(_enemyData, 1);
         GetNextEnemyData();
         yield return new WaitForSeconds(_timeForNewEnemy);
-        _saveSystem.SaveGame();
+        //_saveSystem.SaveGame();
         RespawnEnemy();
     }
 

@@ -68,6 +68,13 @@ namespace Inventory
             return _inventoriesMap[ownerId];
         }
 
+        public void ClearInventory(string ownerId)
+        {
+            _inventoriesMap.Remove(ownerId);
+            var inventoryDataPlayer = CreatePlayerInventory("Player");
+            RegisterInventory(inventoryDataPlayer);
+        }
+
         private InventoryGridData CreatePlayerInventory(string ownerId)
         {
             var size = new Vector2Int(3, 4);

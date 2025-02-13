@@ -2,6 +2,8 @@
 using Items;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Playables;
 
 [Serializable]
 public class GameData
@@ -38,12 +40,18 @@ public class GameData
 
     public void NextLevel()
     {
-        if (!IsBossFailed) _level++;
+        if (!_isBossFailed) _level++;
     }
 
     public void SetLevel(int value)
     {
-        _level = value;
+        if (value < 0)
+        {
+            _level = 0;
+            _isBossFailed = false;
+        }
+        else 
+            _level = value;
     }
 
     public void PrevLevel()

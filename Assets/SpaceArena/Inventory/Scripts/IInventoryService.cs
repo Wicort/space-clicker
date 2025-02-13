@@ -8,6 +8,7 @@ namespace Inventory
         AddItemsToInventoryGridResult AddItems(string ownerId, string itemId, int amount = 1);
         AddItemsToInventoryGridResult AddItemsToInventory(string ownerId, Vector2Int slotCoords, string itemId, int amount = 1);
         IReadOnlyInventoryGrid GetInventory(string ownerId);
+        void ClearInventory(string ownerId);
         bool Has(string ownerId, string itemId, int amount = 1);
         InventoryGrid RegisterInventory(InventoryGridData inventoryData);
         RemoveItemsFromInventoryGridResult RemoveItems(string ownerId, string itemId, int amount = 1);

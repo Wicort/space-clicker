@@ -15,7 +15,6 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
 
         public void Enter()
         {
-            Debug.Log("Enter Main menu state");
             Menu.OnStartGameButtonClicked += StartGame;
         }
 

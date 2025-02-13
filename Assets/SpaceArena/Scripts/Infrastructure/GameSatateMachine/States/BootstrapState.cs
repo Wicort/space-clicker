@@ -56,8 +56,8 @@ namespace Assets.Scripts.Infrastructure.GameSatateMachine.States
             _services.RegisterSingle<IItemService>(new ItemService(localizationService));
             _services.RegisterSingle<IInventoryService>(new InventoryService());
             
-            //_services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
-            _services.RegisterSingle<ISaveSystem>(new YandexCloudSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
+            _services.RegisterSingle<ISaveSystem>(new PlayerPrefsSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
+            //_services.RegisterSingle<ISaveSystem>(new YandexCloudSaveSystem(_services.Single<IInventoryService>(), _services.Single<IItemService>()));
             
             
         }
