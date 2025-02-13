@@ -50,6 +50,7 @@ namespace Items
         {
             if (_id == 0) return;
 
+            Sound.instance.PlayButtonClick();
             OnModuleUpgraded?.Invoke(_id);
         }
 
