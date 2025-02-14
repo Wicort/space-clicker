@@ -57,6 +57,7 @@ namespace Assets.SpaceArena.Scripts.Infrastructure.Localization
             {"Space Arena", "Космическая арена" },
             {"Sounds", "Звуки" },
             {"Music", "Музыка" },
+            {"Leaderboard", "Таблица лидеров" },
         };
 
         public string GetItemName(string itemId)

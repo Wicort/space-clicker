@@ -18,13 +18,13 @@
         "Inv_2_3_id"
     ],
     "stringValues": [
-        "13.02.2025 20:55:04",
+        "14.02.2025 13:48:53",
         "COMMON",
         "COMMON",
         "COMMON",
         "CommonGun",
         "CommonDrone",
-        "",
+        "CommonTouret",
         "",
         "",
         "",
@@ -39,7 +39,7 @@
         "Currency"
     ],
     "floatValues": [
-        1260.4150390625
+        9084.51171875
     ],
     "intKeys": [
         "IsSoundsOff",
@@ -65,14 +65,14 @@
     "intValues": [
         0,
         1,
-        21,
+        33,
+        32,
+        23,
         14,
-        12,
-        6,
         1,
-        6,
-        7,
-        0,
+        8,
+        12,
+        5,
         0,
         0,
         0,
@@ -91,7 +91,7 @@
         false,
         false
     ],
-    "idSave": 251,
+    "idSave": 324,
     "IsBossFailed": false,
     "Level": 29,
     "Currency": 692321.125,

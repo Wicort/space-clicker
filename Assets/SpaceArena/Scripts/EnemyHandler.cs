@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 public class EnemyHandler : MonoBehaviour
 {
@@ -147,16 +148,19 @@ public class EnemyHandler : MonoBehaviour
 
     private IEnumerator KillEnemy()
     {
+        YG2.SetLeaderboard("TopScore", _gameData.Level);
+
         if (_enemyData.IsBoss)
         {
             _gameData.SetIsBossFailed(false);
             _bossTimeText.gameObject.SetActive(false);
         }
         DestroyEnemyShip();
+        
         OnEnemyKilled?.Invoke(_enemyData, 1);
         GetNextEnemyData();
+
         yield return new WaitForSeconds(_timeForNewEnemy);
-        //_saveSystem.SaveGame();
         RespawnEnemy();
     }
 

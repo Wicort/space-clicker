@@ -11,6 +11,8 @@ public class Clicker : MonoBehaviour
     private EnemyHandler _enemyHandler;
     [SerializeField]
     private OfflineReward _offlineReward;
+    [SerializeField] private GameObject _lbScreen;
+    [SerializeField] private GameObject _settingsScreen;
 
     private GameData _gameData;
     private float _clickDamage = 0;
@@ -43,6 +45,9 @@ public class Clicker : MonoBehaviour
 
     private void Start()
     {
+        _lbScreen.SetActive(false);
+        _settingsScreen.SetActive(false);
+
         StartCoroutine(Autoclick());
     }
 
@@ -55,6 +60,7 @@ public class Clicker : MonoBehaviour
             _enemyHandler.OfflineKilling(_offlineReward.Init(_gameData, GetAllDamageInSecond(), _enemyHandler.GetCurrentEnemyHealth()));
             _offlineReward.ShowOfflineRewardPanel();
         }
+        
     }
 
     public void OnClick()
@@ -82,6 +88,15 @@ public class Clicker : MonoBehaviour
     public void OnMenuButtonClick()
     {
         OnMenuButtonClicked?.Invoke();
+    }
+    public void OnLeaderBoardButtonClick()
+    {
+        _lbScreen.SetActive(true);
+    }
+    
+    public void OnSettingsButtonClick()
+    {
+        _settingsScreen.SetActive(true);
     }
 
     private void SetDoubleDamage()
