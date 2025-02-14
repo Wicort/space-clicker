@@ -43,7 +43,6 @@ namespace Inventory
             get => _itemImage.sprite;
             set
             {
-                Debug.Log(value);
                 if (_itemId != null && _itemId != "")
                     _itemImage.sprite = value;
                 else _itemImage.sprite = _emptySprite;

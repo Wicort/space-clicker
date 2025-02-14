@@ -63,13 +63,12 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                         {
                             int amount = LoadInt($"Inv_{x}_{y}_amount");
                             _inventory.AddItems("Player", itemId, amount);
-                            Debug.Log($"Loading item {itemId}, {amount}");
                         }
                     }
                 }
             }
             string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.UtcNow.ToString());
-            if (lastPlayedTimeString != null)
+            if (lastPlayedTimeString != null && (lastPlayedTimeString != ""))
                 _gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
 
             return _gameData;
@@ -78,12 +77,13 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
 
         public void SaveGame()
         {
+            Debug.Log("=================SaveGame()");
             PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
 
             PlayerPrefs.SetInt(IS_SOUNDS_OFF, _gameData.Settings.IsSoundMute ? 1 : 0);
             PlayerPrefs.SetInt(IS_MUSIC_OFF, _gameData.Settings.IsMusicMute ? 1 : 0);
 
-            PlayerPrefs.SetInt(LEVEL, _gameData.Level - 1);
+            PlayerPrefs.SetInt(LEVEL, _gameData.Level-1);
             /*if (_gameData.Level % 10 == 0)
             {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);
@@ -119,7 +119,6 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                             var item = _itemService.GetItemInfo(slot.ItemId);
                             PlayerPrefs.SetString($"Inv_{x}_{y}_id", slot.ItemId);
                             PlayerPrefs.SetInt($"Inv_{x}_{y}_amount", slot.Amount);
-                            Debug.Log($"Saving item {slot.ItemId}, {slot.Amount}");
                         }
                         else
                         {
