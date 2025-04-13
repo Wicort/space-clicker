@@ -162,9 +162,11 @@ namespace Michsky.MUIP
 
             isOn = false;
 
-            switchAnimator.enabled = true;
-            switchAnimator.Play("Switch Off");
-
+            if (switchAnimator != null)
+            {
+                switchAnimator.enabled = true;
+                switchAnimator.Play("Switch Off");
+            }
             OffEvents.Invoke();
             onValueChanged.Invoke(false);
         }

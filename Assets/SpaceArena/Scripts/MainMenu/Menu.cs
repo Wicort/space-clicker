@@ -1,8 +1,6 @@
 using Michsky.MUIP;
-using Services;
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -31,6 +29,7 @@ public class Menu : MonoBehaviour
 
     public void OnSettingsButtonClick()
     {
+        SettingsPanel.SetActive(true);
         Sound.instance.PlayButtonClick();
 
         if (Sound.instance.IsSoundMute())
@@ -43,7 +42,7 @@ public class Menu : MonoBehaviour
         else
             if (MusicSwitcher.isOn == false) MusicSwitcher.SetOn();
 
-        SettingsPanel.SetActive(true);
+
     }
 
     public void OnCloseSettingsButtonClick()

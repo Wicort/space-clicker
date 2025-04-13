@@ -59,14 +59,17 @@ public class OfflineReward : MonoBehaviour
     {
         _gameData = gameData;
         DateTime lastTime = _gameData.LastPlayedTime;
-        DateTime currentTime = DateTime.UtcNow;
+        DateTime currentTime = DateTime.Now;
         float offlineEnemyKilled = 0f;
 
         if (lastTime == null) return 0;
 
         float delta = (float)Math.Clamp((currentTime - lastTime).TotalSeconds, 0, TimeSpanRestriction);
+
         Debug.Log($"TimeSpanRestriction: {TimeSpanRestriction}");
         Debug.Log($"delta: {delta}");
+        Debug.Log($"lastTime: {lastTime}");
+        Debug.Log($"currentTime: {currentTime}");
         Debug.Log($"currentTime - lastTime: {(currentTime - lastTime).TotalSeconds}");
         float timeToKillEnemy = Mathf.Max(10f, enemyHealth / damage);
         offlineEnemyKilled = delta / timeToKillEnemy;
