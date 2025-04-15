@@ -48,7 +48,7 @@ public class OfflineReward : MonoBehaviour
 
     private void SetItemReward(Item item)
     {
-        Debug.Log(item.Name);
+        //Debug.Log(item.Name);
         RewardedItemsList.Add(item);
         var reward = Instantiate(prefab, container.transform);
         reward.GetComponent<ItemLine>().Init(item);

@@ -68,7 +68,7 @@ public class EnemyHandler : MonoBehaviour
         _saveSystem = AllServices.Container.Single<ISaveSystem>();
         _localizationService = AllServices.Container.Single<ILocalizationService>();
         _gameData = gameData;
-        GetNextEnemyData();
+        GetNextEnemyData(false);
         _bosRushButton.gameObject.SetActive(_gameData.IsBossFailed && !_enemyData.IsBoss);
         RespawnEnemy();
     }
@@ -121,10 +121,14 @@ public class EnemyHandler : MonoBehaviour
         
     }
 
-    private void GetNextEnemyData()
+    private void GetNextEnemyData(bool needUp = true)
     {
         _enemyHUD.gameObject.SetActive(false);
-        _gameData.NextLevel();
+
+        if (needUp)
+            _gameData.NextLevel();
+
+        Debug.Log("NextLevel");
         _enemyData = _wavesHandler.GetEnemyDataByLevel(_gameData.Level);        
     }
 

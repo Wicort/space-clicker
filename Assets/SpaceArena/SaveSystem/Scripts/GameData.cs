@@ -2,8 +2,6 @@
 using Items;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Playables;
 
 [Serializable]
 public class GameData

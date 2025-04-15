@@ -37,6 +37,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
             //_gameData.SetIsBossFailed(LoadInt(IS_BOSS_FAILED) == 1);
             _gameData.SetIsBossFailed(false);
             _gameData.SetLevel(LoadInt(LEVEL));
+            Debug.Log($"Load level {_gameData.Level}");
             _gameData.AddCurrency(LoadFloat(CURRENCY));
 
             _gameData.Module0Lvl = LoadInt("Module0Lvl");
@@ -67,7 +68,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                     }
                 }
             }
-            string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.UtcNow.ToString());
+            string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.Now.ToString());
             if (lastPlayedTimeString != null && (lastPlayedTimeString != ""))
                 _gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
 
@@ -78,12 +79,13 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
         public void SaveGame()
         {
             Debug.Log("=================SaveGame()");
-            PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
+            PlayerPrefs.SetString("LastPlayedTime", DateTime.Now.ToString());
 
             PlayerPrefs.SetInt(IS_SOUNDS_OFF, _gameData.Settings.IsSoundMute ? 1 : 0);
             PlayerPrefs.SetInt(IS_MUSIC_OFF, _gameData.Settings.IsMusicMute ? 1 : 0);
 
-            PlayerPrefs.SetInt(LEVEL, _gameData.Level-1);
+            PlayerPrefs.SetInt(LEVEL, _gameData.Level);
+            Debug.Log($"Save level {_gameData.Level}");
             /*if (_gameData.Level % 10 == 0)
             {
                 PlayerPrefs.SetInt(IS_BOSS_FAILED, 1);

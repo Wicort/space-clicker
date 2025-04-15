@@ -25,6 +25,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
 
             _gameData.SetIsBossFailed(YG2.saves.IsBossFailed);
             _gameData.SetLevel(YG2.saves.Level);
+            Debug.Log($"load level {YG2.saves.Level}");
             _gameData.AddCurrency(YG2.saves.Currency);
 
 
@@ -84,6 +85,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
             YG2.saves.IsBossFailed = _gameData.IsBossFailed;
             YG2.saves.Currency = _gameData.Currency;
             YG2.saves.Level = _gameData.Level;
+            Debug.Log($"save level {YG2.saves.Level}");
 
             int i = 0;
             foreach (ActiveUpgrade upg in _gameData.Modules)
