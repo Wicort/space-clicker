@@ -13,6 +13,7 @@ public class Menu : MonoBehaviour
     private void Start()
     {
         SettingsPanel.SetActive(false);
+        OnSettingsButtonClick();
     }
 
     public void OnQuitButtonClick()

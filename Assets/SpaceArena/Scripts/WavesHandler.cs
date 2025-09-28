@@ -28,6 +28,8 @@ public class WavesHandler : MonoBehaviour
     public Wave getWave (int enemyLevel)
     {
         int waveNumber = Mathf.Min((int)Mathf.Floor((enemyLevel - 1) / 10f), waves.Count - 1);
+        if (waveNumber < 0) waveNumber = 0;
+        Debug.Log($"{waveNumber}");
         return waves[waveNumber];
     }
 }

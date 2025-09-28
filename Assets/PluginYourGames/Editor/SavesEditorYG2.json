@@ -18,13 +18,13 @@
         "Inv_2_3_id"
     ],
     "stringValues": [
-        "15.04.2025 22:02:38",
-        "EPIC",
-        "LEGENDARY",
-        "EPIC",
-        "CommonTouret",
-        "CommonGun",
+        "28.09.2025 18:59:42",
+        "COMMON",
+        "COMMON",
+        "COMMON",
         "CommonDrone",
+        "CommonGun",
+        "CommonTouret",
         "",
         "",
         "",
@@ -39,7 +39,7 @@
         "Currency"
     ],
     "floatValues": [
-        70009880576.0
+        1147.8839111328125
     ],
     "intKeys": [
         "IsSoundsOff",
@@ -63,16 +63,16 @@
         "Inv_2_3_amount"
     ],
     "intValues": [
+        0,
         1,
+        37,
+        25,
+        16,
+        8,
         1,
-        148,
-        584,
-        682,
-        478,
-        1,
-        1,
-        1,
-        1,
+        2,
+        6,
+        2,
         0,
         0,
         0,
@@ -91,20 +91,20 @@
         false,
         false
     ],
-    "idSave": 711,
+    "idSave": 96,
     "IsBossFailed": false,
-    "Level": 29,
-    "Currency": 692321.125,
-    "Module0Lvl": 30,
-    "Module0Rarity": "EPIC",
-    "Module1Lvl": 25,
-    "Module1Rarity": "COMMON",
-    "Module2Lvl": 10,
-    "Module2Rarity": "COMMON",
-    "LastPlayedTime": "13.02.2025 16:27:39",
+    "Level": 0,
+    "Currency": 0.0,
+    "Module0Lvl": 0,
+    "Module0Rarity": "",
+    "Module1Lvl": 0,
+    "Module1Rarity": "",
+    "Module2Lvl": 0,
+    "Module2Rarity": "",
+    "LastPlayedTime": "",
     "Settings": {
         "SoundVolume": 1.0,
-        "IsSoundMute": true,
+        "IsSoundMute": false,
         "IsMusicMute": true
     }
 }

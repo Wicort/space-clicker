@@ -11,12 +11,10 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
     {
         private GameData _gameData;
         private IInventoryService _inventory;
-        private IItemService _itemService;
 
-        public YandexCloudSaveSystem(IInventoryService inventory, IItemService itemService)
+        public YandexCloudSaveSystem(IInventoryService inventory)
         {
             _inventory = inventory;
-            _itemService = itemService;
         }
 
         public GameData LoadGame()
@@ -112,7 +110,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
             IReadOnlyInventorySlot[,] slots = _inventory.GetInventory("Player").GetSlots();
             YG2.saves.Inventory = slots;
 
-            YG2.saves.LastPlayedTime = DateTime.UtcNow.ToString();
+            YG2.saves.LastPlayedTime = DateTime.UtcNow.ToString(); 
 
             YG2.saves.Settings = _gameData.Settings;
 

@@ -68,7 +68,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
                     }
                 }
             }
-            string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.Now.ToString());
+            string lastPlayedTimeString = LoadString("LastPlayedTime", DateTime.UtcNow.ToString());
             if (lastPlayedTimeString != null && (lastPlayedTimeString != ""))
                 _gameData.LastPlayedTime = DateTime.Parse(lastPlayedTimeString);
 
@@ -79,7 +79,7 @@ namespace Assets.SpaceArena.SaveSystem.Scripts
         public void SaveGame()
         {
             Debug.Log("=================SaveGame()");
-            PlayerPrefs.SetString("LastPlayedTime", DateTime.Now.ToString());
+            PlayerPrefs.SetString("LastPlayedTime", DateTime.UtcNow.ToString());
 
             PlayerPrefs.SetInt(IS_SOUNDS_OFF, _gameData.Settings.IsSoundMute ? 1 : 0);
             PlayerPrefs.SetInt(IS_MUSIC_OFF, _gameData.Settings.IsMusicMute ? 1 : 0);

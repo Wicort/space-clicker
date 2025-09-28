@@ -59,7 +59,7 @@ public class OfflineReward : MonoBehaviour
     {
         _gameData = gameData;
         DateTime lastTime = _gameData.LastPlayedTime;
-        DateTime currentTime = DateTime.Now;
+        DateTime currentTime = DateTime.UtcNow;
         float offlineEnemyKilled = 0f;
 
         if (lastTime == null) return 0;
